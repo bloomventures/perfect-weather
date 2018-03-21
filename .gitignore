@@ -1,0 +1,9 @@
+resources/public/
+*.log
+target
+checkouts
+.lein-repl-history
+.nrepl-port
+.lein-env
+profiles.clj
+/data
