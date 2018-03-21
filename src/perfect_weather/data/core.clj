@@ -23,7 +23,8 @@
           [wunderground/fetch-day-history (env :wunderground-api-key)])]
     (f {:lat lat
         :lon lon
-        :ymd ymd}))) 
+        :ymd ymd
+        :api-key api-key}))) 
 
 (defn all []
   (let [ymds (->> (p/periodic-seq (t/date-time 2017 01 01) (t/hours 24))
@@ -41,4 +42,3 @@
                                 :lon (city :lon)
                                 :ymd ymd}))))])) 
          (into {}))))
-
