@@ -1,43 +1,10 @@
 (ns perfect-weather.client.views.app
   (:require
     [re-frame.core :refer [subscribe]]
+    [perfect-weather.data.rate :as rate]
     [perfect-weather.cities :refer [cities]]
+    [perfect-weather.data.months :refer [months]]
     [perfect-weather.data.filters :as filters]))
-
-(defn hot? [d]
-  (< 30 (d :temperature)))
-
-(defn cold? [d]
-  (< (d :temperature) 17))
-
-(defn humid? [d]
-  (< 0.75 (d :humidity)))
-
-(defn dry? [d]
-  (< (d :humidity) 0.25))
-
-(defn perfect? [d]
-  (and 
-    (< 20 (d :temperature) 26) 
-    (< 0.45 (d :humidity) 0.55)))
-
-(defn nice? [d]
-  (and 
-    (not (hot? d))
-    (not (cold? d))
-    (not (humid? d))
-    (not (dry? d))))
-
-(defn issue [d]
-  (cond 
-    (hot? d) :hot
-    (cold? d) :cold
-    (humid? d) :humid
-    (dry? d) :dry
-    (perfect? d) :perfect
-    (nice? d) :nice))
-
-(def months ["Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec"])
 
 (defn hourly-view [data]
   [:div {:style {:display "flex"
@@ -167,7 +134,7 @@
                                              #_(if (row :precipitation?)
                                                  "red"
                                                  "blue")
-                                             (case (issue row)
+                                             (case (rate/issue row)
                                                ;:hot "#880000"
                                                ;:cold "#000088"
                                                ;:humid "#888800"
@@ -177,33 +144,34 @@
                                                :perfect "#70fffb"
                                                "black")})
                                           day))))]]]
+
           [:tr
            [:td "Hot"]
-           [:td [summary-view hot? false @(subscribe [:data (city :key)])]]]
+           [:td [summary-view rate/hot? false @(subscribe [:data (city :key)])]]]
           [:tr
            [:td "Hot (filter)"]
-           [:td [median-view hot? false @(subscribe [:data (city :key)])]]]
+           [:td [median-view rate/hot? false @(subscribe [:data (city :key)])]]]
           [:tr
            [:td "Cold"]
-           [:td [summary-view cold? false @(subscribe [:data (city :key)])]]]
+           [:td [summary-view rate/cold? false @(subscribe [:data (city :key)])]]]
           [:tr
            [:td "Cold (filter)"]
-           [:td [median-view cold? false @(subscribe [:data (city :key)])]]]
+           [:td [median-view rate/cold? false @(subscribe [:data (city :key)])]]]
           [:tr
            [:td "Humid"]
-           [:td [summary-view humid? false @(subscribe [:data (city :key)])]]]
+           [:td [summary-view rate/humid? false @(subscribe [:data (city :key)])]]]
           [:tr
            [:td "Humid (filter)"]
-           [:td [median-view humid? false @(subscribe [:data (city :key)])]]]
+           [:td [median-view rate/humid? false @(subscribe [:data (city :key)])]]]
           [:tr
            [:td "Dry"]
-           [:td [summary-view dry? false @(subscribe [:data (city :key)])]]]
+           [:td [summary-view rate/dry? false @(subscribe [:data (city :key)])]]]
           [:tr
            [:td "Dry (filter)"]
-           [:td [median-view dry? false @(subscribe [:data (city :key)])]]]
+           [:td [median-view rate/dry? false @(subscribe [:data (city :key)])]]]
           [:tr
            [:td "Nice"]
-           [:td [summary-view nice? true @(subscribe [:data (city :key)])]]]
+           [:td [summary-view rate/nice? true @(subscribe [:data (city :key)])]]]
           [:tr
            [:td "Nice (filtered)"]
-           [:td [median-view nice? true @(subscribe [:data (city :key)])]]]]]]))]) 
+           [:td [median-view rate/nice? true @(subscribe [:data (city :key)])]]]]]]))]) 
