@@ -2,7 +2,7 @@
   (:require
     [re-frame.core :refer [subscribe]]
     [perfect-weather.data.rate :as rate]
-    [perfect-weather.cities :refer [cities]]
+    [perfect-weather.data.cities :refer [cities]]
     [perfect-weather.data.months :refer [months]]
     [perfect-weather.data.summary :as summary]
     [perfect-weather.data.filters :as filters]))

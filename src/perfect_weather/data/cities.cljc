@@ -1,4 +1,4 @@
-(ns perfect-weather.cities)
+(ns perfect-weather.data.cities)
 
 (defn key-by [k coll]
   (reduce (fn [memo i]

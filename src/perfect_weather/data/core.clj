@@ -4,7 +4,7 @@
     [clj-time.core :as t]
     [clj-time.periodic :as p]
     [clj-time.format :as f]
-    [perfect-weather.cities :refer [cities]]
+    [perfect-weather.data.cities :refer [cities]]
     [perfect-weather.data.darksky :as darksky]
     [perfect-weather.data.wunderground :as wunderground]))
 

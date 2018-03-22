@@ -1,7 +1,6 @@
 (ns perfect-weather.client.state.subs
   (:require
-    [re-frame.core :refer [reg-sub]]
-    [perfect-weather.cities :refer [cities]]))
+    [re-frame.core :refer [reg-sub]]))
 
 (reg-sub
   :data
