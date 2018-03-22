@@ -4,6 +4,7 @@
     [perfect-weather.data.rate :as rate]
     [perfect-weather.cities :refer [cities]]
     [perfect-weather.data.months :refer [months]]
+    [perfect-weather.data.summary :as summary]
     [perfect-weather.data.filters :as filters]))
 
 (defn hourly-view [data]
@@ -174,4 +175,12 @@
            [:td [summary-view rate/nice? true @(subscribe [:data (city :key)])]]]
           [:tr
            [:td "Nice (filtered)"]
-           [:td [median-view rate/nice? true @(subscribe [:data (city :key)])]]]]]]))]) 
+           [:td [median-view rate/nice? true @(subscribe [:data (city :key)])]]]
+          [:tr
+           [:td "Summary"]
+           [:td (summary/text (->> @(subscribe [:data (city :key)])
+                                   (map (fn [hours]
+                                          (day-result? rate/nice? true hours)))
+                                   (filters/streak-filter false? 2)
+                                   (filters/neighbor-filter false?)
+                                   (filters/streak-filter true? 28)))]]]]]))]) 
