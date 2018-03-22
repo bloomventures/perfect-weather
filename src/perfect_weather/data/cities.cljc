@@ -13,6 +13,14 @@
     :lat 52.233333
     :lon  21.016667
     :offset 1}
+   {:key :tokyo
+    :lat 35.683333
+    :lon 139.683333
+    :offset 9}
+   {:key :vancouver
+    :lat 49.25
+    :lon -123.1
+    :offset -7}
    {:key :athens 
     :lat 37.983972
     :lon 23.727806
