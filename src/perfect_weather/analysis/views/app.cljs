@@ -1,4 +1,4 @@
-(ns perfect-weather.client.views.analysis
+(ns perfect-weather.analysis.views.app
   (:require
     [re-frame.core :refer [subscribe]]
     [perfect-weather.data.rate :as rate]
@@ -112,7 +112,7 @@
                                                                                 (if p? "blue" "black")
                                                                                 "white")}}]])))]])))])
 
-(defn analysis-view []
+(defn app-view []
   [:div
    (doall
      (for [city cities]

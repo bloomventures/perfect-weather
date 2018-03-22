@@ -1,6 +1,4 @@
-(ns perfect-weather.client.views.app
-  (:require
-    [perfect-weather.client.views.analysis :refer [analysis-view]]))
+(ns perfect-weather.client.views.app)
 
 (defn app-view []
-  [analysis-view])
+  [:div "Hello World"])
