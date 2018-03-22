@@ -23,20 +23,22 @@
 
 (defn fetch-day-history
   [{:keys [api-key lat lon ymd]}]
-  (->> (with-cache 
-         fetch
-         {:api :darksky
-          :api-key api-key
-          :lat lat
-          :lon lon
-          :ymd ymd})
-       :hourly
-       :data
-       (map (fn [o]
-              {:epoch (o :time)
-               :temperature (o :temperature)
-               :humidity (o :humidity)
-               :precipitation? (or (and 
-                                     (o :precipProbability)
-                                     (> (o :precipProbability) 0))
-                                   (o :precipIntensity))}))))
+  (future 
+    (->> (with-cache 
+           fetch
+           {:api :darksky
+            :api-key api-key
+            :lat lat
+            :lon lon
+            :ymd ymd})
+         deref
+         :hourly
+         :data
+         (map (fn [o]
+                {:epoch (o :time)
+                 :temperature (o :temperature)
+                 :humidity (o :humidity)
+                 :precipitation? (or (and 
+                                       (o :precipProbability)
+                                       (> (o :precipProbability) 0))
+                                     (o :precipIntensity))})))))

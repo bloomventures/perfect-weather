@@ -40,5 +40,8 @@
                                {:provider :darksky
                                 :lat (city :lat)
                                 :lon (city :lon)
-                                :ymd ymd}))))])) 
+                                :ymd ymd})))
+                      doall
+                      (map deref)
+                      doall)])) 
          (into {}))))

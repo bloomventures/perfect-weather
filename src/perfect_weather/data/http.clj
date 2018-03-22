@@ -5,9 +5,11 @@
 
 (defn fetch 
   [{:keys [url params]}]
-  (let [response @(http/get url {:throw-exceptions false})]
-    (if (= 200 (:status response))
-      (-> response
-          :body
-          (json/parse-string true))
-      (println response))))
+  (let [response (http/get url {:throw-exceptions false
+                                :query-params params})]
+    (future 
+      (if (= 200 (:status @response))
+        (-> @response
+            :body
+            (json/parse-string true))
+        (println @response)))))

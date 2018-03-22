@@ -21,27 +21,29 @@
 
 (defn fetch-day-history
   [{:keys [api-key lat lon ymd]}]
-  (->> (with-cache 
-         fetch
-         {:api :wunderground
-          :api-key api-key
-          :lat lat
-          :lon lon
-          :ymd ymd})
-       :history
-       :observations
-       (map (fn [o]
-              {:epoch (->> (t/date-time 
-                             (Integer. (get-in o [:utcdate :year]))
-                             (Integer. (get-in o [:utcdate :mon]))
-                             (Integer. (get-in o [:utcdate :mday])))
-                           (c/to-epoch))
-               :humidity (if (= "N/A" (o :hum))
-                           nil
-                           (float (/ (Integer. (o :hum)) 100)))
-               :temperature (Float. (o :tempm))
-               :precipitation? (or (= "1" (o :rain))
-                                   (= "1" (o :snow))
-                                   (= "1" (o :hail)))}))))
+  (future
+    (->> (with-cache 
+           fetch
+           {:api :wunderground
+            :api-key api-key
+            :lat lat
+            :lon lon
+            :ymd ymd})
+         deref
+         :history
+         :observations
+         (map (fn [o]
+                {:epoch (->> (t/date-time 
+                               (Integer. (get-in o [:utcdate :year]))
+                               (Integer. (get-in o [:utcdate :mon]))
+                               (Integer. (get-in o [:utcdate :mday])))
+                             (c/to-epoch))
+                 :humidity (if (= "N/A" (o :hum))
+                             nil
+                             (float (/ (Integer. (o :hum)) 100)))
+                 :temperature (Float. (o :tempm))
+                 :precipitation? (or (= "1" (o :rain))
+                                     (= "1" (o :snow))
+                                     (= "1" (o :hail)))})))))
 
 
