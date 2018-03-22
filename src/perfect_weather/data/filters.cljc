@@ -14,7 +14,8 @@
 
 (defn mode-filter 
   "Given a collection of boolean values,
-   replaces each value with the mode of the neighbors within the window"
+   replaces each value with the mode of the neighbors within the window.
+   Window size should be odd to avoid arbitrarily-decided ties."
   [window coll]
   (let [hw (int (/ window 2))]
     (->> 
@@ -43,7 +44,7 @@
 
 (defn neighbor-filter 
   "Given a collection of boolean values
-  flips f-truthy streaks where both neigbhoring streaks are larger"
+  flips f-truthy streaks where both neighboring streaks are larger"
   [f coll]
   (let [partitions (partition-by identity coll)]
     (->> (concat [(first partitions)] partitions [(last partitions)])
@@ -63,10 +64,33 @@
                     i))))
          flatten)))
 
+(defn density-filter 
+  "Given a collection of boolean values
+  flips f-truthy value where density of f-falsey values in window around the current value 
+  is greater than the given density.
+  
+  Window size should be odd to avoid arbitrarily-decided ties."
+  [f window density coll]
+  (let [hw (int (/ window 2))]
+    (->> (concat (repeat hw (first coll)) 
+                 coll 
+                 (repeat hw (last coll)))
+         (partition window 1)
+         (map (fn [range]
+                (let [mid (nth range hw)
+                      [top top-count] (->> range
+                                           frequencies
+                                           (sort-by second)
+                                           reverse
+                                           first)]
+                  (if (and (f mid) (> (/ top-count (count range)) density))
+                    top
+                    mid)))))))
+
 (defn combined-filter [coll]
   (->> coll
-       (streak-filter false? 2)
-       (streak-filter true? 2)
+       (streak-filter false? 1)
        (neighbor-filter false?)
-       (neighbor-filter false?)
+       (density-filter false? 28 0.5)
+       (streak-filter false? 7)
        (streak-filter true? 28)))
