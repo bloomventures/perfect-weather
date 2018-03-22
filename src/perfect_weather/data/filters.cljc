@@ -62,3 +62,11 @@
                     :else
                     i))))
          flatten)))
+
+(defn combined-filter [coll]
+  (->> coll
+       (streak-filter false? 2)
+       (streak-filter true? 2)
+       (neighbor-filter false?)
+       (neighbor-filter false?)
+       (streak-filter true? 28)))

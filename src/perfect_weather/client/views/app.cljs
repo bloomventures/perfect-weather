@@ -96,9 +96,7 @@
    (->> data
         (map (fn [hours]
                (day-result? f p? hours)))
-        (filters/streak-filter false? 2)
-        (filters/neighbor-filter false?)
-        (filters/streak-filter true? 28)
+        (filters/combined-filter)
         (partition 30)
         (map-indexed (fn [i month]
                        ^{:key i}
@@ -181,6 +179,4 @@
            [:td (summary/text (->> @(subscribe [:data (city :key)])
                                    (map (fn [hours]
                                           (day-result? rate/nice? true hours)))
-                                   (filters/streak-filter false? 2)
-                                   (filters/neighbor-filter false?)
-                                   (filters/streak-filter true? 28)))]]]]]))]) 
+                                   (filters/combined-filter)))]]]]]))]) 
