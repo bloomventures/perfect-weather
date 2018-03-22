@@ -64,3 +64,10 @@
                              ; "mid-April to late June"
                              )))
                  (string/join ", ")))))
+
+(defn days-count
+  [days]
+  (let [c (->> days
+               (remove false?)
+               count)]
+    (str c " nice days" " " "(" (int (* 100 (/ c (count days)))) "%" ")")))

@@ -179,4 +179,10 @@
            [:td (summary/text (->> @(subscribe [:data (city :key)])
                                    (map (fn [hours]
                                           (day-result? rate/nice? true hours)))
-                                   (filters/combined-filter)))]]]]]))]) 
+                                   (filters/combined-filter)))]]
+          [:tr
+           [:td "Nice Days"]
+           [:td (summary/days-count (->> @(subscribe [:data (city :key)])
+                                         (map (fn [hours]
+                                                (day-result? rate/nice? true hours)))
+                                         (filters/combined-filter)))]]]]]))]) 
