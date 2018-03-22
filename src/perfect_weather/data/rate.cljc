@@ -32,6 +32,15 @@
     (< 20 (d :temperature) 25) 
     (< 0.35 (d :humidity) 0.55)))
 
+(defn day-result? [f p? data]
+  (let [threshold (if p? 6 6)]
+    (<= threshold (->> data
+                       (drop 10)
+                       (take 10)
+                       (map f)
+                       (filter true?)
+                       count))))
+
 (defn nice? 
   "Polygon:
     

@@ -1,3 +1,18 @@
 (ns perfect-weather.data.months)
 
-(def months ["Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec"])
+(def months 
+  ["January" 
+   "February" 
+   "March" 
+   "April" 
+   "May" 
+   "June" 
+   "July" 
+   "August" 
+   "September" 
+   "October" 
+   "November" 
+   "December"])
+
+(def months-abbr 
+  (mapv #(apply str (take 3 %)) months))

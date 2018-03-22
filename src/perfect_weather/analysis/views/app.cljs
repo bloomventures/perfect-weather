@@ -3,7 +3,7 @@
     [re-frame.core :refer [subscribe]]
     [perfect-weather.data.rate :as rate]
     [perfect-weather.data.cities :refer [cities]]
-    [perfect-weather.data.months :refer [months]]
+    [perfect-weather.data.months :refer [months-abbr]]
     [perfect-weather.data.summary :as summary]
     [perfect-weather.data.filters :as filters]))
 
@@ -29,7 +29,7 @@
         (map-indexed (fn [i month]
                        ^{:key i}
                        [:div.month {:style {:border-right "0px solid white"}}
-                        [:div (months i)]
+                        [:div (months-abbr i)]
                         [:div {:style {:display "flex"}}
                          (for [day month]
                            ^{:key (-> day first :id)}
@@ -48,7 +48,7 @@
         (map-indexed (fn [i month]
                        ^{:key i}
                        [:div.month {:style {:border-right "0px solid white"}}
-                        [:div (months i)]
+                        [:div (months-abbr i)]
                         [:div {:style {:display "flex"}}
                          (for [day month]
                            ^{:key (-> day first :id)}
@@ -59,21 +59,12 @@
                                                   :height "5px"
                                                   :background (hour :value)}}])])]])))])
 
-(defn day-result? [f p? data]
-  (let [threshold (if p? 6 6)]
-    (<= threshold (->> data
-                       (drop 10)
-                       (take 10)
-                       (map f)
-                       (filter true?)
-                       count))))
-
 (defn summary-view [f p? data]
   [:div {:style {:display "flex"
                  :position "relative"}}
    (->> data
         (map (fn [hours]
-               (day-result? f p? hours)))
+               (rate/day-result? f p? hours)))
         (partition 30)
         (map-indexed (fn [i month]
                        ^{:key i}
@@ -95,7 +86,7 @@
                  :position "relative"}}
    (->> data
         (map (fn [hours]
-               (day-result? f p? hours)))
+               (rate/day-result? f p? hours)))
         (filters/combined-filter)
         (partition 30)
         (map-indexed (fn [i month]
@@ -178,12 +169,12 @@
            [:td "Summary"]
            [:td (summary/text (->> @(subscribe [:data (city :key)])
                                    (map (fn [hours]
-                                          (day-result? rate/nice? true hours)))
+                                          (rate/day-result? rate/nice? true hours)))
                                    (filters/combined-filter)))]]
           [:tr
            [:td "Nice Days"]
            [:td (summary/days-count (->> @(subscribe [:data (city :key)])
                                          (map (fn [hours]
-                                                (day-result? rate/nice? true hours)))
+                                                (rate/day-result? rate/nice? true hours)))
                                          (filters/combined-filter)))]]]]]))]) 
 
