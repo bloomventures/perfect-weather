@@ -30,7 +30,7 @@
   (let [ymds (->> (p/periodic-seq (t/date-time 2017 01 01) (t/hours 24))
                   (take 365)
                   (map (fn [date]
-                         (f/unparse (f/formatter "yyyMMdd") date))))]
+                         (f/unparse (f/formatter "yyyyMMdd") date))))]
     (->> cities
          (map (fn [city]
                 [(city :key)
