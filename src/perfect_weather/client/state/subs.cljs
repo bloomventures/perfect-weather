@@ -10,7 +10,7 @@
 (reg-sub
   :results
   (fn [db _]
-    (db :results)))
+    (reverse (db :results))))
 
 (reg-sub
   :autocomplete-results

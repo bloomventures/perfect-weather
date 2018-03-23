@@ -56,7 +56,7 @@
 (reg-event-fx
   :reset-query!
   (fn [{db :db} _]
-    {:db (assoc db :query (:city (first (db :results))))}))
+    {:db (assoc db :query "")}))
 
 (reg-event-fx
   :-fetch-initial-data!
@@ -65,8 +65,7 @@
             :uri "/api/random/3"
             :on-success (fn [results]
                           (doseq [result results]
-                            (dispatch [:-store-result! result]))
-                          (dispatch [:reset-query!]))}}))
+                            (dispatch [:-store-result! result])))}}))
 
 (reg-event-fx
   :-fetch-result!
