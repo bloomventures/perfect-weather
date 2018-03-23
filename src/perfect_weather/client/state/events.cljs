@@ -2,9 +2,11 @@
   (:require
     [clojure.string :as string]
     [bloom.omni.ajax :as ajax]
+    [bloom.omni.dispatch-debounce :as dispatch-debounce]
     [re-frame.core :refer [dispatch reg-fx reg-event-fx]]))
 
 (reg-fx :ajax ajax/fx)
+(reg-fx :dispatch-debounce dispatch-debounce/fx)
 
 (reg-event-fx 
   :init!
@@ -18,7 +20,9 @@
   :update-query!
   (fn [{db :db} [_ query]]
     {:db (assoc db :query query)
-     :dispatch [:-fetch-autocomplete! query]}))
+     :dispatch-debounce {:id :query
+                         :timeout 100
+                         :dispatch [:-fetch-autocomplete! query]}}))
 
 (reg-event-fx
   :select-city!
