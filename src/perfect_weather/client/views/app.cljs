@@ -81,12 +81,12 @@
    (let [autocomplete-results @(subscribe [:autocomplete-results])]
      (when (seq autocomplete-results)
        [:div.autocomplete-results
-        (for [place autocomplete-results]
-          ^{:key (place :place-id)}
+        (for [result autocomplete-results]
+          ^{:key (result :place-id)}
           [:div.result
            {:on-click (fn []
-                        (dispatch [:select-city! place]))}
-           (place :description)])]))])
+                        (dispatch [:select-city! result]))}
+           (str (result :city) ", " (result :country))])]))])
 
 (defn app-view []
   [:div.app

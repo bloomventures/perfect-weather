@@ -67,7 +67,8 @@
           (json/parse-string true)
           :predictions
           (->> (map (fn [p]
-                      (select-keys p [:description :place_id])))
-               (map (fn [p]
-                      (rename-keys p {:place_id :place-id})))))
+                      {:city (-> p :terms first :value)
+                       :country (-> p :terms last :value)
+                       :place-id (p :place_id)}))))
       (println response)))) 
+
