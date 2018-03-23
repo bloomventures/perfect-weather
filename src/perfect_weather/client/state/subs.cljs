@@ -11,3 +11,8 @@
   :results
   (fn [db _]
     (db :results)))
+
+(reg-sub
+  :autocomplete-results
+  (fn [db _]
+    (db :autocomplete-results)))

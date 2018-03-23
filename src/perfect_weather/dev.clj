@@ -7,11 +7,15 @@
     [bloom.omni.spa :as spa]
     [bloom.omni.ring :as ring]
     [ring.middleware.format :refer [wrap-restful-format]]
+    [ring.middleware.defaults :refer [wrap-defaults
+                                      api-defaults
+                                      secure-api-defaults]]
     [perfect-weather.server.api :as api]
     [perfect-weather.client.styles]))
 
 (defn start! []
   (-> (mount/with-args {:handlers [(-> (ring/->handler api/routes)
+                                       (wrap-defaults api-defaults)
                                        (wrap-restful-format :formats [:transit-json]))
                                    (ring/->handler spa/routes)]
                         :figwheel-port 5223

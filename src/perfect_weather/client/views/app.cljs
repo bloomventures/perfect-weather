@@ -57,7 +57,7 @@
      (result :country)]]
    [:div.stats
     (result :percent) "% 👌"]]
-  [calendar-view (result :groups)]])
+  [calendar-view (result :ranges)]])
 
 (defn results-view []
   [:div.results
@@ -66,17 +66,29 @@
        ^{:key (result :city)}
        [result-view result]))])
 
+(defn form-view []
+  [:form
+   "When is the weather nice in "
+   [:input {:value @(subscribe [:query])
+            :on-change (fn [e]
+                         (dispatch [:update-query! (.. e -target -value)]))
+            :on-focus (fn [_]
+                        (dispatch [:update-query! ""]))
+            :on-blur (fn [_]
+                       (when (string/blank? @(subscribe [:query]))
+                         (dispatch [:reset-query!])))}] 
+   "?"
+   (let [autocomplete-results @(subscribe [:autocomplete-results])]
+     (when (seq autocomplete-results)
+       [:div.autocomplete-results
+        (for [place autocomplete-results]
+          ^{:key (place :place-id)}
+          [:div.result
+           {:on-click (fn []
+                        (dispatch [:select-city! place]))}
+           (place :description)])]))])
+
 (defn app-view []
   [:div.app
-   [:form
-    "When is the weather nice in "
-    [:input {:value @(subscribe [:query])
-             :on-change (fn [e]
-                          (dispatch [:update-query! (.. e -target -value)]))
-             :on-focus (fn [_]
-                         (dispatch [:update-query! ""]))
-             :on-blur (fn [_]
-                        (when (string/blank? @(subscribe [:query]))
-                          (dispatch [:reset-query!])))}] 
-    "?"]
+   [form-view]
    [results-view]])

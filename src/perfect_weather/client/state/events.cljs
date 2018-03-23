@@ -1,5 +1,6 @@
 (ns perfect-weather.client.state.events
   (:require
+    [clojure.string :as string]
     [bloom.omni.ajax :as ajax]
     [re-frame.core :refer [dispatch reg-fx reg-event-fx]]))
 
@@ -8,14 +9,39 @@
 (reg-event-fx 
   :init!
   (fn [_ _]
-    {:db {:results []
-          :query ""}
+    {:db {:query ""
+          :autocomplete-results []
+          :results []}
      :dispatch [:-fetch-initial-data!]}))
 
 (reg-event-fx
   :update-query!
   (fn [{db :db} [_ query]]
-    {:db (assoc db :query query)}))
+    {:db (assoc db :query query)
+     :dispatch [:-fetch-autocomplete! query]}))
+
+(reg-event-fx
+  :select-city!
+  (fn [{db :db} [_ place]]
+    {:db (assoc db :query (-> place 
+                              :description
+                              (string/split #",")
+                              first))
+     :dispatch [:-fetch-result! (place :place-id)]}))
+
+(reg-event-fx
+  :-fetch-autocomplete!
+  (fn [_ [_ query]]
+    {:ajax {:method :get
+            :uri "/api/autocomplete"
+            :params {:query query}
+            :on-success (fn [results]
+                         (dispatch [:-store-autocomplete-results! results]))}}))
+
+(reg-event-fx
+  :-store-autocomplete-results!
+  (fn [{db :db} [_ results]]
+    {:db (assoc db :autocomplete-results results)}))
 
 (reg-event-fx
   :reset-query!
@@ -34,9 +60,10 @@
 
 (reg-event-fx
   :-fetch-result!
-  (fn [_ _]
+  (fn [_ [_ place-id]]
     {:ajax {:method :get
-            :uri "/api/data"
+            :uri "/api/search"
+            :params {:place-id place-id}
             :on-success (fn [result]
                           (dispatch [:-store-result! result]))}}))
 

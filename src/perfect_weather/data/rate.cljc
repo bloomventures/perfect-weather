@@ -63,6 +63,8 @@ http://saroselectronics.com/digital-relative-humidity-display/
              [32 0.20]
              [27 0.75]]]
     (and
+      t
+      h
       (<= 17 t 32)
       (<= 0.20 h 0.85)
       (within-polygon? [t h] pts))))
