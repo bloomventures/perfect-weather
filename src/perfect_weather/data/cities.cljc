@@ -11,6 +11,11 @@
     :lat 37.983972
     :lon 23.727806
     :offset 2}
+   {:key :honolulu
+    :city "Honolulu"
+    :country "USA"
+    :lat 21.3069444
+    :lon -157.5853333}
    {:key :gdansk
     :city "Gdansk"
     :country "Poland"
