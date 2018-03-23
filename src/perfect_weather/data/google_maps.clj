@@ -33,7 +33,7 @@
                             (filter (fn [ac]
                                       (contains? (set (ac :types)) "locality")))
                             first
-                            :short_name)
+                            :long_name)
                  :country (->> r
                                :address_components
                                (filter (fn [ac]
