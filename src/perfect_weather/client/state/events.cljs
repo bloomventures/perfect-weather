@@ -31,7 +31,8 @@
                               :description
                               (string/split #",")
                               first))
-     :dispatch [:-fetch-result! (place :place-id)]}))
+     :dispatch-n [[:-fetch-result! (place :place-id)]
+                  [:-clear-autocomplete-results!]]}))
 
 (reg-event-fx
   :-fetch-autocomplete!
@@ -46,6 +47,11 @@
   :-store-autocomplete-results!
   (fn [{db :db} [_ results]]
     {:db (assoc db :autocomplete-results results)}))
+
+(reg-event-fx
+  :-clear-autocomplete-results!
+  (fn [{db :db} [_ results]]
+    {:db (assoc db :autocomplete-results [])}))
 
 (reg-event-fx
   :reset-query!
