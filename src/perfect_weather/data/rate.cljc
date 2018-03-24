@@ -32,11 +32,16 @@
     (< 20 (d :temperature) 25) 
     (< 0.35 (d :humidity) 0.55)))
 
+(def hour-start 8)
+(def hour-end 20)
+(def hour-count (- hour-end hour-start))
+(def hour-threshold 8)
+
 (defn day-result? [f p? data]
-  (let [threshold (if p? 6 6)]
+  (let [threshold (if p? hour-threshold 6)]
     (<= threshold (->> data
-                       (drop 10)
-                       (take 10)
+                       (drop hour-start)
+                       (take hour-count)
                        (map f)
                        (filter true?)
                        count))))
@@ -44,11 +49,11 @@
 (defn nice? 
   "Polygon:
     
-     . 17t,85h 
+     . 17.5t,85h 
            . 27t,75h
 
      .         .  32t,20h
-       17t,20h
+       17.5t,20h
   
   References:
 https://en.wikipedia.org/wiki/Thermal_comfort
@@ -58,14 +63,14 @@ http://saroselectronics.com/digital-relative-humidity-display/
   [d]
   (let [t (d :temperature)
         h (d :humidity)
-        pts [[17 0.85]
-             [17 0.20]
+        pts [[17.5 0.85]
+             [17.5 0.20]
              [32 0.20]
              [27 0.75]]]
     (and
       t
       h
-      (<= 17 t 32)
+      (<= 17.5 t 32)
       (<= 0.20 h 0.85)
       (within-polygon? [t h] pts))))
 

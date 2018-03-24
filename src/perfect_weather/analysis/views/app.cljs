@@ -11,14 +11,14 @@
   [:div {:style {:display "flex"
                  :position "relative"}}
    [:div {:style {:position "absolute"
-                  :top (str (+ 2 (* 5 10)) "px")
+                  :top (str (+ 2 (* 5 rate/hour-start)) "px")
                   :margin-top "1em"
                   :z-index 10
                   :width "100%"
                   :height "1px"
                   :background "white"}}]
    [:div {:style {:position "absolute"
-                  :top (str (+ 2 (* 5 20)) "px")
+                  :top (str (+ 2 (* 5 rate/hour-end)) "px")
                   :margin-top "1em"
                   :z-index 10
                   :width "100%"
@@ -53,7 +53,7 @@
                          (for [day month]
                            ^{:key (-> day first :id)}
                            [:div.day {:style {:background "pink"}}
-                            (for [hour (->> day (drop 8) (take 12))]
+                            (for [hour (->> day (drop rate/hour-start) (take rate/hour-count))]
                               ^{:key (hour :id)}
                               [:div.hour {:style {:width "2px"
                                                   :height "5px"
@@ -133,8 +133,8 @@
                                                :nice "#09afa3"
                                                :perfect "#70fffb"
                                                "black")})
-                                          day))))]]]
-
+                                          day))))]]]]
+         #_[:tbody
           [:tr
            [:td "Hot"]
            [:td [summary-view rate/hot? false @(subscribe [:data (city :key)])]]]
@@ -158,13 +158,15 @@
            [:td [summary-view rate/dry? false @(subscribe [:data (city :key)])]]]
           [:tr
            [:td "Dry (filter)"]
-           [:td [median-view rate/dry? false @(subscribe [:data (city :key)])]]]
+           [:td [median-view rate/dry? false @(subscribe [:data (city :key)])]]]]
+         [:tbody
           [:tr
            [:td "Nice"]
            [:td [summary-view rate/nice? true @(subscribe [:data (city :key)])]]]
           [:tr
            [:td "Nice (filtered)"]
-           [:td [median-view rate/nice? true @(subscribe [:data (city :key)])]]]
+           [:td [median-view rate/nice? true @(subscribe [:data (city :key)])]]]]
+        #_[:tbody
           [:tr
            [:td "Summary"]
            [:td (summary/text (->> @(subscribe [:data (city :key)])
