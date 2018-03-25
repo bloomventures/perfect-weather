@@ -6,20 +6,17 @@
   #_(apply println args))
 
 (defn with-cache 
-  [fetch-fn {:keys [api api-key lat lon ymd]}]
+  [cache-id query-id fetch-fn args]
   (future
-    (log "Fetching data for..." (name api) lat lon ymd)
-    (let [path (str "data/" (name api) "/" lat " " lon " " ymd ".edn")]
+    (log "Fetching data for..." (name cache-id) query-id)
+    (let [path (str "data/" (name cache-id) "/" query-id ".edn")]
       (if (.exists (io/file path))
         (do
           (log "Returning cached result.")
           (read-string (slurp path)))
         (do
           (log "Fetching from API...")
-          (if-let [result @(fetch-fn {:api-key api-key
-                                      :lat lat
-                                      :lon lon
-                                      :ymd ymd})]
+          (if-let [result @(fetch-fn args)]
             (do
               (log "Successful.")
               (spit path result)

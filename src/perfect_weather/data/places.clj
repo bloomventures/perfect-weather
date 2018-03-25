@@ -1,6 +1,7 @@
 (ns perfect-weather.data.places
   (:require
-    [clojure.java.io :as io]))
+    [clojure.java.io :as io]
+    [perfect-weather.data.google-maps :as google-maps]))
 
 (defn all []
   (->> (io/file "data/places")

@@ -8,7 +8,7 @@
     [perfect-weather.data.rate :as rate]))
 
 (defn compute [{:keys [lat lon city country]}]
-  (let [equivalent-place (places/closest-to {:lat lat :lon lon})
+  (let [equivalent-place (or (places/closest-to {:lat lat :lon lon}) {:lat lat :lon lon})
         data (data/city-day-data {:lat (equivalent-place :lat) 
                                   :lon (equivalent-place :lon)})
         days (->> data
@@ -30,17 +30,18 @@
      :ranges ranges}))
 
 (defn compute-by-place-id [place-id]
-  (let [place (google-maps/place-details place-id)]
+  (let [place @(google-maps/place place-id)]
     (compute {:lat (place :lat)
               :lon (place :lon)
               :country (place :country)
               :city (place :city)})))
 
+
 (def routes
   [[:get "/api/random/:n"]
    (fn [req]
      {:status 200
-      :body (->> (places/n-random 3)
+      :body (->> (places/n-random (Integer/parseInt (get-in req [:params :n])))
                  (map compute))})
 
    [:get "/api/autocomplete"]

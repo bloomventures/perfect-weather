@@ -3,7 +3,8 @@
     [clojure.set :refer [rename-keys]]
     [cheshire.core :as json]
     [environ.core :refer [env]]
-    [org.httpkit.client :as http]))
+    [org.httpkit.client :as http]
+    [perfect-weather.data.cache :refer [with-cache]]))
 
 (defn round [precision d]
   (let [factor (Math/pow 10 precision)]
@@ -22,7 +23,8 @@
                      {:key (env :google-api-key)
                       :placeid place-id}})
         parse (fn [r]
-                {:lat (round 2 (get-in r [:geometry :location :lat]))
+                {:place-id place-id
+                 :lat (round 2 (get-in r [:geometry :location :lat]))
                  :lon (round 2 (get-in r [:geometry :location :lng]))
                  :city (->> r
                             :address_components
@@ -37,13 +39,14 @@
                                first
                                :long_name)
                  :offset (get-in r [:utc_offset])})]
-    (if (= 200 (:status response))
-      (-> response
-          :body
-          (json/parse-string true)
-          :result
-          parse)
-      (println response))))
+    (future
+      (if (= 200 (:status response))
+        (-> response
+            :body
+            (json/parse-string true)
+            :result
+            parse)
+        (println response)))))
 
 (defn autocomplete
   "Reference: 
@@ -66,4 +69,11 @@
                        :country (-> p :terms last :value)
                        :place-id (p :place_id)}))))
       (println response)))) 
+
+(defn place [place-id]
+  (->> (with-cache 
+         :places
+         place-id
+         place-details
+         place-id)))
 

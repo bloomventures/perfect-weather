@@ -25,9 +25,10 @@
   [{:keys [api-key lat lon ymd]}]
   (future 
     (->> (with-cache 
+           :darksky
+           (str lat " " lon " " ymd)
            fetch
-           {:api :darksky
-            :api-key api-key
+           {:api-key api-key
             :lat lat
             :lon lon
             :ymd ymd})
