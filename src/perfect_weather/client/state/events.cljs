@@ -3,18 +3,28 @@
     [clojure.string :as string]
     [bloom.omni.ajax :as ajax]
     [bloom.omni.dispatch-debounce :as dispatch-debounce]
-    [re-frame.core :refer [dispatch reg-fx reg-event-fx]]))
+    [bloom.omni.router :as router]
+    [re-frame.core :refer [dispatch reg-fx reg-event-fx]]
+    [perfect-weather.client.state.routes]))
 
 (reg-fx :ajax ajax/fx)
 (reg-fx :dispatch-debounce dispatch-debounce/fx)
+(reg-fx :router router/fx)
 
 (reg-event-fx 
   :init!
   (fn [_ _]
     {:db {:query ""
           :autocomplete-results []
+          :page nil
           :results []}
-     :dispatch [:-fetch-initial-data!]}))
+     :dispatch [:-fetch-initial-data!]
+     :router [:init!]}))
+
+(reg-event-fx
+  :route-page!
+  (fn [{db :db} [_ page]]
+    {:db (assoc db :page page)}))
 
 (reg-event-fx
   :update-query!

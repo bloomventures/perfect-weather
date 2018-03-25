@@ -1,10 +1,8 @@
 (ns perfect-weather.client.styles
   (:require
-    [garden.stylesheet :refer [at-import]]))
-
-(def color-accent "#4cafef")
-(def color-grid-background "#f5f5f5")
-(def color-grid-border "#ddd")
+    [garden.stylesheet :refer [at-import]]
+    [perfect-weather.client.ui.colors :as colors]
+    [perfect-weather.client.views.faq-page-styles :refer [>faq-page]]))
 
 (def row 
   [:&
@@ -29,13 +27,13 @@
 
      [:>.column
       {:width (str (float (/ 100 12)) "%")
-       :border-left [["1px" "solid" color-grid-border]]}
+       :border-left [["1px" "solid" colors/grid-border]]}
 
       ["&:nth-child(even)"
-       {:background color-grid-background}]
+       {:background colors/grid-background}]
 
       [:&:last-child
-       {:border-right [["1px" "solid" color-grid-border]]}]]]]])
+       {:border-right [["1px" "solid" colors/grid-border]]}]]]]])
 
 (defn styles []
   [(at-import "https://fonts.googleapis.com/css?family=Montserrat:400,600")
@@ -53,82 +51,106 @@
       :justify-content "center"
       :align-items "center"}
 
-     [:>form
-      {:font-size "1.5rem"
-       :margin "3rem"}
+     (>faq-page)
 
-      [:>input
+     [:>.index-page
+      {:display "flex"
+       :min-height "100vh"
+       :flex-direction "column"
+       :justify-content "center"
+       :align-items "center"}
+
+      [:>form
        {:font-size "1.5rem"
-        :width "8em"
-        :padding "0.25rem"}]]
+        :margin "3rem"}
 
-     [:>.results
-      ; fudge to visually center
-      {:margin-right "4rem"
-       :width "100%"}
+       [:>input
+        {:font-size "1.5rem"
+         :width "8em"
+         :padding "0.25rem"}]]
 
-      (let [height "4rem"]
-        [:>.result
-         row
-         {:height height}
+      [:>.results
+       ; fudge to visually center
+       {:margin-right "4rem"
+        :width "100%"}
 
-         [:>.legend
-          {:text-transform "uppercase"
-           :height height
-           :line-height height
-           :padding-right "0.5rem"
-           :font-size "0.85rem"
-           :letter-spacing "0.1em"
-           :text-align "right"
-           :font-weight "bold"
-           :color color-accent}
+       (let [height "4rem"]
+         [:>.result
+          row
+          {:height height}
 
-          [:&:first-letter
-           {:font-size "1.15em"}]]
+          [:>.legend
+           {:text-transform "uppercase"
+            :height height
+            :line-height height
+            :padding-right "0.5rem"
+            :font-size "0.85rem"
+            :letter-spacing "0.1em"
+            :text-align "right"
+            :font-weight "bold"
+            :color colors/accent}
 
-         [:>.calendar
+           [:&:first-letter
+            {:font-size "1.15em"}]]
 
-          [:>.columns
-           {:margin-bottom (str "-" height)} 
+          [:>.calendar
 
-           [:>.month]]
+           [:>.columns
+            {:margin-bottom (str "-" height)} 
 
-          [:>.ranges
-           {:display "flex"
-            :height "100%" 
-            :align-items "center"}
+            [:>.month]]
 
-           [:>.range
-            {:height "1em"}
+           [:>.ranges
+            {:display "flex"
+             :height "100%" 
+             :align-items "center"}
 
-            [:&.never
-             {:color color-accent
-              :width "100%"
-              :font-weight "bold"
-              :text-align "center"}]
+            [:>.range
+             {:height "1em"}
 
-            [:&.fill
-             {:background color-accent
-              :border-radius "1em"}]
+             [:&.never
+              {:color colors/accent
+               :width "100%"
+               :font-weight "bold"
+               :text-align "center"}]
 
-            [:&.start
-             {:border-radius "0 1em 1em 0"}]
+             [:&.fill
+              {:background colors/accent
+               :border-radius "1em"}]
 
-            [:&.end
-             {:border-radius "1em 0 0 1em"}]]]]])
+             [:&.start
+              {:border-radius "0 1em 1em 0"}]
 
-      (let [height "2rem"]
-        [:>.bottom-legend
-         row
-         {:height height}
+             [:&.end
+              {:border-radius "1em 0 0 1em"}]]]]])
 
-         [:>.main
+       (let [height "2rem"]
+         [:>.bottom-legend
+          row
+          {:height height}
 
-          [:>.columns
+          [:>.main
 
-           [:>.column
-            {:line-height height
-             :text-align "center"
-             :text-transform "uppercase"
-             :font-size "0.7em"
-             :letter-spacing "0.1em"}]]]])]]]])
+           [:>.columns
+
+            [:>.column
+             {:line-height height
+              :text-align "center"
+              :text-transform "uppercase"
+              :font-size "0.7em"
+              :letter-spacing "0.1em"}]]]])]
+
+      [:>.gap
+       {:flex-grow 1}]
+
+      [:>.footer
+       {:display "flex"
+        :padding "0.25rem"}
+
+       [:>div
+        {:margin "0 0.5rem"
+         :color colors/text-light}
+
+        [:>a
+         {:color colors/accent
+          :text-decoration "none"}]]]]]]])

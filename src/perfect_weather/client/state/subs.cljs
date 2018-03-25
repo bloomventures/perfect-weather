@@ -16,3 +16,8 @@
   :autocomplete-results
   (fn [db _]
     (db :autocomplete-results)))
+
+(reg-sub
+  :page
+  (fn [db _]
+    (db :page)))

@@ -2,7 +2,9 @@
   (:require
     [clojure.string :as string]
     [re-frame.core :refer [dispatch subscribe]]
-    [perfect-weather.data.months :refer [months months-abbr]]))
+    [perfect-weather.client.state.routes :as routes]
+    [perfect-weather.data.months :refer [months months-abbr]]
+    [perfect-weather.client.views.faq-page :refer [faq-page-view]]))
 
 (defn calendar-view [ranges]
   [:div.calendar.main 
@@ -74,7 +76,40 @@
                         (dispatch [:select-city! result]))}
            (str (result :city) ", " (result :country))])]))])
 
+(defn footer-view []
+  [:div.footer
+
+   [:div
+    [:a {:href (routes/faq-path)}
+     "FAQ"]]
+
+   [:div
+    "Built by " 
+    [:a {:href "https://bloomventures.io/"
+         :target "_blank"}
+     "Bloom"]]
+
+   [:div
+    "Powered by "
+    [:a {:href "https://darksky.net/poweredby/"
+         :target "_blank"}
+     "DarkSky"] " & "
+    [:a {:href "https://developers.google.com/places/"}
+     "Google"]]])
+
+(defn index-page-view []
+  [:div.index-page
+   [:div.gap]
+   [form-view]
+   [results-view]
+   [:div.gap]
+   [footer-view]])
+
 (defn app-view []
   [:div.app
-   [form-view]
-   [results-view]])
+   (case @(subscribe [:page])
+     :index
+     [index-page-view]
+     :faq
+     [faq-page-view]
+     nil)])
