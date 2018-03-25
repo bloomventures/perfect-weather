@@ -5,6 +5,10 @@
     [environ.core :refer [env]]
     [org.httpkit.client :as http]))
 
+(defn round [precision d]
+  (let [factor (Math/pow 10 precision)]
+    (/ (Math/round (* d factor)) factor)))
+
 (def base-url "https://maps.googleapis.com/maps/api/place")
 
 (defn place-details 
@@ -18,8 +22,8 @@
                      {:key (env :google-api-key)
                       :placeid place-id}})
         parse (fn [r]
-                {:lat (get-in r [:geometry :location :lat])
-                 :lon (get-in r [:geometry :location :lng])
+                {:lat (round 2 (get-in r [:geometry :location :lat]))
+                 :lon (round 2 (get-in r [:geometry :location :lng]))
                  :city (->> r
                             :address_components
                             (filter (fn [ac]
