@@ -2,7 +2,6 @@
   (:require
     [re-frame.core :refer [subscribe]]
     [perfect-weather.data.rate :as rate]
-    [perfect-weather.data.cities :refer [cities]]
     [perfect-weather.data.months :refer [months-abbr]]
     [perfect-weather.data.summary :as summary]
     [perfect-weather.data.filters :as filters]))
@@ -71,10 +70,10 @@
 (defn app-view []
   [:div
    (doall
-     (for [city cities]
-       ^{:key (city :key)}
+     (for [place @(subscribe [:data])]
+       ^{:key (place :city)}
        [:div
-        [:h2 (name (city :key))]
+        [:h2 (place :city)]
 
         [:table
 
@@ -83,7 +82,7 @@
              [:td "Temperature"]
              [:td
               [hourly-view 
-               (->> @(subscribe [:data (city :key)]) 
+               (->> (place :data)
                     (map (fn [day]
                            (map (fn [row]
                                   {:id (row :epoch)
@@ -96,7 +95,7 @@
              [:td "Humidity"]
              [:td
               [hourly-view 
-               (->> @(subscribe [:data (city :key)]) 
+               (->> (place :data)
                     (map (fn [day]
                            (map (fn [row]
                                   {:id (row :epoch)
@@ -110,7 +109,7 @@
            [:td "Nice Hours"]
            [:td
             [hourly-view 
-             (->> @(subscribe [:data (city :key)]) 
+             (->> (place :data)
                   (map (fn [day]
                          (map (fn [row]
                                 {:id (row :epoch)
@@ -136,35 +135,35 @@
               [:tr
                [:td title]
                [:td 
-                [bar-view (->> @(subscribe [:data (city :key)])
+                [bar-view (->> (place :data)
                                (map (fn [hours]
                                       (rate/day-result? f false hours))))]
-                [bar-view (->> @(subscribe [:data (city :key)])
+                [bar-view (->> (place :data)
                                (map (fn [hours]
                                       (rate/day-result? f false hours)))
                                (filters/combined-filter))]]])]
          [:tbody
           [:tr
            [:td "Nice Days"]
-           [:td [bar-view (->> @(subscribe [:data (city :key)])
+           [:td [bar-view (->> (place :data)
                                (map (fn [hours]
                                       (rate/day-result? rate/nice? true hours))))]]]
           [:tr
            [:td "Nice Days (filtered)"]
-           [:td [bar-view (->> @(subscribe [:data (city :key)])
+           [:td [bar-view (->> (place :data)
                                (map (fn [hours]
                                       (rate/day-result? rate/nice? true hours)))
                                (filters/combined-filter))]]]]
          #_[:tbody
             [:tr
              [:td "Summary"]
-             [:td (summary/text (->> @(subscribe [:data (city :key)])
+             [:td (summary/text (->> (place :data)
                                      (map (fn [hours]
                                             (rate/day-result? rate/nice? true hours)))
                                      (filters/combined-filter)))]]
             [:tr
              [:td "Nice Days"]
-             [:td (summary/days-count (->> @(subscribe [:data (city :key)])
+             [:td (summary/days-count (->> (place :data)
                                            (map (fn [hours]
                                                   (rate/day-result? rate/nice? true hours)))
                                            (filters/combined-filter)))]]]]]))]) 

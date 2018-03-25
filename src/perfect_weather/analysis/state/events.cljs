@@ -15,7 +15,7 @@
   :-fetch-data!
   (fn [_ _]
     {:ajax {:method :get
-            :uri "/api/data"
+            :uri "/api/analysis/3"
             :on-success (fn [response]
                           (dispatch [:-store-data! response]))}}))
 

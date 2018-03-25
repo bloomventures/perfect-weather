@@ -1,6 +1,6 @@
 (ns perfect-weather.server.api
   (:require
-    [perfect-weather.data.cities :refer [cities]]
+    [perfect-weather.data.places :as places]
     [perfect-weather.data.core :as data]
     [perfect-weather.data.filters :as filters]
     [perfect-weather.data.summary :as summary]
@@ -40,7 +40,7 @@
 
 (defn compute-by-place-id [place-id]
   (let [place (google-maps/place-details place-id)
-        city (->> cities
+        city (->> (places/all)
                   (map (fn [{:keys [lat lon] :as city}]
                          [city (distance city place)]))
                   (remove (fn [[_ dist]]
@@ -61,7 +61,7 @@
   [[:get "/api/random/:n"]
    (fn [req]
      {:status 200
-      :body (->> (take 3 (shuffle cities))
+      :body (->> (places/n-random 3)
                  (map compute))})
 
    [:get "/api/autocomplete"]
@@ -74,9 +74,11 @@
      {:status 200
       :body (compute-by-place-id (get-in req [:params :place-id]))})
    
-   ; for analysis
-   [:get "/api/data"]
-   (fn [_]
+   [:get "/api/analysis/:n"]
+   (fn [req]
      {:status 200
-      :body (data/all)})])
+      :body  (->> (places/n-random (Integer/parseInt (get-in req [:params :n])))
+                  (map (fn [city]
+                         (assoc city
+                           :data (data/city-day-data city)))))})])
 
