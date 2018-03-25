@@ -1,4 +1,4 @@
-(ns perfect-weather.client.styles
+(ns perfect-weather.client.ui.app-styles
   (:require
     [garden.stylesheet :refer [at-import]]
     [perfect-weather.client.ui.faq-page-styles :refer [>faq-page]]

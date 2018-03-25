@@ -11,7 +11,7 @@
                                       api-defaults
                                       secure-api-defaults]]
     [perfect-weather.server.api :as api]
-    [perfect-weather.client.styles]))
+    [perfect-weather.client.ui.app-styles]))
 
 (defn start! []
   (-> (mount/with-args {:handlers [(-> (ring/->handler api/routes)
@@ -20,7 +20,7 @@
                                    (ring/->handler spa/routes)]
                         :figwheel-port 5223
                         :http-port 1262
-                        :css {:styles 'perfect-weather.client.styles/styles}
+                        :css {:styles 'perfect-weather.client.ui.app-styles/styles}
                         :cljs {:main "perfect-weather.client.core"}})
       (mount/start)))
 
