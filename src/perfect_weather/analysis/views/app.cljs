@@ -7,64 +7,52 @@
     [perfect-weather.data.summary :as summary]
     [perfect-weather.data.filters :as filters]))
 
-(defn hourly-view [data]
-  [:div {:style {:display "flex"
-                 :position "relative"}}
-   [:div {:style {:position "absolute"
-                  :top (str (+ 2 (* 5 rate/hour-start)) "px")
-                  :margin-top "1em"
-                  :z-index 10
-                  :width "100%"
-                  :height "1px"
-                  :background "white"}}]
-   [:div {:style {:position "absolute"
-                  :top (str (+ 2 (* 5 rate/hour-end)) "px")
-                  :margin-top "1em"
-                  :z-index 10
-                  :width "100%"
-                  :height "1px"
-                  :background "white"}}]
-   (->> data
-        (partition 30)
-        (map-indexed (fn [i month]
-                       ^{:key i}
-                       [:div.month {:style {:border-right "0px solid white"}}
-                        [:div (months-abbr i)]
-                        [:div {:style {:display "flex"}}
-                         (for [day month]
-                           ^{:key (-> day first :id)}
-                           [:div.day {:style {:background "pink"}}
-                            (for [row day]
-                              ^{:key (row :id)}
-                              [:div.hour {:style {:width "2px"
-                                                  :height "5px"
-                                                  :background (row :value)}}])])]])))])
-
-(defn hourly-view-mini [data]
-  [:div {:style {:display "flex"
-                 :position "relative"}}
-   (->> data
-        (partition 30)
-        (map-indexed (fn [i month]
-                       ^{:key i}
-                       [:div.month {:style {:border-right "0px solid white"}}
-                        [:div (months-abbr i)]
-                        [:div {:style {:display "flex"}}
-                         (for [day month]
-                           ^{:key (-> day first :id)}
-                           [:div.day {:style {:background "pink"}}
-                            (for [hour (->> day (drop rate/hour-start) (take rate/hour-count))]
-                              ^{:key (hour :id)}
-                              [:div.hour {:style {:width "2px"
-                                                  :height "5px"
-                                                  :background (hour :value)}}])])]])))])
-
-(defn summary-view [f p? data]
+(defn hourly-view [data {:keys [bars? clip?]}]
+  (let [h 2
+        w 2
+        clip (if clip?
+               (fn [coll]
+                 (->> coll
+                      (drop rate/hour-start)
+                      (take rate/hour-count)))
+               identity)]
+    [:div {:style {:display "flex"
+                   :position "relative"}}
+     (when bars?
+       [:div
+        [:div {:style {:position "absolute"
+                       :top (str (+ 2 (* h rate/hour-start)) "px")
+                       :margin-top "1em"
+                       :z-index 10
+                       :width "100%"
+                       :height "1px"
+                       :background "white"}}]
+        [:div {:style {:position "absolute"
+                       :top (str (+ 2 (* h rate/hour-end)) "px")
+                       :margin-top "1em"
+                       :z-index 10
+                       :width "100%"
+                       :height "1px"
+                       :background "white"}}]])
+     (->> data
+          (partition 30)
+          (map-indexed (fn [i month]
+                         ^{:key i}
+                         [:div.month 
+                          [:div (months-abbr i)]
+                          [:div {:style {:display "flex"}}
+                           (for [day month]
+                             ^{:key (-> day first :id)}
+                             [:div.day {:style {:background "black"}}
+                              (for [row (clip day)]
+                                ^{:key (row :id)}
+                                [:div.hour {:style {:width (str w "px")
+                                                    :height (str h "px") 
+                                                    :background (row :value)}}])])]])))]))
+(defn bar-view [data]
   [:div {:style {:display "flex"
                  :position "relative"}}
    (->> data
-        (map (fn [hours]
-               (rate/day-result? f p? hours)))
         (partition 30)
         (map-indexed (fn [i month]
                        ^{:key i}
@@ -77,30 +65,7 @@
                                               [:div.hour {:style {:width "2px"
                                                                   :height "5px"
                                                                   :background (if day
-                                                                                (if p? "blue" "black")
-                                                                                "white")}}]])))]])))])
-
-
-(defn median-view [f p? data]
-  [:div {:style {:display "flex"
-                 :position "relative"}}
-   (->> data
-        (map (fn [hours]
-               (rate/day-result? f p? hours)))
-        (filters/combined-filter)
-        (partition 30)
-        (map-indexed (fn [i month]
-                       ^{:key i}
-                       [:div.month 
-                        [:div {:style {:display "flex"}}
-                         (->> month
-                              (map-indexed (fn [i day]
-                                             ^{:key i}
-                                             [:div.day 
-                                              [:div.hour {:style {:width "2px"
-                                                                  :height "5px"
-                                                                  :background (if day
-                                                                                (if p? "blue" "black")
+                                                                                "#4cafef"
                                                                                 "white")}}]])))]])))])
 
 (defn app-view []
@@ -112,71 +77,95 @@
         [:h2 (name (city :key))]
 
         [:table
-         [:tbody
-          [:tr
-           [:td]
-           [:td
-            [hourly-view (->> @(subscribe [:data (city :key)]) 
-                              (map (fn [day]
-                                     (map (fn [row]
-                                            {:id (row :epoch)
-                                             :value 
-                                             #_(if (row :precipitation?)
-                                                 "red"
-                                                 "blue")
-                                             (case (rate/issue row)
-                                               ;:hot "#880000"
-                                               ;:cold "#000088"
-                                               ;:humid "#888800"
-                                               ;:dry "#880088"
-                                               ;:rain "red"
-                                               :nice "#09afa3"
-                                               :perfect "#70fffb"
-                                               "black")})
-                                          day))))]]]]
+
          #_[:tbody
-          [:tr
-           [:td "Hot"]
-           [:td [summary-view rate/hot? false @(subscribe [:data (city :key)])]]]
-          [:tr
-           [:td "Hot (filter)"]
-           [:td [median-view rate/hot? false @(subscribe [:data (city :key)])]]]
-          [:tr
-           [:td "Cold"]
-           [:td [summary-view rate/cold? false @(subscribe [:data (city :key)])]]]
-          [:tr
-           [:td "Cold (filter)"]
-           [:td [median-view rate/cold? false @(subscribe [:data (city :key)])]]]
-          [:tr
-           [:td "Humid"]
-           [:td [summary-view rate/humid? false @(subscribe [:data (city :key)])]]]
-          [:tr
-           [:td "Humid (filter)"]
-           [:td [median-view rate/humid? false @(subscribe [:data (city :key)])]]]
-          [:tr
-           [:td "Dry"]
-           [:td [summary-view rate/dry? false @(subscribe [:data (city :key)])]]]
-          [:tr
-           [:td "Dry (filter)"]
-           [:td [median-view rate/dry? false @(subscribe [:data (city :key)])]]]]
+            [:tr
+             [:td "Temperature"]
+             [:td
+              [hourly-view 
+               (->> @(subscribe [:data (city :key)]) 
+                    (map (fn [day]
+                           (map (fn [row]
+                                  {:id (row :epoch)
+                                   :value (str "hsl(204,84%," (/ (* 100 (row :temperature))
+                                                                 40) "%)")})
+                                day))))
+               {:bars? false
+                :clip? false}]]]
+            [:tr
+             [:td "Humidity"]
+             [:td
+              [hourly-view 
+               (->> @(subscribe [:data (city :key)]) 
+                    (map (fn [day]
+                           (map (fn [row]
+                                  {:id (row :epoch)
+                                   :value (str "hsl(204,84%," (* 100 (row :humidity)) "%)")})
+                                day))))
+               {:bars? false
+                :clip? false}]]]]
+
          [:tbody
           [:tr
-           [:td "Nice"]
-           [:td [summary-view rate/nice? true @(subscribe [:data (city :key)])]]]
-          [:tr
-           [:td "Nice (filtered)"]
-           [:td [median-view rate/nice? true @(subscribe [:data (city :key)])]]]]
-        #_[:tbody
-          [:tr
-           [:td "Summary"]
-           [:td (summary/text (->> @(subscribe [:data (city :key)])
-                                   (map (fn [hours]
-                                          (rate/day-result? rate/nice? true hours)))
-                                   (filters/combined-filter)))]]
+           [:td "Nice Hours"]
+           [:td
+            [hourly-view 
+             (->> @(subscribe [:data (city :key)]) 
+                  (map (fn [day]
+                         (map (fn [row]
+                                {:id (row :epoch)
+                                 :value (case (rate/issue row)
+                                          ;:hot "#880000"
+                                          ;:cold "#000088"
+                                          ;:humid "#888800"
+                                          ;:dry "#880088"
+                                          ;:rain "red"
+                                          :nice "#4cafef"
+                                          ;:perfect "#70fffb"
+                                          "white")})
+                              day))))
+             {:bars? false
+              :clip? false}]]]]
+
+         #_[:tbody
+            (for [[title f] [["Hot" rate/hot?]
+                             ["Cold" rate/cold?]
+                             ["Humid" rate/humid?]
+                             ["Dry" rate/dry?]]]
+              ^{:key title}
+              [:tr
+               [:td title]
+               [:td 
+                [bar-view (->> @(subscribe [:data (city :key)])
+                               (map (fn [hours]
+                                      (rate/day-result? f false hours))))]
+                [bar-view (->> @(subscribe [:data (city :key)])
+                               (map (fn [hours]
+                                      (rate/day-result? f false hours)))
+                               (filters/combined-filter))]]])]
+         [:tbody
           [:tr
            [:td "Nice Days"]
-           [:td (summary/days-count (->> @(subscribe [:data (city :key)])
-                                         (map (fn [hours]
-                                                (rate/day-result? rate/nice? true hours)))
-                                         (filters/combined-filter)))]]]]]))]) 
+           [:td [bar-view (->> @(subscribe [:data (city :key)])
+                               (map (fn [hours]
+                                      (rate/day-result? rate/nice? true hours))))]]]
+          [:tr
+           [:td "Nice Days (filtered)"]
+           [:td [bar-view (->> @(subscribe [:data (city :key)])
+                               (map (fn [hours]
+                                      (rate/day-result? rate/nice? true hours)))
+                               (filters/combined-filter))]]]]
+         #_[:tbody
+            [:tr
+             [:td "Summary"]
+             [:td (summary/text (->> @(subscribe [:data (city :key)])
+                                     (map (fn [hours]
+                                            (rate/day-result? rate/nice? true hours)))
+                                     (filters/combined-filter)))]]
+            [:tr
+             [:td "Nice Days"]
+             [:td (summary/days-count (->> @(subscribe [:data (city :key)])
+                                           (map (fn [hours]
+                                                  (rate/day-result? rate/nice? true hours)))
+                                           (filters/combined-filter)))]]]]]))]) 
 
