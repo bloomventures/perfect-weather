@@ -2,7 +2,7 @@
   (:require
     [garden.stylesheet :refer [at-import]]
     [perfect-weather.client.ui.colors :as colors]
-    [perfect-weather.client.views.faq-page-styles :refer [>faq-page]]))
+    [perfect-weather.client.ui.faq-page-styles :refer [>faq-page]]))
 
 (def row 
   [:&

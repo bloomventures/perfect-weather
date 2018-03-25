@@ -1,4 +1,4 @@
-(ns perfect-weather.client.views.faq-page-styles
+(ns perfect-weather.client.ui.faq-page-styles
   (:require
     [perfect-weather.client.ui.colors :as colors]))
 

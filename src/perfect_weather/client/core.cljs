@@ -4,7 +4,7 @@
     [re-frame.core :refer [dispatch-sync]]
     [perfect-weather.client.state.subs]
     [perfect-weather.client.state.events]
-    [perfect-weather.client.views.app :refer [app-view]]))
+    [perfect-weather.client.ui.app :refer [app-view]]))
 
 (enable-console-print!)
 

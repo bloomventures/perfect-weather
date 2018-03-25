@@ -1,4 +1,4 @@
-(ns perfect-weather.client.views.faq-page
+(ns perfect-weather.client.ui.faq-page
   (:require
     [perfect-weather.client.state.routes :as routes]
     [perfect-weather.data.rate :as rate]))

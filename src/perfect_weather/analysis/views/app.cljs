@@ -1,4 +1,4 @@
-(ns perfect-weather.analysis.views.app
+(ns perfect-weather.analysis.ui.app
   (:require
     [re-frame.core :refer [subscribe]]
     [perfect-weather.data.rate :as rate]

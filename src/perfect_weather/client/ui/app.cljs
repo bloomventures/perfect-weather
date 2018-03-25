@@ -1,10 +1,10 @@
-(ns perfect-weather.client.views.app
+(ns perfect-weather.client.ui.app
   (:require
     [clojure.string :as string]
     [re-frame.core :refer [dispatch subscribe]]
     [perfect-weather.client.state.routes :as routes]
     [perfect-weather.data.months :refer [months months-abbr]]
-    [perfect-weather.client.views.faq-page :refer [faq-page-view]]))
+    [perfect-weather.client.ui.faq-page :refer [faq-page-view]]))
 
 (defn calendar-view [ranges]
   [:div.calendar.main 
