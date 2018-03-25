@@ -7,14 +7,6 @@
 
 (def base-url "https://maps.googleapis.com/maps/api/place")
 
-(defn place-photo-url
-  "https://developers.google.com/places/web-service/photos"
-  [photo-reference]
-  (str base-url "/photo?key=" (env :google-api-key) 
-       "&photoreference=" photo-reference
-       "&maxheight=" 200
-       "&maxwidth=" 200))
-
 (defn place-details 
   "Reference:
    https://developers.google.com/places/web-service/details"
@@ -40,7 +32,6 @@
                                          (contains? (set (ac :types)) "country")))
                                first
                                :long_name)
-                 :photo-reference (get-in r [:photos 0 :photo_reference])
                  :offset (get-in r [:utc_offset])})]
     (if (= 200 (:status response))
       (-> response
