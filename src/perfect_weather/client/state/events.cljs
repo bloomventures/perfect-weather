@@ -72,7 +72,7 @@
   :-fetch-initial-data!
   (fn [_ _]
     {:ajax {:method :get
-            :uri "/api/random/3"
+            :uri "/api/random/5"
             :on-success (fn [results]
                           (doseq [result results]
                             (dispatch [:-store-result! result])))}}))
