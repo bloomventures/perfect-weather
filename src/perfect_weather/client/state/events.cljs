@@ -89,4 +89,8 @@
 (reg-event-fx
   :-store-result!
   (fn [{db :db} [_ result]]
-    {:db (update db :results conj result)}))
+    {:db (-> db
+             (update :results #(vec (remove (fn [r] (and 
+                                                      (= (result :city) (r :city))
+                                                      (= (result :country) (r :country)))) %)))
+             (update :results conj result))}))
