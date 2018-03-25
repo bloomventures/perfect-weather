@@ -35,7 +35,8 @@
 (defn result-view [result]
  [:div.result.row
   [:div.legend
-   (result :city)]
+   [:div.label
+    (result :city) ", " (result :country)]]
   [calendar-view (result :ranges)]])
 
 (defn results-view []

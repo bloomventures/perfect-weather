@@ -61,15 +61,21 @@
        {:height height}
 
        [:>.legend
-        {:text-transform "uppercase"
-         :height height
-         :line-height height
-         :padding-right "0.5rem"
-         :font-size "0.85rem"
-         :letter-spacing "0.1em"
-         :text-align "right"
-         :font-weight "bold"
-         :color colors/accent}
+        {:position "relative"}
+
+        [:>.label
+         {:position "absolute"
+          :right 0
+          :text-transform "uppercase"
+          :height height
+          :line-height height
+          :padding-right "0.5rem"
+          :font-size "0.85rem"
+          :letter-spacing "0.1em"
+          :text-align "right"
+          :white-space "nowrap"
+          :font-weight "bold"
+          :color colors/accent}]
 
         [:&:first-letter
          {:font-size "1.15em"}]]
