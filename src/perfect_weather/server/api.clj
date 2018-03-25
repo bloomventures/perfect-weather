@@ -7,19 +7,10 @@
     [perfect-weather.data.google-maps :as google-maps]
     [perfect-weather.data.rate :as rate]))
 
-(defn distance
-  [{lon1 :lon lat1 :lat} {lon2 :lon lat2 :lat}]
-  (let [R 6378.137 ; Radius of Earth in km
-        dlat (Math/toRadians (- lat2 lat1))
-        dlon (Math/toRadians (- lon2 lon1))
-        lat1 (Math/toRadians lat1)
-        lat2 (Math/toRadians lat2)
-        a (+ (* (Math/sin (/ dlat 2)) (Math/sin (/ dlat 2))) (* (Math/sin (/ dlon 2)) (Math/sin (/ dlon 2)) (Math/cos lat1) (Math/cos lat2)))]
-    (* R 2 (Math/asin (Math/sqrt a)))))
-
 (defn compute [{:keys [lat lon city country]}]
-  (let [data (data/city-day-data {:lat lat 
-                                  :lon lon})
+  (let [equivalent-place (places/closest-to {:lat lat :lon lon})
+        data (data/city-day-data {:lat (equivalent-place :lat) 
+                                  :lon (equivalent-place :lon)})
         days (->> data
                   (map (fn [hours]
                          (rate/day-result? rate/nice? true hours)))
@@ -39,23 +30,11 @@
      :ranges ranges}))
 
 (defn compute-by-place-id [place-id]
-  (let [place (google-maps/place-details place-id)
-        city (->> (places/all)
-                  (map (fn [{:keys [lat lon] :as city}]
-                         [city (distance city place)]))
-                  (remove (fn [[_ dist]]
-                            (> dist 100)))
-                  first
-                  first)]
-    (if city
-      (compute {:lat (city :lat)
-                :lon (city :lon)
-                :country (place :country)
-                :city (place :city)})
-      (compute {:lat (place :lat)
-                :lon (place :lon)
-                :country (place :country)
-                :city (place :city)}))))
+  (let [place (google-maps/place-details place-id)]
+    (compute {:lat (place :lat)
+              :lon (place :lon)
+              :country (place :country)
+              :city (place :city)})))
 
 (def routes
   [[:get "/api/random/:n"]
