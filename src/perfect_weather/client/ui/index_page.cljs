@@ -57,24 +57,28 @@
 (defn form-view []
   [:form
    "When's the weather nice in "
-   [:input {:value @(subscribe [:query])
-            :on-change (fn [e]
+   [:div.field
+    [:input {:value @(subscribe [:query])
+             :on-change (fn [e]
+                          (dispatch [:update-query! (.. e -target -value)]))
+             :on-focus (fn [e]
                          (dispatch [:update-query! (.. e -target -value)]))
-            :on-focus (fn [_]
-                        (dispatch [:update-query! ""]))
-            :on-blur (fn [_]
-                       (when (string/blank? @(subscribe [:query]))
-                         (dispatch [:reset-query!])))}] 
-   "?"
-   (let [autocomplete-results @(subscribe [:autocomplete-results])]
-     (when (seq autocomplete-results)
-       [:div.autocomplete-results
-        (for [result autocomplete-results]
-          ^{:key (result :place-id)}
-          [:div.result
-           {:on-click (fn []
-                        (dispatch [:select-city! result]))}
-           (str (result :city) ", " (result :country))])]))])
+             :on-blur (fn [_]
+                        ; need to have a timeout here, b/c otherwise, the on-blur removes
+                        ; the autocomplete before the on-click has a chance to trigger
+                        (js/setTimeout (fn []
+                                         (dispatch [:clear-autocomplete-results!]))
+                                       200))}] 
+    (let [autocomplete-results @(subscribe [:autocomplete-results])]
+      (when (seq autocomplete-results)
+        [:div.autocomplete-results
+         (for [result autocomplete-results]
+           ^{:key (result :place-id)}
+           [:div.result
+            {:on-click (fn []
+                         (dispatch [:select-city! result]))}
+            (str (result :city) ", " (result :country))])]))]
+   "?"])
 
 (defn footer-view []
   [:div.footer

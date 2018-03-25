@@ -45,10 +45,40 @@
     {:font-size "1.5rem"
      :margin "3rem"}
 
-    [:>input
-     {:font-size "1.5rem"
-      :width "8em"
-      :padding "0.25rem"}]]
+    [:>.field
+     {:display "inline-block"}
+
+     [:>input
+      {:font-size "1.5rem"
+       :width "12rem"
+       :padding "0.25rem"
+       :border [["1px" "solid" colors/grid-border]]
+       :font-family "inherit"
+       :box-shadow "0 2px 5px rgba(0,0,0,0.1)"}
+      
+      [:&:focus
+       {:border-color colors/accent
+        :outline "none"}]]
+
+     [:>.autocomplete-results
+      {:position "absolute"
+       :background "white"
+       :font-size "1rem"
+       :box-sizing "border-box"
+       :width "12rem"
+       :border [["1px" "solid" colors/grid-border]]
+       :border-top "none"
+       :box-shadow "0 2px 5px rgba(0,0,0,0.1)"}
+
+      [:>.result
+       {:padding "0.25rem"
+        :cursor "pointer"
+        :border-top [["1px" "solid" "white"]]
+        :border-bottom [["1px" "solid" "white"]]}
+       
+       [:&:hover
+        {:background colors/grid-background
+         :border-color colors/grid-border}]]]]]
 
    [:>.results
     ; fudge to visually center

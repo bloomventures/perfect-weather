@@ -31,7 +31,7 @@
   (fn [{db :db} [_ query]]
     {:db (assoc db :query query)
      :dispatch-debounce {:id :query
-                         :timeout 100
+                         :timeout 150
                          :dispatch [:-fetch-autocomplete! query]}}))
 
 (reg-event-fx
@@ -42,7 +42,7 @@
                               (string/split #",")
                               first))
      :dispatch-n [[:-fetch-result! (place :place-id)]
-                  [:-clear-autocomplete-results!]]}))
+                  [:clear-autocomplete-results!]]}))
 
 (reg-event-fx
   :-fetch-autocomplete!
@@ -59,14 +59,9 @@
     {:db (assoc db :autocomplete-results results)}))
 
 (reg-event-fx
-  :-clear-autocomplete-results!
+  :clear-autocomplete-results!
   (fn [{db :db} [_ results]]
     {:db (assoc db :autocomplete-results [])}))
-
-(reg-event-fx
-  :reset-query!
-  (fn [{db :db} _]
-    {:db (assoc db :query "")}))
 
 (reg-event-fx
   :-fetch-initial-data!
