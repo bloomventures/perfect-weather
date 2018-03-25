@@ -67,7 +67,13 @@
           (->> (map (fn [p]
                       {:city (-> p :terms first :value)
                        :country (-> p :terms last :value)
-                       :place-id (p :place_id)}))))
+                       :place-id (p :place_id)}))
+               ; get rid of dupes
+               (reduce (fn [memo p]
+                         (if (memo [(p :city) (p :country)])
+                           memo
+                           (assoc memo [(p :city) (p :country)] p))) {})
+               vals))
       (println response)))) 
 
 (defn place [place-id]
@@ -76,4 +82,3 @@
          place-id
          place-details
          place-id)))
-
