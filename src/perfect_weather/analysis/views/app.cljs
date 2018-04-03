@@ -89,7 +89,7 @@
                                    :value (str "hsl(204,84%," (/ (* 100 (row :temperature))
                                                                  40) "%)")})
                                 day))))
-               {:bars? false
+               {:bars? true
                 :clip? false}]]]
             [:tr
              [:td "Humidity"]
@@ -101,7 +101,7 @@
                                   {:id (row :epoch)
                                    :value (str "hsl(204,84%," (* 100 (row :humidity)) "%)")})
                                 day))))
-               {:bars? false
+               {:bars? true
                 :clip? false}]]]]
 
          [:tbody
@@ -121,27 +121,27 @@
                                           ;:rain "red"
                                           :nice "#4cafef"
                                           ;:perfect "#70fffb"
-                                          "white")})
+                                          "black")})
                               day))))
-             {:bars? false
+             {:bars? true
               :clip? false}]]]]
 
-         #_[:tbody
-            (for [[title f] [["Hot" rate/hot?]
-                             ["Cold" rate/cold?]
-                             ["Humid" rate/humid?]
-                             ["Dry" rate/dry?]]]
-              ^{:key title}
-              [:tr
-               [:td title]
-               [:td 
-                [bar-view (->> (place :data)
-                               (map (fn [hours]
-                                      (rate/day-result? f false hours))))]
-                [bar-view (->> (place :data)
-                               (map (fn [hours]
-                                      (rate/day-result? f false hours)))
-                               (filters/combined-filter))]]])]
+         [:tbody
+          (for [[title f] [["Hot" rate/hot?]
+                           ["Cold" rate/cold?]
+                           ["Humid" rate/humid?]
+                           ["Dry" rate/dry?]]]
+            ^{:key title}
+            [:tr
+             [:td title]
+             [:td 
+              [bar-view (->> (place :data)
+                             (map (fn [hours]
+                                    (rate/day-result? f false hours))))]
+              [bar-view (->> (place :data)
+                             (map (fn [hours]
+                                    (rate/day-result? f false hours)))
+                             (filters/combined-filter))]]])]
          [:tbody
           [:tr
            [:td "Nice Days"]
