@@ -31,7 +31,7 @@
   (fn [{db :db} [_ query]]
     {:db (assoc db :query query)
      :dispatch-debounce {:id :query
-                         :timeout 150
+                         :timeout 200
                          :dispatch [:-fetch-autocomplete! query]}}))
 
 (reg-event-fx
