@@ -30,7 +30,7 @@
     [:div {:ref (fn []
                   (js/setTimeout 
                     (fn [] (reset! message (rand-nth loading-messages)))
-                    2500))} 
+                    5000))} 
      @message]))
 
 (defn calendar-view [ranges]
