@@ -52,7 +52,17 @@
    [:get "/api/search"]
    (fn [req]
      {:status 200
-      :body (compute-by-place-id (get-in req [:params :place-id]))})
+      :body (cond 
+              (get-in req [:params :place-id]) 
+              (compute-by-place-id (get-in req [:params :place-id]))
+              
+              (and 
+                (get-in req [:params :city]) 
+                (get-in req [:params :country]))
+              (->> (google-maps/autocomplete (str (get-in req [:params :city]) ", " (get-in req [:params :country])))
+                   first
+                   :place-id
+                   compute-by-place-id))})
    
    [:get "/api/analysis/:n"]
    (fn [req]

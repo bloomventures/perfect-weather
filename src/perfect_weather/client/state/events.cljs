@@ -5,7 +5,7 @@
     [bloom.omni.dispatch-debounce :as dispatch-debounce]
     [bloom.omni.router :as router]
     [re-frame.core :refer [dispatch reg-fx reg-event-fx]]
-    [perfect-weather.client.state.routes]))
+    [perfect-weather.client.state.routes :as routes]))
 
 (reg-fx :ajax ajax/fx)
 (reg-fx :dispatch-debounce dispatch-debounce/fx)
@@ -18,7 +18,6 @@
           :autocomplete-results []
           :page nil
           :results []}
-     :dispatch [:-fetch-initial-data!]
      :router [:init!]}))
 
 (reg-event-fx
@@ -37,12 +36,21 @@
 (reg-event-fx
   :select-city!
   (fn [{db :db} [_ place]]
-    {:db (assoc db :query (place :city))
-     :dispatch-n [[:-store-result! {:city (place :city)
-                                    :country (place :country)
-                                    :ranges nil}]
-                  [:-fetch-result! (place :place-id)]
-                  [:clear-autocomplete-results!]]}))
+    {:router [:navigate! (routes/result-path place)]
+     ; store this, so that when the navigation is resolved
+     ; it will use the place-id, avoiding an extra query
+     :db (assoc db :selected-place place)}))
+
+(reg-event-fx
+  :route-city!
+  (fn [{db :db} [_ place] ]
+    (let [place (or (db :selected-place) place)]
+      {:db (assoc db :query (place :city)) 
+       :dispatch-n [[:-store-result! {:city (place :city)
+                                      :country (place :country)
+                                      :ranges nil}]
+                    [:-fetch-result! place]
+                    [:clear-autocomplete-results!]]})))
 
 (reg-event-fx
   :-fetch-autocomplete!
@@ -64,20 +72,21 @@
     {:db (assoc db :autocomplete-results [])}))
 
 (reg-event-fx
-  :-fetch-initial-data!
-  (fn [_ _]
-    {:ajax {:method :get
-            :uri "/api/random/5"
-            :on-success (fn [results]
-                          (doseq [result results]
-                            (dispatch [:-store-result! result])))}}))
+  :fetch-random!
+  (fn [{db :db} _]
+    (when (empty? (db :results))
+      {:ajax {:method :get
+              :uri "/api/random/5"
+              :on-success (fn [results]
+                            (doseq [result results]
+                              (dispatch [:-store-result! result])))}})))
 
 (reg-event-fx
   :-fetch-result!
-  (fn [_ [_ place-id]]
+  (fn [_ [_ place]]
     {:ajax {:method :get
             :uri "/api/search"
-            :params {:place-id place-id}
+            :params place 
             :on-success (fn [result]
                           (dispatch [:-store-result! result]))}}))
 

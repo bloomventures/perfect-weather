@@ -1,12 +1,31 @@
 (ns perfect-weather.client.state.routes
   (:require
+    [clojure.string :as string]
     [bloom.omni.router :as router]
     [re-frame.core :refer [dispatch]]))
 
 (router/defroute index-path "/" []
-  (dispatch [:route-page! :index]))
+  (dispatch [:route-page! :index])
+  (dispatch [:fetch-random!]))
 
 (router/defroute faq-path "/faq" []
   (dispatch [:route-page! :faq]))
+
+(defn place->slug [{:keys [city country]}]
+  (-> (str city "-" country)
+      (string/lower-case)))
+
+(defn slug->place [slug]
+  (let [[city country] (->> (string/split slug #"-" 2)
+                            (map string/capitalize))]
+    {:city city
+     :country country}))
+
+(router/defroute -result-path "/:slug" [slug]
+  (dispatch [:route-page! :index])
+  (dispatch [:route-city! (slug->place slug)]))
+
+(defn result-path [place]
+  (-result-path {:slug (place->slug place)}))
 
 
