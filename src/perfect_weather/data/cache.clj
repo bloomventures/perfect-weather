@@ -1,13 +1,19 @@
 (ns perfect-weather.data.cache
   (:require
-    [clojure.java.io :as io]))
+    [clojure.java.io :as io]
+    [clojure.string :as string]))
 
 (defn log [& args]
   #_(apply println args))
 
+(defn- sanitize 
+  "Sanitize a file name"
+  [file-name]
+  (string/replace file-name #"[^0-9a-zA-Z\.\-\ ]" ""))
+
 (defn- cache-path 
   [cache-id query-id]
-  (str "data/" (name cache-id) "/" query-id ".edn"))
+  (str "data/" (name cache-id) "/" (sanitize query-id) ".edn"))
 
 (defn in-cache? 
   [cache-id query-id]
