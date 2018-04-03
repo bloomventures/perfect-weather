@@ -3,7 +3,8 @@
     [clojure.string :as string]
     [re-frame.core :refer [dispatch subscribe]]
     [perfect-weather.client.state.routes :as routes]
-    [perfect-weather.data.months :refer [months months-abbr]]))
+    [perfect-weather.data.months :refer [months months-abbr]]
+    [perfect-weather.client.ui.autocomplete :refer [autocomplete-view]]))
 
 (defn calendar-view [ranges]
   [:div.calendar.main 
@@ -55,29 +56,20 @@
          [:div.column month]))]]])
 
 (defn form-view []
-  [:form
+  [:form {:on-submit (fn [e]
+                       (.preventDefault e))}
    "When's the weather nice in "
-   [:div.field
-    [:input {:value @(subscribe [:query])
-             :on-change (fn [e]
-                          (dispatch [:update-query! (.. e -target -value)]))
-             :on-focus (fn [e]
-                         (dispatch [:update-query! (.. e -target -value)]))
-             :on-blur (fn [_]
-                        ; need to have a timeout here, b/c otherwise, the on-blur removes
-                        ; the autocomplete before the on-click has a chance to trigger
-                        (js/setTimeout (fn []
-                                         (dispatch [:clear-autocomplete-results!]))
-                                       200))}] 
-    (let [autocomplete-results @(subscribe [:autocomplete-results])]
-      (when (seq autocomplete-results)
-        [:div.autocomplete-results
-         (for [result autocomplete-results]
-           ^{:key (result :place-id)}
-           [:div.result
-            {:on-click (fn []
-                         (dispatch [:select-city! result]))}
-            (str (result :city) ", " (result :country))])]))]
+   [autocomplete-view 
+    {:value (subscribe [:query])
+     :on-change (fn [value]
+                  (dispatch [:update-query! value]))
+     :results (subscribe [:autocomplete-results])
+     :on-clear (fn []
+                 (dispatch [:clear-autocomplete-results!]))
+     :on-select (fn [result]
+                  (dispatch [:select-city! result]))
+     :render-result (fn [result]
+                      (str (result :city) ", " (result :country)))}] 
    "?"])
 
 (defn footer-view []

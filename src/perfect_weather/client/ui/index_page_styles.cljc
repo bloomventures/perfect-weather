@@ -76,7 +76,7 @@
         :border-top [["1px" "solid" "white"]]
         :border-bottom [["1px" "solid" "white"]]}
        
-       [:&:hover
+       [:&.active
         {:background colors/grid-background
          :border-color colors/grid-border}]]]]]
 
