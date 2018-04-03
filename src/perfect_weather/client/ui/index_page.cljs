@@ -2,9 +2,36 @@
   (:require
     [clojure.string :as string]
     [re-frame.core :refer [dispatch subscribe]]
+    [reagent.core :as r]
     [perfect-weather.client.state.routes :as routes]
     [perfect-weather.data.months :refer [months months-abbr]]
     [perfect-weather.client.ui.autocomplete :refer [autocomplete-view]]))
+
+(def loading-messages
+  ["Reticulating splines..."
+   "Praying to the weather gods..."
+   "Chasing rainbows..."
+   "Reading the clouds..."
+   "Searching for a hygrometer..."
+   "Predicting the weather..."
+   "Pulling head out clouds..."
+   "Moving satellites into position..."
+   "Dividing by zero..."
+   "Checking the weather channel..."
+   "Calling the weather man..."
+   "Twiddling thumbs..."
+   "Searching for patterns..."
+   "Forecasting..."
+   "Running the numbers..."
+   "Breaking the ice..."])
+
+(defn loading-message-view []
+  (let [message (r/atom (rand-nth loading-messages))]
+    [:div {:ref (fn []
+                  (js/setTimeout 
+                    (fn [] (reset! message (rand-nth loading-messages)))
+                    2500))} 
+     @message]))
 
 (defn calendar-view [ranges]
   [:div.calendar.main 
@@ -13,7 +40,11 @@
      (repeat 12 [:div.column]))
    (into 
      [:div.ranges]
-     (if (seq ranges)
+     (cond
+       (nil? ranges)
+       [[:div.range.loading [loading-message-view]]]
+
+       (seq ranges)
        (for [[start end text] 
              (->> (concat [{:text nil :range [0 0]}] 
                           ranges 
@@ -31,6 +62,8 @@
                               (when text "fill")]
                       :title text
                       :style {:width (str (* 100 (/ (- end start) 365)) "%")}}])
+
+       :else
        [[:div.range.never "☹"]]))])
 
 (defn result-view [result]

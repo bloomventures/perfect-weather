@@ -125,6 +125,12 @@
          [:>.range
           {:height "1em"}
 
+          [:&.loading
+           {:color colors/accent
+            :width "100%"
+            :font-weight "bold"
+            :text-align "center"}]
+
           [:&.never
            {:color colors/accent
             :width "100%"

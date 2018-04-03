@@ -37,11 +37,11 @@
 (reg-event-fx
   :select-city!
   (fn [{db :db} [_ place]]
-    {:db (assoc db :query (-> place 
-                              :description
-                              (string/split #",")
-                              first))
-     :dispatch-n [[:-fetch-result! (place :place-id)]
+    {:db (assoc db :query (place :city))
+     :dispatch-n [[:-store-result! {:city (place :city)
+                                    :country (place :country)
+                                    :ranges nil}]
+                  [:-fetch-result! (place :place-id)]
                   [:clear-autocomplete-results!]]}))
 
 (reg-event-fx
