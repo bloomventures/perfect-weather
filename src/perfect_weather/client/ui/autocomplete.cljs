@@ -17,8 +17,6 @@
        [:input {:value @value
                 :on-change (fn [e]
                              (on-change (.. e -target -value)))
-                :on-focus (fn [e]
-                            (on-change (.. e -target -value)))
                 :on-key-down-capture 
                 (fn [e] (case (.-keyCode e)
                           38 ; up arrow
