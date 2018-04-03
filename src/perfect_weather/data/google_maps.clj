@@ -4,7 +4,7 @@
     [cheshire.core :as json]
     [environ.core :refer [env]]
     [org.httpkit.client :as http]
-    [perfect-weather.data.cache :refer [with-cache]]))
+    [perfect-weather.data.cache :refer [with-cache in-cache?]]))
 
 (defn round [precision d]
   (let [factor (Math/pow 10 precision)]
@@ -48,7 +48,7 @@
             parse)
         (println response)))))
 
-(defn autocomplete
+(defn autocomplete-raw
   "Reference: 
    https://developers.google.com/places/web-service/autocomplete"
   [query]
@@ -59,22 +59,35 @@
                      {:key (env :google-api-key)
                       :input query
                       :type "(cities)"}})]
-    (if (= 200 (:status response))
-      (-> response
-          :body
-          (json/parse-string true)
-          :predictions
-          (->> (map (fn [p]
-                      {:city (-> p :terms first :value)
-                       :country (-> p :terms last :value)
-                       :place-id (p :place_id)}))
-               ; get rid of dupes
-               (reduce (fn [memo p]
-                         (if (memo [(p :city) (p :country)])
-                           memo
-                           (assoc memo [(p :city) (p :country)] p))) {})
-               vals))
-      (println response)))) 
+    (future (if (= 200 (:status response))
+              (-> response
+                  :body
+                  (json/parse-string true)
+                  :predictions
+                  (->> (map (fn [p]
+                              {:city (-> p :terms first :value)
+                               :country (-> p :terms last :value)
+                               :place-id (p :place_id)}))
+                       ; get rid of dupes
+                       (reduce (fn [memo p]
+                                 (if (memo [(p :city) (p :country)])
+                                   memo
+                                   (assoc memo [(p :city) (p :country)] p))) {})
+                       vals))
+              (println response))))) 
+
+(defn autocomplete
+  [query]
+  (->> (with-cache 
+         :autocomplete
+         query
+         autocomplete-raw
+         query)
+       deref
+       (map (fn [place]
+              (if (in-cache? :places (place :place-id))
+                (assoc place :known? true)
+                place)))))
 
 (defn place [place-id]
   (->> (with-cache 

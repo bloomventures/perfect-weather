@@ -78,7 +78,15 @@
        
        [:&.active
         {:background colors/grid-background
-         :border-color colors/grid-border}]]]]]
+         :border-color colors/grid-border}]
+       
+       [:>.place
+        {:display "flex"
+         :justify-content "space-between"}
+
+        [:>.name]
+
+        [:>.known]]]]]]
 
    [:>.results
     ; fudge to visually center

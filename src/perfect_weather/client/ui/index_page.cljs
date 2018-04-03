@@ -102,7 +102,11 @@
      :on-select (fn [result]
                   (dispatch [:select-city! result]))
      :render-result (fn [result]
-                      (str (result :city) ", " (result :country)))}] 
+                      [:div.place
+                       [:div.name
+                        (str (result :city) ", " (result :country))]
+                       (when (result :known?) 
+                         [:div.known "★"])])}] 
    "?"])
 
 (defn footer-view []
