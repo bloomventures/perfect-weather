@@ -1,5 +1,6 @@
 (ns perfect-weather.data.google-maps 
   (:require
+    [clojure.string :as string]
     [clojure.set :refer [rename-keys]]
     [cheshire.core :as json]
     [environ.core :refer [env]]
@@ -78,16 +79,17 @@
 
 (defn autocomplete
   [query]
-  (->> (with-cache 
-         :autocomplete
-         query
-         autocomplete-raw
-         query)
-       deref
-       (map (fn [place]
-              (if (in-cache? :places (place :place-id))
-                (assoc place :known? true)
-                place)))))
+  (let [query (string/lower-case query)]
+    (->> (with-cache 
+           :autocomplete
+           query
+           autocomplete-raw
+           query)
+         deref
+         (map (fn [place]
+                (if (in-cache? :places (place :place-id))
+                  (assoc place :known? true)
+                  place))))))
 
 (defn place [place-id]
   (->> (with-cache 
