@@ -4,7 +4,8 @@
 
 (defn >faq-page []
   [:>.faq-page
-   {:line-height "1.35"}
+   {:line-height "1.35"
+    :margin "0 2rem"}
 
    [:>.header
     {:margin-top "2em"

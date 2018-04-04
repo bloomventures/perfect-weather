@@ -36,7 +36,7 @@
 (defn calendar-view [ranges]
   [:div.calendar.main 
    (into
-     [:div.columns]
+     [:div.columns.background]
      (repeat 12 [:div.column]))
    (into 
      [:div.ranges]
@@ -64,29 +64,26 @@
                       :style {:width (str (* 100 (/ (- end start) 365)) "%")}}])
 
        :else
-       [[:div.range.never "☹"]]))])
+       [[:div.range.never "☹"]]))
+   (into 
+     [:div.columns.months]
+     (for [month months-abbr]
+       [:div.column 
+        [:div.label month]]))])
 
 (defn result-view [result]
- [:div.result.row
-  [:div.legend
-   [:div.label
-    (result :city) ", " (result :country)]]
-  [calendar-view (result :ranges)]])
+  [:div.result.row
+   [:div.legend
+    [:div.label
+     (result :city) ", " (result :country)]]
+   [calendar-view (result :ranges)]])
 
 (defn results-view []
   [:div.results
    (doall
      (for [result @(subscribe [:results])]
        ^{:key (result :city)}
-       [result-view result]))
-   
-   [:div.row.bottom-legend
-    [:div.legend]
-    [:div.main
-     (into 
-       [:div.columns]
-       (for [month months-abbr]
-         [:div.column month]))]]])
+       [result-view result]))])
 
 (defn form-view []
   [:form {:on-submit (fn [e]
