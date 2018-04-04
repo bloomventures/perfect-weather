@@ -6,6 +6,7 @@
 (defn fetch 
   [{:keys [url params]}]
   (let [response (http/get url {:throw-exceptions false
+                                :timeout 10000
                                 :query-params params})]
     (future 
       (if (= 200 (:status @response))
