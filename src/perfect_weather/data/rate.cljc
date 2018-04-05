@@ -22,7 +22,7 @@
   (< (d :temperature) 17))
 
 (defn humid? [d]
-  (< 0.85 (d :humidity)))
+  (< 0.75 (d :humidity)))
 
 (defn dry? [d]
   (< (d :humidity) 0.20))
@@ -89,10 +89,11 @@
     (not (rainy? d))))
 
 (defn issue [d]
-  (cond 
-    (hot? d) :hot
-    (cold? d) :cold
-    (humid? d) :humid
-    (dry? d) :dry
-    (perfect? d) :perfect
-    (nice? d) :nice))
+  (->> [(when (hot? d) :hot)
+        (when (cold? d) :cold)
+        (when (humid? d) :humid)
+        (when (dry? d) :dry)
+        (when (rainy? d) :rainy)
+        (when (nice? d)) :nice]
+    (filter nil?)
+    set))

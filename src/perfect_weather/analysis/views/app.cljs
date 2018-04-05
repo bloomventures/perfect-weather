@@ -87,10 +87,11 @@
                            (map (fn [row]
                                   {:id (row :epoch)
                                    :value (str "hsl(204,84%," (/ (* 100 (row :temperature))
-                                                                 40) "%)")})
+                                                                  40) "%)")})
                                 day))))
                {:bars? true
                 :clip? false}]]]
+
             [:tr
              [:td "Humidity"]
              [:td
@@ -144,20 +145,25 @@
                   (map (fn [day]
                          (map (fn [row]
                                 {:id (row :epoch)
-                                 :value (case (rate/issue row)
-                                          ;:hot "#880000"
-                                          ;:cold "#000088"
-                                          ;:humid "#888800"
-                                          ;:dry "#880088"
-                                          ;:rain "red"
-                                          :nice "#4cafef"
-                                          ;:perfect "#70fffb"
-                                          "black")})
+                                 :value (if (rate/nice? row)
+                                          "#4cafef"
+                                          "black"
+                                          ) 
+
+                                 #_(case (rate/issue row)
+                                     ;:hot "#880000"
+                                     ;:cold "#000088"
+                                     ;:humid "#888800"
+                                     ;:dry "#880088"
+                                     ;:rain "red"
+                                     :nice "#4cafef"
+                                     ;:perfect "#70fffb"
+                                     "black")})
                               day))))
              {:bars? true
               :clip? false}]]]]
 
-         [:tbody
+         #_[:tbody
           (for [[title f] [["Hot" rate/hot?]
                            ["Cold" rate/cold?]
                            ["Humid" rate/humid?]
