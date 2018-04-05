@@ -49,29 +49,35 @@
 (defn nice? 
   "Polygon:
     
-     . 17.5t,85h 
-           . 27t,75h
+       . 16t,80h 
 
-     .         .  32t,20h
-       17.5t,20h
+                    . 28t,60h
+
+     . 14t,30h
+                        .  32t,20h
   
   References:
-https://en.wikipedia.org/wiki/Thermal_comfort
-https://www.educate-sustainability.eu/kb/content/factors-comfort
-http://saroselectronics.com/digital-relative-humidity-display/
-  "
+    https://en.wikipedia.org/wiki/Thermal_comfort
+    https://en.wikipedia.org/wiki/Relative_humidity
+    https://en.wikipedia.org/wiki/Dew_point
+    https://en.wikipedia.org/wiki/Humidex
+    https://en.wikipedia.org/wiki/Heat_index"
   [d]
   (let [t (d :temperature)
         h (d :humidity)
-        pts [[17.5 0.85]
-             [17.5 0.20]
+        pts [[16 0.80]
+             [14 0.30]
              [32 0.20]
-             [27 0.75]]]
+             [28 0.60]]
+        max-t (->> pts (map first) (apply max))
+        min-t (->> pts (map first) (apply min))
+        max-h (->> pts (map second) (apply max))
+        min-h (->> pts (map second) (apply min))]
     (and
       t
       h
-      (<= 17.5 t 32)
-      (<= 0.20 h 0.85)
+      (<= min-t t max-t)
+      (<= min-h h max-h)
       (within-polygon? [t h] pts))))
 
 (defn issue [d]
