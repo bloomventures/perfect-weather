@@ -102,6 +102,21 @@
                                    :value (str "hsl(204,84%," (* 100 (row :humidity)) "%)")})
                                 day))))
                {:bars? true
+                :clip? false}]]]
+            [:tr
+            [:tr
+             [:td "Precipitation"]
+             [:td
+              [hourly-view 
+               (->> (place :data)
+                    (map (fn [day]
+                           (map (fn [row]
+                                  {:id (row :epoch)
+                                   :value (if (row :precipitation?)
+                                            "#4cafef"
+                                            "black")})
+                                day))))
+               {:bars? true
                 :clip? false}]]]]
 
          [:tbody

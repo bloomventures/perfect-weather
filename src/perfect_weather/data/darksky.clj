@@ -41,5 +41,6 @@
                  :humidity (o :humidity)
                  :precipitation? (or (and 
                                        (o :precipProbability)
-                                       (> (o :precipProbability) 0))
-                                     (o :precipIntensity))})))))
+                                       (< 0 (o :precipProbability)))
+                                     (and (o :precipIntensity)
+                                       (< 0 (o :precipIntensity))))})))))

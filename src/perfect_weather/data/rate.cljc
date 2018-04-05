@@ -46,7 +46,7 @@
                        (filter true?)
                        count))))
 
-(defn nice? 
+(defn thermally-comfortable? 
   "Polygon:
     
        . 16t,80h 
@@ -79,6 +79,14 @@
       (<= min-t t max-t)
       (<= min-h h max-h)
       (within-polygon? [t h] pts))))
+
+(defn rainy? [d]
+  (= true (d :precipitation?)))
+
+(defn nice? [d]
+  (and 
+    (thermally-comfortable? d)
+    (not (rainy? d))))
 
 (defn issue [d]
   (cond 
