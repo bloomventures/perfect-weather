@@ -93,8 +93,11 @@
        (streak-filter false? 1)
        ; remove false gaps dominated by neighboring true streaks
        (neighbor-filter false?)
+       ; remove low density false
        (density-filter false? 28 0.65)
        ; bridge 5-day false gaps
        (streak-filter false? 5)
        ; only keep 28-day true streaks
-       (streak-filter true? 28)))
+       (streak-filter true? 28)
+       ; bridge 14-day false gaps
+       (streak-filter false? 14)))
