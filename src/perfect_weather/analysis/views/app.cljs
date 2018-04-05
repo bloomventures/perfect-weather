@@ -103,7 +103,23 @@
                                 day))))
                {:bars? true
                 :clip? false}]]]
+
             [:tr
+             [:td "Dew Point"]
+             [:td
+              [hourly-view 
+               (->> (place :data)
+                    (map (fn [day]
+                           (map (fn [row]
+                                  {:id (row :epoch)
+                                   :value (str "hsl(204,84%," (* 100 (/ (row :dew-point) 30)) "%)")})
+                                day))))
+               {:bars? true
+                :clip? false}]]]
+
+
+
+
             [:tr
              [:td "Precipitation"]
              [:td

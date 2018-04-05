@@ -39,6 +39,7 @@
                 {:epoch (o :time)
                  :temperature (o :temperature)
                  :humidity (o :humidity)
+                 :dew-point (o :dewPoint)
                  :precipitation? (or (and 
                                        (o :precipProbability)
                                        (< 0 (o :precipProbability)))
