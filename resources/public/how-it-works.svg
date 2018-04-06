@@ -28,8 +28,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="400.68996"
-     inkscape:cy="865.16704"
+     inkscape:cx="-488.35213"
+     inkscape:cy="682.51459"
      inkscape:document-units="mm"
      inkscape:current-layer="svg8"
      showgrid="false"
@@ -65,14 +65,15 @@
      style="opacity:1;fill:#ffffff;fill-opacity:0.99402095;stroke:none;stroke-width:0.56977034;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      inkscape:export-filename="/home/rafal/Code/personal/perfect-weather/resources/public/images/psychometric-graph.png" />
   <rect
-     style="opacity:1;fill:#ffffff;fill-opacity:0.99402095;stroke:none;stroke-width:0.75980002;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+     style="opacity:1;fill:#ffffff;fill-opacity:0.99402095;stroke:none;stroke-width:0.83155751;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      id="rect6539"
-     width="185.44318"
-     height="187.09821"
+     width="195.94383"
+     height="258.15024"
      x="-115.47173"
      y="-25.602684"
      inkscape:export-xdpi="165.07675"
-     inkscape:export-ydpi="165.07675" />
+     inkscape:export-ydpi="165.07675"
+     inkscape:export-filename="/home/rafal/Code/personal/perfect-weather/resources/public/images/how-it-works.png" />
   <g
      id="layer1"
      inkscape:groupmode="layer"
@@ -522,7 +523,7 @@
        xml:space="preserve"
        id="flowRoot5877"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,56.285429,-5.3416316)"><flowRegion
+       transform="matrix(0.26458333,0,0,0.26458333,56.285429,61.569749)"><flowRegion
          id="flowRegion5879"><rect
            id="rect5881"
            width="219.70821"
@@ -530,8 +531,8 @@
            x="-617.20319"
            y="559.86469" /></flowRegion><flowPara
          id="flowPara5883"
-         style="font-size:10px;line-height:1.25">Pass the NICE days through a combination of digital filters to get NICE day ranges.</flowPara></flowRoot>    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,56.360359,-24.760385)"
+         style="font-size:10px;line-height:1.25">Filter out small streaks to get the final NICE day ranges for the year.</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,56.360359,42.150995)"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot6205"
        xml:space="preserve"><flowRegion
@@ -542,7 +543,7 @@
            width="218.69804"
            id="rect6199" /></flowRegion><flowPara
          style="font-size:10px;line-height:1.25"
-         id="flowPara6203">For each day, if 8 or more of the 12 selected hours are NICE, then consider the day as NICE.</flowPara></flowRoot>    <flowRoot
+         id="flowPara6203">For each day, if 6 or more of the 12 selected hours are NICE, then consider the day as NICE.</flowPara></flowRoot>    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,56.360359,-133.83139)"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot6205-2"
@@ -550,12 +551,12 @@
          id="flowRegion6201-7"><rect
            y="559.86469"
            x="-617.20319"
-           height="40.911133"
-           width="218.69804"
+           height="76.77153"
+           width="220.2133"
            id="rect6199-0" /></flowRegion><flowPara
          id="flowPara6259"
-         style="font-size:10px;line-height:1.25">Query the DarkSky API (many times) to get the temperature and humidity for each hour in the previous year at that location.</flowPara></flowRoot>    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,56.282844,-47.45672)"
+         style="font-size:10px;line-height:1.25">Query the DarkSky API (many times) to get the last 3 years of hourly weather data for that location. The values we care about are: temperature, humidity and precipitation.</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,56.282844,-23.115053)"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot6205-2-3"
        xml:space="preserve"><flowRegion
@@ -567,7 +568,7 @@
            id="rect6199-0-0" /></flowRegion><flowPara
          style="font-size:10px;line-height:1.25"
          id="flowPara6203-9-6">Clip the NICE hours to just include the hours we're interested in (8am - 8pm).</flowPara></flowRoot>    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,56.272509,-76.330085)"
+       transform="matrix(0.26458333,0,0,0.26458333,56.272509,-51.988418)"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot6205-2-2"
        xml:space="preserve"><flowRegion
@@ -578,7 +579,7 @@
            width="218.69804"
            id="rect6199-0-8" /></flowRegion><flowPara
          id="flowPara6335"
-         style="font-size:10px;line-height:1.25">For each hour, based on it's temperature and humidity, determine if it's NICE or not.</flowPara></flowRoot>    <flowRoot
+         style="font-size:10px;line-height:1.25">For each hour determine if it's NICE or not.</flowPara></flowRoot>    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,56.257005,-164.85037)"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot6205-2-9"
@@ -671,7 +672,7 @@
     </g>
     <g
        id="g5553"
-       transform="translate(-56.581229,5.3602584)">
+       transform="translate(-56.581229,3.7727583)">
       <image
          width="95.25"
          height="12.7"
@@ -738,7 +739,7 @@
     </g>
     <g
        id="g5592"
-       transform="translate(-56.581229,13.322219)">
+       transform="translate(-56.581229,37.663886)">
       <image
          width="95.25"
          height="12.7"
@@ -803,84 +804,80 @@
            id="tspan5477"
            sodipodi:role="line">NICE HOURS</tspan></text>
     </g>
-    <g
-       id="g5631"
-       transform="translate(-56.581229,11.296027)">
-      <image
-         width="95.25"
-         height="6.3499999"
-         preserveAspectRatio="none"
-         xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAAwCAYAAADn/t0sAAAFdklEQVR42u3dwZHsJhQFUH/Xz+AH 4IwcrDNyAI6hvZ/FyPhx4YHO2c50twRPgCjV1Y/P5/P5DQCI+uOvf779+99//hr6/9mfH/X0e6N/ r7Zfuj2q57vb7Pqq9s9t7T3aPun672Z1/Zzu9vZKj0e755Pd8/Ho+NNtfpw9nlZ/b/b6b/Xvza4n zr7/uL1/V88njPldEwAAAAAAkGADGgAAAACACBvQAAAAAABE/NQEAP/P2zK1ZrfXV7MzHXdn7H39 /dkZkk/nV/18OtO32r7U2ruaAZrODJ19vKvrtzperc5kXX09vv36rtZT98z52f2/erxIr0fS8/HT /88eD6rrk+rxdav/1ceTHp9PX5+ffn/WfX0EIzwBDQAAAABAhA1oAAAAAAAibEADAAAAABDx4/P5 fDQDcKPuGYHa/9fS/599Pqd9/+7+Pe37R+svnVG5OyM4nSmY/r1u19Pq9ux+vOnzOf34T6u/060e j97WH6dfz6PnM3t+rWZ2n/aOkPQ7U9Lja/qdC93O/7T57LT7rdP72xPQAAAAAABE2IAGAAAAACDC BjQAAAAAABE/NQHAnVZnys3+/tHf654p2C1DWqb19/VTrYfZ9dT9+7r35+28k6DXeHB7f3TLkJ19 /LMzWN823jydf3V9cPo7Clavj56+3/yR7Z/V9xdY33XmCWgAAAAAACJsQAMAAAAAEGEDGgAAAACA CBnQMNHqzF2ZXWPtU834290fp2fqVj/fLTPytPEGbvb2zN3bf1/9qKebjmf296ePf/f10W39uzvj vNoeszO4V98vd5t/Rt9RUz3+0+bj0fvz1dd3t9+/fb/AE9AAAAAAAETYgAYAAAAAIMIGNAAAAAAA ETKg4UVGM6o4qz9mZ5CnM82fPn96ptnqejm9/ndnGM7OhH/7+CSjHO7xdL2fvn5cvd5J90e3enlq 3/R8MXo83TNo0/cH6fOp9ke6f9wPa09yPAENAAAAAECEDWgAAAAAACJsQAMAAAAAECEDGhqTSTpm NDOt2j7dM9hGj6ea0bU6Ezl9faXrZXUm4u3jQTXDczTTWAZy7/He+Ts/x6ueTlk/ze6f2fPZbfdH rr+59b07Y3r1+a++H7htPW6+eTdPQAMAAAAAEGEDGgAAAACACBvQAAAAAABEyIDmW6dnhJ2umhF1 e8bUaL2edv7VjODVmcOzx4fq8a8er96Wedbt+no6nvTfAetl6+Uz5qtu33d6e7x9/TH7nT3dMrxX n1/3/q9mYntHk+N78/l4AhoAAAAAgAgb0AAAAAAARNiABgAAAAAgQgY035Jhpz1Pls7Y2p1p1j0D 7/Z6H80MTtfD7vrvfr1XM51lQmfrQaY21ndAYr7oPn+Pjh/p8aaaQZ1+p4z1Qu/5qFs9n34/eVt7 eQIaAAAAAIAIG9AAAAAAAETYgAYAAAAAIEIGNEy0O5Nr9PNvy9Cqnv/qz6f7q5phPPt4umVIz860 df2uHc9Wt1f3TEmZibBuvjgto/Ft73BQb3etz1nbvk/19vR71fpd/Q6W9OfVP2+afz0BDQAAAABA hA1oAAAAAAAibEADAAAAABAhAxpe7LaMoWrm1pNuma631UM1U272752WwdY9g3h1fXS/ntNur1+Z teqJdf1dfYfF7nqa/c6N1ePP6PHsns9PHy+q73jp3h7Vet19/X49/tPm/9n3O9Y/Z93vvp0noAEA AAAAiLABDQAAAABAhA1oAAAAAAAiZEAD/EfdMnafjq/b783O1Ove37Mzi1f3X/eM3e6ZeKdlco9m vsoEVu/J+t+dsSsjMluvnN2f6flt9fxZzdytHl/39fHt78C5/fqETjwBDQAAAABAhA1oAAAAAAAi bEADAAAAABDxL12H5CxHt9K3AAAAAElFTkSuQmCC "
-         id="image5441"
-         x="20.910194"
-         y="94.409706" />
-      <text
-         id="text5598"
-         y="92.081467"
-         x="22.104694"
-         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-         xml:space="preserve"><tspan
-           style="font-size:2.64583325px;stroke-width:0.26458332"
-           y="92.081467"
-           x="22.104694"
-           id="tspan5596"
-           sodipodi:role="line">JAN</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-         x="116.97435"
-         y="92.081467"
-         id="text5602"><tspan
-           sodipodi:role="line"
-           id="tspan5600"
-           x="116.97435"
-           y="92.081467"
-           style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332">DEC</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-         x="19.90387"
-         y="96.077721"
-         id="text5606"><tspan
-           sodipodi:role="line"
-           id="tspan5604"
-           x="19.90387"
-           y="96.077721"
-           style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332">8</tspan></text>
-      <text
-         id="text5610"
-         y="100.7597"
-         x="19.87674"
-         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-         xml:space="preserve"><tspan
-           style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332"
-           y="100.7597"
-           x="19.87674"
-           id="tspan5608"
-           sodipodi:role="line">20</tspan></text>
-      <text
-         id="text5479-3"
-         y="92.081467"
-         x="68.478996"
-         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-         xml:space="preserve"><tspan
-           style="font-size:2.64583325px;text-align:center;text-anchor:middle;stroke-width:0.26458332"
-           y="92.081467"
-           x="68.478996"
-           id="tspan5477-5"
-           sodipodi:role="line">NICE HOURS</tspan></text>
-    </g>
+    <image
+       y="130.04742"
+       x="-35.671036"
+       id="image5441"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAAwCAYAAADn/t0sAAAFdklEQVR42u3dwZHsJhQFUH/Xz+AH 4IwcrDNyAI6hvZ/FyPhx4YHO2c50twRPgCjV1Y/P5/P5DQCI+uOvf779+99//hr6/9mfH/X0e6N/ r7Zfuj2q57vb7Pqq9s9t7T3aPun672Z1/Zzu9vZKj0e755Pd8/Ho+NNtfpw9nlZ/b/b6b/Xvza4n zr7/uL1/V88njPldEwAAAAAAkGADGgAAAACACBvQAAAAAABE/NQEAP/P2zK1ZrfXV7MzHXdn7H39 /dkZkk/nV/18OtO32r7U2ruaAZrODJ19vKvrtzperc5kXX09vv36rtZT98z52f2/erxIr0fS8/HT /88eD6rrk+rxdav/1ceTHp9PX5+ffn/WfX0EIzwBDQAAAABAhA1oAAAAAAAibEADAAAAABDx4/P5 fDQDcKPuGYHa/9fS/599Pqd9/+7+Pe37R+svnVG5OyM4nSmY/r1u19Pq9ux+vOnzOf34T6u/060e j97WH6dfz6PnM3t+rWZ2n/aOkPQ7U9Lja/qdC93O/7T57LT7rdP72xPQAAAAAABE2IAGAAAAACDC BjQAAAAAABE/NQHAnVZnys3+/tHf654p2C1DWqb19/VTrYfZ9dT9+7r35+28k6DXeHB7f3TLkJ19 /LMzWN823jydf3V9cPo7Clavj56+3/yR7Z/V9xdY33XmCWgAAAAAACJsQAMAAAAAEGEDGgAAAACA CBnQMNHqzF2ZXWPtU834290fp2fqVj/fLTPytPEGbvb2zN3bf1/9qKebjmf296ePf/f10W39uzvj vNoeszO4V98vd5t/Rt9RUz3+0+bj0fvz1dd3t9+/fb/AE9AAAAAAAETYgAYAAAAAIMIGNAAAAAAA ETKg4UVGM6o4qz9mZ5CnM82fPn96ptnqejm9/ndnGM7OhH/7+CSjHO7xdL2fvn5cvd5J90e3enlq 3/R8MXo83TNo0/cH6fOp9ke6f9wPa09yPAENAAAAAECEDWgAAAAAACJsQAMAAAAAECEDGhqTSTpm NDOt2j7dM9hGj6ea0bU6Ezl9faXrZXUm4u3jQTXDczTTWAZy7/He+Ts/x6ueTlk/ze6f2fPZbfdH rr+59b07Y3r1+a++H7htPW6+eTdPQAMAAAAAEGEDGgAAAACACBvQAAAAAABEyIDmW6dnhJ2umhF1 e8bUaL2edv7VjODVmcOzx4fq8a8er96Wedbt+no6nvTfAetl6+Uz5qtu33d6e7x9/TH7nT3dMrxX n1/3/q9mYntHk+N78/l4AhoAAAAAgAgb0AAAAAAARNiABgAAAAAgQgY035Jhpz1Pls7Y2p1p1j0D 7/Z6H80MTtfD7vrvfr1XM51lQmfrQaY21ndAYr7oPn+Pjh/p8aaaQZ1+p4z1Qu/5qFs9n34/eVt7 eQIaAAAAAIAIG9AAAAAAAETYgAYAAAAAIEIGNEy0O5Nr9PNvy9Cqnv/qz6f7q5phPPt4umVIz860 df2uHc9Wt1f3TEmZibBuvjgto/Ft73BQb3etz1nbvk/19vR71fpd/Q6W9OfVP2+afz0BDQAAAABA hA1oAAAAAAAibEADAAAAABAhAxpe7LaMoWrm1pNuma631UM1U272752WwdY9g3h1fXS/ntNur1+Z teqJdf1dfYfF7nqa/c6N1ePP6PHsns9PHy+q73jp3h7Vet19/X49/tPm/9n3O9Y/Z93vvp0noAEA AAAAiLABDQAAAABAhA1oAAAAAAAiZEAD/EfdMnafjq/b783O1Ove37Mzi1f3X/eM3e6ZeKdlco9m vsoEVu/J+t+dsSsjMluvnN2f6flt9fxZzdytHl/39fHt78C5/fqETjwBDQAAAABAhA1oAAAAAAAi bEADAAAAABDxL12H5CxHt9K3AAAAAElFTkSuQmCC "
+       preserveAspectRatio="none"
+       height="6.3499999"
+       width="95.25" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-34.476536"
+       y="127.71918"
+       id="text5598"><tspan
+         sodipodi:role="line"
+         id="tspan5596"
+         x="-34.476536"
+         y="127.71918"
+         style="font-size:2.64583325px;stroke-width:0.26458332">JAN</tspan></text>
+    <text
+       id="text5602"
+       y="127.71918"
+       x="60.39312"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332"
+         y="127.71918"
+         x="60.39312"
+         id="tspan5600"
+         sodipodi:role="line">DEC</tspan></text>
+    <text
+       id="text5606"
+       y="131.71545"
+       x="-36.677361"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332"
+         y="131.71545"
+         x="-36.677361"
+         id="tspan5604"
+         sodipodi:role="line">8</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-36.704491"
+       y="136.39743"
+       id="text5610"><tspan
+         sodipodi:role="line"
+         id="tspan5608"
+         x="-36.704491"
+         y="136.39743"
+         style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332">20</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="11.897767"
+       y="127.71918"
+       id="text5479-3"><tspan
+         sodipodi:role="line"
+         id="tspan5477-5"
+         x="11.897767"
+         y="127.71918"
+         style="font-size:2.64583325px;text-align:center;text-anchor:middle;stroke-width:0.26458332">NICE HOURS</tspan></text>
     <g
        id="g5867"
-       transform="translate(5.2916667,0.71948225)">
+       transform="translate(5.2916667,67.630864)">
       <image
-         width="95.25"
-         height="2.6458333"
-         preserveAspectRatio="none"
-         xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAAKCAYAAABCH/nnAAAA1ElEQVR42u3Y0Q2DIBQF0LYrOEA3 6rDdyAE6A373qyFyC8g5fyYE5YlPcu+llHIDuKDn+/N1vb+2qvG1fs0/Wz1q52vt7PsafX2rS3+P 6eddfX+MVo/R++/Z/T3a+nr3/9bP27ofXW0/ptfz7/7Run/17ofp+ztPMdJ5sPX42fvx7Ovt/f9Y rV69PZQAAAAAAIAEATQAAAAAABECaAAAAAAAIgTQAAAAAABECKABAAAAAIgQQAMAAAAAECGABgAA AAAgQgANAAAAAECEABoAAAAAgIgDmxJMEGqH6cgAAAAASUVORK5CYII= "
-         id="image5430"
+         y="128.10916"
          x="-40.294529"
-         y="128.10916" />
+         id="image1237"
+         xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAAKCAYAAABCH/nnAAAABmJLR0QA/wD/AP+gvaeTAAAACXBI WXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gQGCyQl8QozNQAAAJ5JREFUeNrt2EENgEAQA0DAAgJw hFgcIQANiwYehT0yo4D0ErrpXFU1AZ/Yjqv19537Kt9gPt3fH+AvuvfZ233wNI9ufTX6fYL7CGCE vhztf+w+6G0RAQAAAAAACQZoAAAAAAAiDNAAAAAAAEQYoAEAAAAAiDBAAwAAAAAQYYAGAAAAACDC AA0AAAAAQIQBGgAAAACACAM0AAAAAAARN/K6GRCwiQzxAAAAAElFTkSuQmCC "
+         preserveAspectRatio="none"
+         height="2.6458333"
+         width="95.25" />
       <text
          xml:space="preserve"
          style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -917,15 +914,15 @@
     </g>
     <g
        id="g5858"
-       transform="translate(5.2916667,-1.3192495e-6)">
+       transform="translate(5.2916667,66.91138)">
       <image
-         width="95.25"
-         height="2.6458333"
-         preserveAspectRatio="none"
-         xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAAKCAYAAABCH/nnAAAAgklEQVR42u3YQQ3AIBREQYqFCsAR YnGEgGr4qNikITMS9rR5T1VVA+B6Y31GAK6052sE8E8A/AP4qW4CAAAAAAASBGgAAAAAACIEaAAA AAAAIgRoAAAAAAAiBGgAAAAAACIEaAAAAAAAIgRoAAAAAAAiBGgAAAAAACIEaAAAAAAAIg7SuQoQ T4/dAwAAAABJRU5ErkJggg== "
-         id="image5419"
+         y="147.91328"
          x="-40.294529"
-         y="147.91328" />
+         id="image1226"
+         xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAAKCAYAAABCH/nnAAAABmJLR0QA/wD/AP+gvaeTAAAACXBI WXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gQGCyUCTRu3HwAAAIJJREFUeNrt2EENwCAUREGKhQrA EWJxhIBq+KjYNCEzEva0eU9VVQO40FifEQBoe75GAP8NAH+Pn3QTAAAAAACQIEADAAAAABAhQAMA AAAAECFAAwAAAAAQIUADAAAAABAhQAMAAAAAECFAAwAAAAAQIUADAAAAABAhQAMAAAAAEHEA+IoK ENYTLyoAAAAASUVORK5CYII= "
+         preserveAspectRatio="none"
+         height="2.6458333"
+         width="95.25" />
       <text
          id="text5665"
          y="145.49258"
@@ -960,5 +957,312 @@
            y="145.49258"
            style="font-size:2.64583325px;text-align:center;text-anchor:middle;stroke-width:0.26458332">NICE DAYS</tspan></text>
     </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="63.012455"
+       y="26.926367"
+       id="text999"><tspan
+         sodipodi:role="line"
+         id="tspan997"
+         x="63.012455"
+         y="26.926367"
+         style="font-size:4.23333311px;stroke-width:0.26458332">× 3</tspan></text>
+    <text
+       id="text1003"
+       y="54.08952"
+       x="63.012455"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-size:4.23333311px;stroke-width:0.26458332"
+         y="54.08952"
+         x="63.012455"
+         id="tspan1001"
+         sodipodi:role="line">× 3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="63.012455"
+       y="108.89206"
+       id="text1007"><tspan
+         sodipodi:role="line"
+         id="tspan1005"
+         x="63.012455"
+         y="108.89206"
+         style="font-size:4.23333311px;stroke-width:0.26458332">× 3</tspan></text>
+    <text
+       id="text1011"
+       y="134.76343"
+       x="63.012455"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-size:4.23333311px;stroke-width:0.26458332"
+         y="134.76343"
+         x="63.012455"
+         id="tspan1009"
+         sodipodi:role="line">× 3</tspan></text>
+    <image
+       y="177.30057"
+       x="-35.671036"
+       id="image1110"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAAoCAYAAAAIe13aAAAABmJLR0QA/wD/AP+gvaeTAAAACXBI
+WXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gQGCyIbZjGJGAAAAodJREFUeNrt3dtNAzEQBVBAdEAB
+dESx6YgCqGH5RZaIWeyb9eOc/yhex2uPRp7J83EcxxMA0NX77csksI3PjzeTQGw/tL6sH/vZuu/j
+2fGU3z9avDX6+mmdb4D/ejEFAAAAAAAkSEADAAAAABDxagoAeITRS2i1zAAAxFsk57+1pcWjf9/0
+8wD7cAMaAAAAAIAICWgAAAAAACIkoAEAAAAAiNADGmARZY+2sifbbj0B9UAEABDfGf++z1PrUT37
+76EHNzNxAxoAAAAAgAgJaAAAAAAAIrTgALbVWnLVWvKULvnSggK4aj89uz+2fp61zlesH+Nfdz+0
+P8A48Rc8khvQAAAAAABESEADAAAAABChBQcMrHdJc83qJTtK/gDm2G9rn1di6vwE75/xgPV6/3nF
+S4zEDWgAAAAAACIkoAEAAAAAiJCABgAAAAAgQg9omEitp1Pvnpuz94zSow5gj/Ow5Pxaez70tGSk
+9SbeBMRf18Qj4oO5uAENAAAAAECEBDQAAAAAABFacMCFerfMAADmK8lMn+dKVEG8DXD1/mc/3Zsb
+0AAAAAAAREhAAwAAAAAQoQXH5tIlEKuVeCoZAQDED+D9ALC/wt+5AQ0AAAAAQIQENAAAAAAAERLQ
+AAAAAABE6AENd+iZBADO85ryPy9Gjx9mj2/Ojn+1/ySxPgAgf361xg+18ewWn7gBDQAAAABAhAQ0
+AAAAAAARWnAAvypLRpSwAkD9vEQ8Y30CAD3P59njFzegAQAAAACIkIAGAAAAACBCCw74QYki1gsA
+OL8BAOgXb7kBDQAAAABAhAQ0AAAAAAAREtAAAAAAAERIQAMAAAAAECEBDQAAAABAhAQ0AAAAAAAR
+3z1Uw85XAi2WAAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="6.3499999"
+       width="95.25" />
+    <image
+       y="154.4558"
+       x="-35.671036"
+       id="image1121"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAAoCAYAAAAIe13aAAAABmJLR0QA/wD/AP+gvaeTAAAACXBI
+WXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gQGCyERrckzxQAAA0FJREFUeNrt3duNFDEQBVBAkwEB
+kBHBkhEBEMPwzYrRYOxrl+1z/lba3e4uP7rGsms+P5/P5ycAmOzbj19//Pzz+9ehv1/t+Wb7GJ/V
+98PZRo/H6uN99P3Nft7V11vdv9g7X1g9f/XmL63XT883s8fju+dpvb/e9kv3n9Xvs9b+19tfAV75
+IgQAAAAAACRYgAYAAAAAIOIhBAB/5wja3Hi2HolsPcK5+ohmtXjDzv3Z/AsgH7gxvqOv1/v/di9J
+Ve1+0p9vYCU7oAEAAAAAiLAADQAAAABAhAVoAAAAAAAi1IAGKGp2DeN3NcZ2i9fsvweoMv9Xvx7A
+rPyv2nx2+neMtL5Per8jpvXzy+ga1foL/Ds7oAEAAAAAiLAADQAAAABAhBIcsLHdjpztFr9q13dE
+emy8xQ/2HW/Gs/mVc9vztiPnt4+fdHsrYYD5A2qwAxoAAAAAgAgL0AAAAAAARCjBcRlHNGrF/6Pq
+Rxx37y+nHcEb/Ty3H3kF5COYX6H6+Hk3f84uafHu+uZ3Kr9vTv98uNv4G33/5qNa7IAGAAAAACDC
+AjQAAAAAABEWoAEAAAAAiFADGg52e80jNSgB7piPT3/f3V5zVQ1H8fe85n/0B+q1V2sN+vR82ltD
+nyw7oAEAAAAAiLAADQAAAABARPkSHLbIj42f9ti7vzqyBIB8Rb4pH5DPMm88OdINMCYfkb/cnZ/Y
+AQ0AAAAAQIQFaAAAAAAAIoaX4HAE6Sy9R9J2a//R3zLviAkA8oX7nl/+y8n9b/T15MsA8jnxPZ8d
+0AAAAAAARFiABgAAAAAgwgI0AAAAAAARDyGA19RAmhtfNTMBqPh+2S0f6H3+1u/EOK195SPyZbQ/
+yIfER3zHsgMaAAAAAIAIC9AAAAAAAEQcX4LDlnh4PR4AwPvv/PzT+39t+83uD63X0z/Omm8ATpkv
+qpcEuy2f7L1/O6ABAAAAAIiwAA0AAAAAQMRDCOD/jT7yoWTM3u3viCuA9/uJ83/1+0/fX7X+0Jof
+yj8AkJ+xmh3QAAAAAABEWIAGAAAAACDCAjQAAAAAABHNNaDVXIF5jLe920sNbwBAfghg/oTb2QEN
+AAAAAECEBWgAAAAAACJ+A7ECtNlyZlzFAAAAAElFTkSuQmCC
+"
+       preserveAspectRatio="none"
+       height="6.3499999"
+       width="95.25" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot1130"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,56.282844,0.93383303)"><flowRegion
+         id="flowRegion1126"><rect
+           id="rect1124"
+           width="218.69804"
+           height="40.911133"
+           x="-617.20319"
+           y="559.86469" /></flowRegion><flowPara
+         id="flowPara1128"
+         style="font-size:10px;line-height:1.25">Combine the 3 years by taking the median NICE hours for each day.</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,56.282844,23.897524)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot1138"
+       xml:space="preserve"><flowRegion
+         id="flowRegion1134"><rect
+           y="559.86469"
+           x="-617.20319"
+           height="33.334988"
+           width="232.84019"
+           id="rect1132" /></flowRegion><flowPara
+         style="font-size:10px;line-height:1.25"
+         id="flowPara1136">Smooth out the NICE hours / day by applying a median filter (with a 7 day window).</flowPara></flowRoot>    <g
+       id="g1380"
+       transform="translate(-0.70722831,9.9678513)">
+      <text
+         id="text5598-3-6"
+         y="164.76389"
+         x="-34.158691"
+         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:2.64583325px;stroke-width:0.26458332"
+           y="164.76389"
+           x="-34.158691"
+           id="tspan5596-6-7"
+           sodipodi:role="line">JAN</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="60.710964"
+         y="164.76389"
+         id="text5602-7-5"><tspan
+           sodipodi:role="line"
+           id="tspan5600-5-3"
+           x="60.710964"
+           y="164.76389"
+           style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332">DEC</tspan></text>
+      <text
+         id="text5479-3-6-5"
+         y="164.76389"
+         x="12.883782"
+         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:2.64583325px;text-align:center;text-anchor:middle;stroke-width:0.26458332"
+           y="164.76389"
+           x="12.883782"
+           id="tspan5477-5-2-6"
+           sodipodi:role="line">NICE HOURS COUNT</tspan></text>
+    </g>
+    <g
+       transform="translate(-0.70722831,-12.995839)"
+       id="g1394">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="-34.158691"
+         y="164.76389"
+         id="text1384"><tspan
+           sodipodi:role="line"
+           id="tspan1382"
+           x="-34.158691"
+           y="164.76389"
+           style="font-size:2.64583325px;stroke-width:0.26458332">JAN</tspan></text>
+      <text
+         id="text1388"
+         y="164.76389"
+         x="60.710964"
+         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         xml:space="preserve"><tspan
+           style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332"
+           y="164.76389"
+           x="60.710964"
+           id="tspan1386"
+           sodipodi:role="line">DEC</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+         x="12.883782"
+         y="164.76389"
+         id="text1392"><tspan
+           sodipodi:role="line"
+           x="12.883782"
+           y="164.76389"
+           style="font-size:2.64583325px;text-align:center;text-anchor:middle;stroke-width:0.26458332"
+           id="tspan1407">NICE HOURS COUNT</tspan></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-36.677361"
+       y="156.41949"
+       id="text1437"><tspan
+         sodipodi:role="line"
+         id="tspan1435"
+         x="-36.677361"
+         y="156.41949"
+         style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332">12</tspan></text>
+    <text
+       id="text1441"
+       y="160.76833"
+       x="-36.704491"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332"
+         y="160.76833"
+         x="-36.704491"
+         id="tspan1439"
+         sodipodi:role="line">0</tspan></text>
+    <text
+       id="text1445"
+       y="179.26427"
+       x="-36.677361"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332"
+         y="179.26427"
+         x="-36.677361"
+         id="tspan1443"
+         sodipodi:role="line">12</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-36.704491"
+       y="183.6131"
+       id="text1449"><tspan
+         sodipodi:role="line"
+         id="tspan1447"
+         x="-36.704491"
+         y="183.6131"
+         style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332">0</tspan></text>
+    <image
+       width="95.25"
+       height="12.7"
+       preserveAspectRatio="none"
+       xlink:href="data:image/png;base64,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 rkJggg== "
+       id="image1513"
+       x="-35.002861"
+       y="74.244362" />
+    <text
+       id="text1520"
+       y="72.211815"
+       x="-34.476536"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-size:2.64583325px;stroke-width:0.26458332"
+         y="72.211815"
+         x="-34.476536"
+         id="tspan1518"
+         sodipodi:role="line">JAN</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="60.39312"
+       y="72.211815"
+       id="text1524"><tspan
+         sodipodi:role="line"
+         id="tspan1522"
+         x="60.39312"
+         y="72.211815"
+         style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332">DEC</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="-36.677361"
+       y="76.208069"
+       id="text1528"><tspan
+         sodipodi:role="line"
+         id="tspan1526"
+         x="-36.677361"
+         y="76.208069"
+         style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332">0</tspan></text>
+    <text
+       id="text1532"
+       y="86.944366"
+       x="-36.704491"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332"
+         y="86.944366"
+         x="-36.704491"
+         id="tspan1530"
+         sodipodi:role="line">24</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="2.8268712"
+       y="72.211815"
+       id="text1536"><tspan
+         sodipodi:role="line"
+         id="tspan1534"
+         x="2.8268712"
+         y="72.211815"
+         style="font-size:2.64583325px;stroke-width:0.26458332">PRECIPITATION</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="63.012455"
+       y="82.135353"
+       id="text1557"><tspan
+         sodipodi:role="line"
+         id="tspan1555"
+         x="63.012455"
+         y="82.135353"
+         style="font-size:4.23333311px;stroke-width:0.26458332">× 3</tspan></text>
   </g>
 </svg>
