@@ -9,7 +9,7 @@
 (defn- sanitize 
   "Sanitize a file name"
   [file-name]
-  (string/replace file-name #"[^0-9a-zA-Z\.\-\ ]" ""))
+  (string/replace file-name #"[^0-9a-zA-Z_\.\-\ ]" ""))
 
 (defn- cache-path 
   [cache-id query-id]
