@@ -80,6 +80,7 @@
      [:>.autocomplete-results
       {:position "absolute"
        :background "white"
+       :text-align "left"
        :font-size "1rem"
        :box-sizing "border-box"
        :width "12rem"
@@ -101,7 +102,8 @@
         {:display "flex"
          :justify-content "space-between"}
 
-        [:>.name]
+        [:>.name
+         {:white-space "nowrap"}]
 
         [:>.known]]]]]]
 
