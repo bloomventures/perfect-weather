@@ -182,7 +182,10 @@
            {:border-radius "0 1em 1em 0"}]
 
           [:&.end
-           {:border-radius "1em 0 0 1em"}]]]
+           {:border-radius "1em 0 0 1em"}]
+          
+          [:&.start.end
+           {:border-radius 0}]]]
 
         (let [height "2rem"]
           [:>.columns.months

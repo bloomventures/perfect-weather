@@ -57,11 +57,11 @@
                   butlast)]
          [:div.range {:class [(when (= start 0)
                                 "start")
-                              (when (= end 365)
+                              (when (= end 364)
                                 "end")
                               (when text "fill")]
                       :title text
-                      :style {:width (str (* 100 (/ (- end start) 365)) "%")}}])
+                      :style {:width (str (* 100 (/ (- end start) 364)) "%")}}])
 
        :else
        [[:div.range.never "☹"]]))
