@@ -80,6 +80,7 @@
      [:>.autocomplete-results
       {:position "absolute"
        :background "white"
+       :text-align "left"
        :font-size "1rem"
        :box-sizing "border-box"
        :width "12rem"
@@ -101,7 +102,8 @@
         {:display "flex"
          :justify-content "space-between"}
 
-        [:>.name]
+        [:>.name
+         {:white-space "nowrap"}]
 
         [:>.known]]]]]]
 
@@ -176,11 +178,8 @@
            {:background colors/accent
             :border-radius "1em"}]
 
-          [:&.start
-           {:border-radius "0 1em 1em 0"}]
-
-          [:&.end
-           {:border-radius "1em 0 0 1em"}]]]
+          [:&.loop
+           {:border-radius "0 !important"}]]]
 
         (let [height "2rem"]
           [:>.columns.months

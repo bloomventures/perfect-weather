@@ -15,10 +15,16 @@
    [:div.items
 
     [:div.item
-     [:h2 "What's considered a 'nice' day?"]
+     [:h2 "What weather is considered 'nice'?"]
+     [:p "The weather is 'nice' if:"]
+     [:ul
+      [:li "the temperature and humidity are within a comfortable range (in a t-shirt or sweater)"]
+      [:li "it's not raining"]]
+     [:p 
+      "The acceptable temperature/humidity range is a synthesis of various human thermal-comfort research sources:"]
+     [:img {:src "/images/psychometric-graph.png"}]
      [:p
-      "A day is considered 'nice' if, in 2017, at least " rate/hour-threshold " hours between " rate/hour-start "am and " (- rate/hour-end 12) "pm were within a comfortable temperature/humidity range, according to human thermal comfort research:"]
-     [:img {:src "/images/psychometric-graph.png"}]]
+      "A day is considered 'nice' if at least " rate/hour-threshold " hours between " rate/hour-start "am and " (- rate/hour-end 12) "pm were 'nice', based on data from the last 3 years." ]]
 
     [:div.item
      [:h2 "How does it all work?"]
@@ -26,9 +32,8 @@
      [:img {:src "/images/how-it-works.png"}]
      [:p "I have a giant list of potential improvements, but the big ones are:"]
      [:ul
-      [:li "take rain into account (skipped in v1 because most historical weather APIs have spotty global precipitation data)"]
-      [:li "use the last 3-5 years of data (instead of just 1) and indicate in the output when it is 'reliably' vs. 'unreliably' nice"] 
-      [:li "summarize each period under a category, such as: 'perfect', 'nice', 'rainy', 'sweater weather', 'hot', 'humid', 'chilly', 'cold'"]]
+      [:li "indicate why periods are not nice, or kinda-nice, such as: 'perfect', 'nice', 'rainy', 'sweater weather', 'hot', 'humid', 'chilly', 'cold'"]
+      [:li "indicate in the output when it is 'reliably' vs. 'unreliably' nice"]]
      [:p "If you have any other ideas or suggestions, hit me up at: " 
       [:a {:href (str "mailto:" email)} email]]]
 
@@ -38,7 +43,7 @@
       "I'm a digital nomad, which means I work remotely, and change places every few months, preferring places that are inexpensive and have nice weather."]
      [:p
       [:a {:href "https://nomadlist.com/" :target "_blank"} "nomadlist.com"]
-      " is fantastic for figuring out where to go next, except their weather filtering is garbage (there's just three options: below 16C, 16°C - 25°C, and above 25°C; whereas the range I'm looking for is 19-30°C, with adjustments based on humidity)"]
+      " is fantastic for figuring out where to go next, except their weather filtering is meh (there are only three options: below 16C, 16°C - 25°C, and above 25°C; whereas the range I'm looking for is 19-30°C, with adjustments based on humidity)"]
      [:p "Wikipedia's climate sections are nice (" [:a {:href "https://en.wikipedia.org/wiki/Warsaw#Climate" :target "_blank"} "example"] "), but:"]
      [:ul
       [:li "'daily mean', 'average low', etc. are hard to mentally translate to 'is it nice?'"]

@@ -12,6 +12,15 @@
        first
        first))
 
+(defn median
+  [coll]
+  (let [sorted (sort coll)]
+    (if (even? (count coll))
+      (/ (+ (nth sorted (dec (int (/ (count coll) 2))))
+            (nth sorted (int (/ (count coll) 2))))
+         2)
+      (nth sorted (int (/ (count coll) 2))))))
+
 (defn mode-filter 
   "Given a collection of boolean values,
    replaces each value with the mode of the neighbors within the window.
@@ -19,9 +28,9 @@
   [window coll]
   (let [hw (int (/ window 2))]
     (->> 
-      (concat [(repeat hw (first coll))] 
+      (concat (repeat hw (first coll)) 
               coll 
-              [(repeat hw (last coll))])
+              (repeat hw (last coll)))
       (partition window 1)
       (map mode))))
 
@@ -87,17 +96,32 @@
                     top
                     mid)))))))
 
-(defn combined-filter [coll]
-  (->> coll
-       ; remove 1-day false gaps
-       (streak-filter false? 1)
-       ; remove false gaps dominated by neighboring true streaks
-       (neighbor-filter false?)
-       ; remove low density false
-       (density-filter false? 28 0.65)
-       ; bridge 5-day false gaps
-       (streak-filter false? 5)
-       ; only keep 28-day true streaks
-       (streak-filter true? 28)
-       ; bridge 14-day false gaps
-       (streak-filter false? 14)))
+(defn convolve 
+  "From: 
+  https://stackoverflow.com/questions/3259825/trouble-with-lazy-convolution-fn-in-clojure"
+  [xs is]
+  (if (> (count xs) (count is))
+    (convolve is xs)
+    (let [is (concat (repeat (dec (count xs)) 0) is)]
+      (for [s (take-while not-empty (iterate rest is))]
+         (reduce + (map * (rseq xs) s))))))
+
+(defn gaussian-filter-numbers 
+  "Given a collection of numbers, applies a gaussian filter / performs a weirstrauss transform 
+  for the given standard deviation"
+  [std-dev coll]
+  (convolve coll [0.0545 0.2442 0.4026 0.2442 0.0545]))
+
+(defn median-filter 
+  "Given a collection of numbers, transforms each to be the median of the window around each
+  
+  Window should be odd"
+  [window coll]
+  (let [hw (int (/ window 2))]
+    (->> 
+      (concat (repeat hw (first coll)) 
+              coll 
+              (repeat hw (last coll)))
+      (partition window 1)
+      (map median))))
+

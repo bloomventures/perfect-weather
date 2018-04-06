@@ -11,10 +11,7 @@
   (let [equivalent-place (or (places/closest-to {:lat lat :lon lon}) {:lat lat :lon lon})
         data (data/city-day-data {:lat (equivalent-place :lat) 
                                   :lon (equivalent-place :lon)})
-        days (->> data
-                  (map (fn [hours]
-                         (rate/day-result? rate/nice? true hours)))
-                  (filters/combined-filter))
+        days (rate/nice-days data) 
         ranges (->> (summary/ranges days)
                     (map (fn [range]
                            {:text (summary/range->text range)
