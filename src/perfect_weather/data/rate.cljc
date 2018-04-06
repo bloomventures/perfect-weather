@@ -1,4 +1,6 @@
-(ns perfect-weather.data.rate)
+(ns perfect-weather.data.rate
+  (:require
+    [perfect-weather.data.filters :as filters]))
 
 (defn within-polygon?
   "Based on: 
@@ -31,20 +33,6 @@
   (and 
     (< 20 (d :temperature) 25) 
     (< 0.35 (d :humidity) 0.55)))
-
-(def hour-start 8)
-(def hour-end 20)
-(def hour-count (- hour-end hour-start))
-(def hour-threshold 8)
-
-(defn day-result? [f p? data]
-  (let [threshold (if p? hour-threshold 6)]
-    (<= threshold (->> data
-                       (drop hour-start)
-                       (take hour-count)
-                       (map f)
-                       (filter true?)
-                       count))))
 
 (defn thermally-comfortable? 
   "Polygon:
@@ -97,3 +85,51 @@
         (when (nice? d)) :nice]
     (filter nil?)
     set))
+
+(def hour-start 8)
+(def hour-end 20)
+(def hour-count (- hour-end hour-start))
+(def hour-threshold 6)
+
+(defn day-nice-hours-count [data]
+  (->> data
+       (drop hour-start)
+       (take hour-count)
+       (map nice?)
+       (filter true?)
+       count))
+
+(defn combined-filter [coll]
+  (->> coll
+       ; bridge 7-day false gaps
+       (filters/streak-filter false? 7)
+       ; only keep 21-day true streaks
+       (filters/streak-filter true? 21)))
+
+(defn years->median-nice-days 
+  "Given multiple years of hourly data points, returns a single year of median-nice-hour-% (within the relevant hour band)"
+  [data]
+  (->> data
+       (partition 365)
+       (apply interleave)
+       (partition (/ (count data) 365))
+       (map (fn [days]
+              (->> days
+                   (map day-nice-hours-count)
+                   ((fn [day-results]
+                      (->> day-results
+                           sort
+                           second
+                           ((fn [c]
+                              (/ c hour-count)))))))))))
+
+(defn nice-days 
+  "Expects multiple years of data;
+   returns single year of boolean nice/not-nice"
+  [data]
+  (->> data
+       years->median-nice-days
+       (filters/median-filter 7)
+       (map (fn [day]
+              (<= (/ hour-threshold hour-count) day)))
+       combined-filter))
