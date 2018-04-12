@@ -13,7 +13,6 @@
                                       api-defaults
                                       secure-api-defaults]]
     [perfect-weather.server.api :as api]
-    [perfect-weather.systems.base :refer [handlers]]
     [perfect-weather.analysis :as analysis]
     [perfect-weather.config :refer [config]]))
 
