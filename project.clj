@@ -8,7 +8,7 @@
                  [environ "1.1.0"]
                  [ring-middleware-format "0.7.2"]
                  [ring/ring-defaults "0.3.1"]
-                 [bloom/omni "0.7.0"]]
+                 [io.bloomventures/omni "0.8.0"]]
 
   :plugins [[lein-figwheel "0.5.14"]
             [lein-environ "1.1.0"]]
