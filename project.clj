@@ -15,7 +15,7 @@
 
   :main perfect-weather.core
 
-  :aliases {"compile-assets" ["exec" "-ep" "(use 'perfect-weather.systems.compile) (compile!)"]}
+  :aliases {"compile-assets" ["exec" "-ep" "(use 'perfect-weather.compile) (compile!)"]}
 
   :profiles {:uberjar {:aot :all
                        :prep-tasks ["compile-assets"
