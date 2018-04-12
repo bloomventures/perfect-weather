@@ -1,7 +1,8 @@
 (ns perfect-weather.data.cache
   (:require
     [clojure.java.io :as io]
-    [clojure.string :as string]))
+    [clojure.string :as string]
+    [environ.core :refer [env]]))
 
 (defn log [& args]
   #_(apply println args))
@@ -13,7 +14,7 @@
 
 (defn- cache-path 
   [cache-id query-id]
-  (str "data/" (name cache-id) "/" (sanitize query-id) ".edn"))
+  (str (env :cache-path) "/" (name cache-id) "/" (sanitize query-id) ".edn"))
 
 (defn in-cache? 
   [cache-id query-id]

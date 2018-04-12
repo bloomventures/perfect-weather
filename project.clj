@@ -8,9 +8,15 @@
                  [environ "1.1.0"]
                  [ring-middleware-format "0.7.2"]
                  [ring/ring-defaults "0.3.1"]
-                 [io.bloomventures/omni "0.8.0"]]
+                 [io.bloomventures/omni "0.9.0"]]
 
-  :plugins [[lein-figwheel "0.5.14"]
-            [lein-environ "1.1.0"]]
+  :plugins [[lein-environ "1.1.0"]
+            [lein-exec "0.3.7"]]
 
-  :main perfect-weather.core)
+  :main perfect-weather.core
+
+  :aliases {"compile-assets" ["exec" "-ep" "(use 'perfect-weather.systems.compile) (compile!)"]}
+
+  :profiles {:uberjar {:aot :all
+                       :prep-tasks ["compile-assets"
+                                    "compile"]}})
