@@ -54,5 +54,5 @@
 (defn stop! []
   (mount/stop))
 
-(defn -main []
+(defn -main [& _]
   (start! :prod))
