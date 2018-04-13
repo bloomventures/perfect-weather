@@ -12,13 +12,23 @@
   [file-name]
   (string/replace file-name #"[^0-9a-zA-Z_\.\-\ ]" ""))
 
+(defn- cache-base-path
+  [cache-id]
+  (str (env :cache-path) "/" (name cache-id)))
+
 (defn- cache-path 
   [cache-id query-id]
-  (str (env :cache-path) "/" (name cache-id) "/" (sanitize query-id) ".edn"))
+  (str (cache-base-path cache-id) "/" (sanitize query-id) ".edn"))
 
 (defn in-cache? 
   [cache-id query-id]
   (.exists (io/file (cache-path cache-id query-id))))
+
+(defn cache-list 
+  [cache-id]
+  (->> (io/file (cache-base-path cache-id))
+       file-seq 
+       (filter #(.isFile %))))
 
 (defn with-cache 
   [cache-id query-id fetch-fn args]

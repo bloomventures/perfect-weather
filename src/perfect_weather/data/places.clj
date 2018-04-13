@@ -1,18 +1,15 @@
 (ns perfect-weather.data.places
   (:require
     [clojure.java.io :as io]
+    [perfect-weather.data.cache :as cache]
     [perfect-weather.data.google-maps :as google-maps]))
 
 (defn all []
-  (->> (io/file "data/places")
-       file-seq 
-       (filter #(.isFile %))
+  (->> (cache/cache-list :places)
        (map (comp read-string slurp))))
 
 (defn n-random [n]
-  (->> (io/file "data/places")
-       file-seq 
-       (filter #(.isFile %))
+  (->> (cache/cache-list :places)
        shuffle
        (take n)
        (map (comp read-string slurp))))
