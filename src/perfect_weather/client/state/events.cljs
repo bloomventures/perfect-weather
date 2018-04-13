@@ -76,7 +76,7 @@
   (fn [{db :db} _]
     (when (empty? (db :results))
       {:ajax {:method :get
-              :uri "/api/random/5"
+              :uri "/api/random/3"
               :on-success (fn [results]
                             (doseq [result results]
                               (dispatch [:-store-result! result])))}})))
