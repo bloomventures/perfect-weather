@@ -12,9 +12,10 @@
                                         (if @active-result-index
                                           (mod (+ delta @active-result-index) (count @results))
                                           0))))]
-    (fn [{:keys [value results on-change on-clear on-select render-result]}]
+    (fn [{:keys [value results auto-focus? on-change on-clear on-select render-result]}]
       [:div.field
        [:input {:value @value
+                :auto-focus auto-focus?
                 :on-change (fn [e]
                              (on-change (.. e -target -value)))
                 :on-key-down-capture 

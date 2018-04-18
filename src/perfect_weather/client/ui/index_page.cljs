@@ -88,7 +88,8 @@
                        (.preventDefault e))}
    "When's the weather nice in "
    [autocomplete-view 
-    {:value (subscribe [:query])
+    {:auto-focus? true
+     :value (subscribe [:query])
      :on-change (fn [value]
                   (dispatch [:update-query! value]))
      :results (subscribe [:autocomplete-results])
