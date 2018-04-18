@@ -3,7 +3,7 @@
     [perfect-weather.client.state.routes :as routes]
     [perfect-weather.data.rate :as rate]))
 
-(def email "raf@todo.com")
+(def email "rafal.dittwald@gmail.com")
 
 (defn faq-page-view []
   [:div.faq-page
