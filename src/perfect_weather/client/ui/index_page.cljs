@@ -86,7 +86,7 @@
 (defn form-view []
   [:form {:on-submit (fn [e]
                        (.preventDefault e))}
-   "When's the weather nice in "
+   "When's the best weather in "
    [autocomplete-view 
     {:auto-focus? true
      :value (subscribe [:query])
