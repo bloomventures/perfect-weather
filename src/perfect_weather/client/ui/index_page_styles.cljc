@@ -193,8 +193,13 @@
            {:background colors/accent
             :border-radius "1em"}]
 
-          [:&.loop
-           {:border-radius "0 !important"}]]]
+          [:&.start-loop
+           {:border-top-left-radius 0
+            :border-bottom-left-radius 0}]
+
+          [:&.end-loop
+           {:border-top-right-radius 0
+            :border-bottom-right-radius 0}]]]
 
         (let [height "2rem"]
           [:>.columns.months
