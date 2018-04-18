@@ -4,12 +4,14 @@
     [bloom.omni.ajax :as ajax]
     [bloom.omni.dispatch-debounce :as dispatch-debounce]
     [bloom.omni.router :as router]
+    [bloom.omni.fx.title :as title]
     [re-frame.core :refer [dispatch reg-fx reg-event-fx]]
     [perfect-weather.client.state.routes :as routes]))
 
 (reg-fx :ajax ajax/fx)
 (reg-fx :dispatch-debounce dispatch-debounce/fx)
 (reg-fx :router router/fx)
+(reg-fx :title title/fx)
 
 (reg-event-fx 
   :init!
@@ -23,7 +25,17 @@
 (reg-event-fx
   :route-page!
   (fn [{db :db} [_ page]]
-    {:db (assoc db :page page)}))
+    {:db (assoc db :page page)
+     :dispatch [:-set-page-title!]}))
+
+(reg-event-fx :-set-page-title!
+  (fn [{db :db} _]
+    (let [site "Sunny Pursuits"
+          page (case (db :page)
+                 :faq "FAQ"
+                 :index (db :query))]
+      {:title (str site (when-not (string/blank? page) 
+                            (str " - " page)))})))
 
 (reg-event-fx
   :update-query!
