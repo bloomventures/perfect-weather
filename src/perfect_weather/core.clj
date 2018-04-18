@@ -15,9 +15,11 @@
     [perfect-weather.server.api :as api]
     [perfect-weather.config :refer [config]]))
 
-(def handlers
+(defn handlers []
   [(-> (ring/->handler api/routes)
-       (wrap-defaults api-defaults)
+       (wrap-defaults (if (= "prod" (env :environment))
+                        secure-api-defaults
+                        api-defaults))
        (wrap-restful-format :formats [:transit-json]))
    (ring/->handler spa/routes)])
 
@@ -26,7 +28,7 @@
     :analysis
     (-> (mount/with-args 
           (merge config
-                 {:handlers handlers
+                 {:handlers (handlers)
                   :figwheel-port 5223
                   :http-port 1262
                   :css {:styles "perfect-weather.analysis.styles/styles"}
@@ -36,7 +38,7 @@
     :dev
     (-> (mount/with-args 
           (merge config
-                 {:handlers handlers
+                 {:handlers (handlers)
                   :figwheel-port 5223
                   :http-port 1262}))
         (mount/start))
@@ -44,7 +46,7 @@
     :prod
     (-> (mount/with-args 
           (merge config
-                 {:handlers handlers
+                 {:handlers (handlers)
                   :http-port (Integer/parseInt (env :http-port))}))
         (mount/except
           #{#'bloom.omni.figwheel/component
