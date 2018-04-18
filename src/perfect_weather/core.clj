@@ -17,7 +17,9 @@
 
 (defn handlers []
   [(-> (ring/->handler api/routes)
-       (wrap-defaults api-defaults)
+       (wrap-defaults (if (= "prod" (env :environment))
+                        (assoc secure-api-defaults :proxy true)
+                        api-defaults))
        (wrap-restful-format :formats [:transit-json]))
    (ring/->handler spa/routes)])
 
