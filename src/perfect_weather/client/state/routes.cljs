@@ -12,12 +12,18 @@
   (dispatch [:route-page! :faq]))
 
 (defn place->slug [{:keys [city country]}]
-  (-> (str city "-" country)
+  (-> (str city "--" country)
+      (string/replace #" " "-")
       (string/lower-case)))
 
 (defn slug->place [slug]
-  (let [[city country] (->> (string/split slug #"-" 2)
-                            (map string/capitalize))]
+  (let [[city country] (string/split slug #"--" 2)
+        city (->> (string/split city #"-")
+                  (map string/capitalize)
+                  (string/join " "))
+        country (->> (string/split country #"-")
+                     (map string/capitalize)
+                     (string/join " "))]
     {:city city
      :country country}))
 
