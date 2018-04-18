@@ -27,10 +27,11 @@
 
 (defn loading-message-view []
   (let [message (r/atom (rand-nth loading-messages))]
-    [:div {:ref (fn []
-                  (js/setTimeout 
-                    (fn [] (reset! message (rand-nth loading-messages)))
-                    5000))} 
+    [:div.message {:ref (fn []
+                          (js/setTimeout 
+                            (fn [] (reset! message (rand-nth loading-messages)))
+                            5000))}
+     [:div.img [:img {:src "/images/sun.svg"}]]
      @message]))
 
 (defn calendar-view [ranges]

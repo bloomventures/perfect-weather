@@ -166,7 +166,22 @@
            {:color colors/accent
             :width "100%"
             :font-weight "bold"
-            :text-align "center"}]
+            :text-align "center"}
+
+           [:>.message
+            {:display "flex"
+             :align-items "center"
+             :justify-content "center"
+             :height "1em"}
+
+            [:>.img 
+             {:animation [["throb" "1s" "infinite" "ease-in-out"]]}
+
+             [:img
+              {:width "1.5em"
+               :height "1.5em"
+               :margin-right "0.25em"
+               :animation [["spin" "8s" "infinite" "linear"]]}]]]]
 
           [:&.never
            {:color colors/accent
