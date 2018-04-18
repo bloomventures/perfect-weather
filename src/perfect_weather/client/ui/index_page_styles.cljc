@@ -67,7 +67,7 @@
 
      [:>input
       {:font-size "1.5rem"
-       :width "12rem"
+       :width "18rem"
        :padding "0.25rem"
        :border [["1px" "solid" colors/grid-border]]
        :font-family "inherit"
@@ -83,7 +83,7 @@
        :text-align "left"
        :font-size "1rem"
        :box-sizing "border-box"
-       :width "12rem"
+       :min-width "18rem"
        :border [["1px" "solid" colors/grid-border]]
        :border-top "none"
        :box-shadow "0 2px 5px rgba(0,0,0,0.1)"}
