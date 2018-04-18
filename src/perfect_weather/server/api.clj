@@ -23,6 +23,7 @@
                         100))]
     {:city city
      :country country
+     :place-id (equivalent-place :place-id)
      :percent percent
      :ranges ranges}))
 

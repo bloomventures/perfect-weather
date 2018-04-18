@@ -60,6 +60,7 @@
       {:db (assoc db :query (place :city)) 
        :dispatch-n [[:-store-result! {:city (place :city)
                                       :country (place :country)
+                                      :place-id (or (place :place-id) :temp)
                                       :ranges nil}]
                     [:-fetch-result! place]
                     [:clear-autocomplete-results!]]})))
@@ -106,7 +107,8 @@
   :-store-result!
   (fn [{db :db} [_ result]]
     {:db (-> db
-             (update :results #(vec (remove (fn [r] (and 
-                                                      (= (result :city) (r :city))
-                                                      (= (result :country) (r :country)))) %)))
+             ; remove the temporary placeholder for the place (or previously searched result)
+             (update :results #(vec (remove (fn [r] (or
+                                                      (= :temp (r :place-id))
+                                                      (= (result :place-id) (r :place-id)))) %)))
              (update :results conj result))}))

@@ -80,7 +80,7 @@
   [:div.results
    (doall
      (for [result @(subscribe [:results])]
-       ^{:key (result :city)}
+       ^{:key (result :place-id)}
        [result-view result]))])
 
 (defn form-view []
