@@ -60,6 +60,7 @@
     {:font-size "1.5rem"
      :max-width "100vw"
      :text-align "center"
+     :line-height "1.5em"
      :margin "1rem 0 2rem"}
 
     [:>.field
