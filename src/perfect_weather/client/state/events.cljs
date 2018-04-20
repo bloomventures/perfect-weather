@@ -30,12 +30,12 @@
 
 (reg-event-fx :-set-page-title!
   (fn [{db :db} _]
-    (let [site "Sunny Pursuits"
-          page (case (db :page)
-                 :faq "FAQ"
-                 :index (db :query))]
-      {:title (str site (when-not (string/blank? page) 
-                            (str " - " page)))})))
+    (let [title (case (db :page)
+                  :faq "Best weather in... (FAQ)"
+                  :index (if-not (string/blank? (db :query))
+                           (str "Best weather in " (db :query))
+                           "Best weather in..."))]
+      {:title title})))
 
 (reg-event-fx
   :update-query!
