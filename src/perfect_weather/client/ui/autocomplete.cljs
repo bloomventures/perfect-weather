@@ -34,6 +34,8 @@
                           (when @active-result-index
                             (on-select (nth @results @active-result-index)))
                           nil))
+                :on-focus (fn [e]
+                            (.. e -target (setSelectionRange (.. e -target -value -length) (.. e -target -value -length))))
                 :on-blur (fn [_]
                            ; need to have a timeout here, b/c otherwise, the on-blur removes
                            ; the autocomplete before the on-click has a chance to trigger
