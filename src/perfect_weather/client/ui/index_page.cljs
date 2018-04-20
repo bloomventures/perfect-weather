@@ -98,7 +98,7 @@
      :value (subscribe [:query])
      :on-change (fn [value]
                   (dispatch [:update-query! value]))
-     :results (subscribe [:autocomplete-results])
+     :results @(subscribe [:autocomplete-results])
      :on-clear (fn []
                  (dispatch [:clear-autocomplete-results!]))
      :on-select (fn [result]
