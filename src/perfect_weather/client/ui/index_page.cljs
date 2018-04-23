@@ -70,7 +70,7 @@
        :else
        [[:div.range.never 
          {:title "It's never nice"}
-         "☹"]]))
+         "☹ Never Nice"]]))
    (into 
      [:div.columns.months]
      (for [month months-abbr]
