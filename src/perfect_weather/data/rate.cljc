@@ -101,8 +101,8 @@
 
 (defn combined-filter [coll]
   (->> coll
-       ; bridge 7-day false gaps
-       (filters/streak-filter false? 7)
+       ; bridge 10-day false gaps
+       (filters/streak-filter false? 10)
        ; only keep 21-day true streaks
        (filters/streak-filter true? 21)))
 
