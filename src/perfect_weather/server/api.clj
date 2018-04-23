@@ -3,44 +3,15 @@
     [perfect-weather.data.places :as places]
     [perfect-weather.data.core :as data]
     [perfect-weather.data.filters :as filters]
-    [perfect-weather.data.summary :as summary]
     [perfect-weather.data.google-maps :as google-maps]
-    [perfect-weather.data.rate :as rate]))
-
-(defn compute [{:keys [lat lon city country]}]
-  (let [equivalent-place (or (places/closest-to {:lat lat :lon lon}) {:lat lat :lon lon})
-        data (data/city-day-data {:lat (equivalent-place :lat) 
-                                  :lon (equivalent-place :lon)})
-        days (rate/nice-days data) 
-        ranges (->> (summary/ranges days)
-                    (map (fn [range]
-                           {:text (summary/range->text range)
-                            :range range})))
-        percent (int (* (/ (->> days
-                                (remove false?)
-                                count)
-                           365)
-                        100))]
-    {:city city
-     :country country
-     :place-id (equivalent-place :place-id)
-     :percent percent
-     :ranges ranges}))
-
-(defn compute-by-place-id [place-id]
-  (let [place @(google-maps/place place-id)]
-    (compute {:lat (place :lat)
-              :lon (place :lon)
-              :country (place :country)
-              :city (place :city)})))
-
+    [perfect-weather.data.compute :as compute]))
 
 (def routes
   [[:get "/api/random/:n"]
    (fn [req]
      {:status 200
       :body (->> (places/n-random (Integer/parseInt (get-in req [:params :n])))
-                 (map compute))})
+                 (map compute/compute))})
 
    [:get "/api/autocomplete"]
    (fn [req]
@@ -52,7 +23,7 @@
      {:status 200
       :body (cond 
               (get-in req [:params :place-id]) 
-              (compute-by-place-id (get-in req [:params :place-id]))
+              (compute/compute-by-place-id (get-in req [:params :place-id]))
               
               (and 
                 (get-in req [:params :city]) 
@@ -60,7 +31,7 @@
               (->> (google-maps/autocomplete (str (get-in req [:params :city]) ", " (get-in req [:params :country])))
                    first
                    :place-id
-                   compute-by-place-id))})
+                   compute/compute-by-place-id))})
    
    [:get "/api/analysis/:n"]
    (fn [req]
