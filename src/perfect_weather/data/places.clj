@@ -35,5 +35,7 @@
                 [city (distance city needle)]))
          (remove (fn [[_ dist]]
                    (> dist threshold)))
+         (sort-by (fn [[_ dist]]
+                    dist))
          first
          first)))
