@@ -30,7 +30,7 @@
           (merge config
                  {:handlers (handlers)
                   :figwheel-port 5223
-                  :http-port 1262
+                  :http-port (Integer/parseInt (env :http-port))
                   :css {:styles "perfect-weather.analysis.styles/styles"}
                   :cljs {:main "perfect-weather.analysis.core"}}))
         (mount/start))
@@ -40,7 +40,7 @@
           (merge config
                  {:handlers (handlers)
                   :figwheel-port 5223
-                  :http-port 1262}))
+                  :http-port (Integer/parseInt (env :http-port))}))
         (mount/start))
 
     :prod
