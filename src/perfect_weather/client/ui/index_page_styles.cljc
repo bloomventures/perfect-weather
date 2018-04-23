@@ -64,7 +64,8 @@
      :margin "1rem 0 2rem"}
 
     [:>.field
-     {:display "inline-block"}
+     {:display "inline-block"
+      :line-height "1em"}
 
      [:>input
       {:font-size "1.5rem"
