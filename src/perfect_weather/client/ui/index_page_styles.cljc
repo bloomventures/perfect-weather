@@ -82,6 +82,7 @@
      [:>.autocomplete-results
       {:position "absolute"
        :background "white"
+       :z-index 1000
        :text-align "left"
        :font-size "1rem"
        :box-sizing "border-box"
