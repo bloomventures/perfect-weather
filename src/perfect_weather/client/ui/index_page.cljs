@@ -121,12 +121,14 @@
    [:div
     "Built by " 
     [:a {:href "https://bloomventures.io/"
+         :rel "noopener"
          :target "_blank"}
      "Bloom"]]
 
    [:div
     "Powered by "
     [:a {:href "https://darksky.net/poweredby/"
+         :rel "noopener"
          :target "_blank"}
      "DarkSky"] " & "
     [:a {:href "https://developers.google.com/places/"}
