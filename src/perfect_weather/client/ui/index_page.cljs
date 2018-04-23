@@ -68,7 +68,9 @@
                         :style {:width (str (* 100 (/ (- end start) 364)) "%")}}]))
 
        :else
-       [[:div.range.never "☹"]]))
+       [[:div.range.never 
+         {:title "It's never nice"}
+         "☹"]]))
    (into 
      [:div.columns.months]
      (for [month months-abbr]
