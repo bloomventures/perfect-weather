@@ -8,6 +8,11 @@
   (->> (cache/cache-list :places)
        (map (comp read-string slurp))))
 
+(defn by-city [city]
+  (->> (all) 
+       (filter (fn [p]
+                 (= (p :city) city)))))
+
 (defn n-random [n]
   (->> (cache/cache-list :places)
        shuffle
