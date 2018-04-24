@@ -207,7 +207,8 @@
             {:margin-left "0.2em"
              :color colors/text-light
              :display "inline-block"
-             :pointer-events "none"}
+             :pointer-events "none"
+             :white-space "nowrap"}
             (tiny-text)]
 
            ["&:nth-child(odd)"
