@@ -186,21 +186,39 @@
                :margin-right "0.25em"
                :animation [["spin" "8s" "infinite" "linear"]]}]]]]
 
-          [:&.never
-           {:color colors/accent
-            :width "100%"
-            :font-weight "bold"
-            :text-align "center"}]
-
-          [:&.fill
+          [:&.nice
            {:background colors/accent
             :border-radius "1em"}]
 
-          [:&.start-loop
+          [:&.hot
+           :&.hot-and-humid
+           :&.humid
+           :&.cold
+           :&.dry
+           {:height "0.5em" 
+            :opacity 0.5
+            :background-size "contain"}]
+
+          [:&.hot-and-humid
+           {:background-image "url(/images/hot-and-humid.svg?1244)"}]
+
+          [:&.hot
+           {:background-image "url(/images/hot.svg?124)"}]
+
+          [:&.cold
+           {:background-image "url(/images/cold.svg?124)"}]
+
+          [:&.humid
+           {:background-image "url(/images/humid.svg?124)"}]
+
+          [:&.dry
+           {:background-image "url(/images/dry.svg?124)"}]
+
+          [:&.start
            {:border-top-left-radius 0
             :border-bottom-left-radius 0}]
 
-          [:&.end-loop
+          [:&.end
            {:border-top-right-radius 0
             :border-bottom-right-radius 0}]]]
 

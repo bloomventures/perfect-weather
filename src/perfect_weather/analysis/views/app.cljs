@@ -186,17 +186,17 @@
           [:tr
            [:td "-> Combine Days w/ Median"]
            [:td [graph-view (->> (place :data)
-                                 rate/years->median-nice-days)]]]
+                                 (rate/years->median-factor-days rate/nice?))]]]
           [:tr
            [:td "-> Median Filter"]
            [:td [graph-view (->> (place :data)
-                                 rate/years->median-nice-days
+                                 (rate/years->median-factor-days rate/nice?)
                                  (filters/median-filter 7))]]]
 
           [:tr
            [:td "-> Threshold " rate/hour-threshold]
            [:td [bar-view (->> (place :data)
-                               rate/years->median-nice-days
+                               (rate/years->median-factor-days rate/nice?)
                                (filters/median-filter 7)
                                (map (fn [day]
                                       (<= (/ rate/hour-threshold rate/hour-count) day))))]]]
@@ -204,22 +204,38 @@
           [:tr
            [:td "-> Filter Streaks"]
            [:td [bar-view (->> (place :data)
-                               rate/years->median-nice-days
+                               (rate/years->median-factor-days rate/nice?)
                                (filters/median-filter 7)
                                (map (fn [day]
                                       (<= (/ rate/hour-threshold rate/hour-count) day)))
-                               rate/combined-filter)]]]]
+                               (rate/combined-filter rate/nice?))]]]]
+
+         [:tbody
+          (for [[label f] [["hot" rate/hot?]
+                           ["cold" rate/cold?]
+                           ["humid" rate/humid?]
+                           ["dry" rate/dry?]
+                           ["rainy" rate/rainy?]]]
+            ^{:key label}
+            [:tr
+             [:td label]
+             [:td [bar-view (->> (place :data)
+                                 (rate/years->median-factor-days f)
+                                 (filters/median-filter 7)
+                                 (map (fn [day]
+                                        (<= (/ rate/hour-threshold rate/hour-count) day)))
+                                 (rate/combined-filter f))]]])]
          #_[:tbody
             [:tr
              [:td "Summary"]
              [:td (summary/text (->> (place :data)
                                      (map (fn [hours]
                                             (rate/day-result? rate/nice? hours)))
-                                     (rate/combined-filter)))]]
+                                     (rate/combined-filter rate/nice?)))]]
             [:tr
              [:td "Nice Days"]
              [:td (summary/days-count (->> (place :data)
                                            (map (fn [hours]
                                                   (rate/day-result? rate/nice? hours)))
-                                           (rate/combined-filter)))]]]]]))]) 
+                                           (rate/combined-filter rate/nice?)))]]]]]))]) 
 

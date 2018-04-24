@@ -17,22 +17,6 @@
         inside?'
         (recur others [x1 y1] inside?')))))
 
-(defn hot? [d]
-  (< 32 (d :temperature)))
-
-(defn cold? [d]
-  (< (d :temperature) 17))
-
-(defn humid? [d]
-  (< 0.75 (d :humidity)))
-
-(defn dry? [d]
-  (< (d :humidity) 0.20))
-
-(defn perfect? [d]
-  (and 
-    (< 20 (d :temperature) 25) 
-    (< 0.35 (d :humidity) 0.55)))
 (defn fast-within-polygon?
   [[x y] points]
   (when (and x y)
@@ -70,51 +54,80 @@
 (defn rainy? [d]
   (= true (d :precipitation?)))
 
+; factors
+
 (defn nice? [d]
   (and 
     (thermally-comfortable? d)
     (not (rainy? d))))
 
-(defn issue [d]
-  (->> [(when (hot? d) :hot)
-        (when (cold? d) :cold)
-        (when (humid? d) :humid)
-        (when (dry? d) :dry)
-        (when (rainy? d) :rainy)
-        (when (nice? d)) :nice]
-    (filter nil?)
-    set))
+(defn hot? [d]
+  (and 
+    (d :temperature)
+    (< 28 (d :temperature))
+    (not (nice? d))))
+
+(defn cold? [d]
+  (and 
+    (d :temperature)
+    (< (d :temperature) 16)
+    (not (nice? d))))
+
+(defn humid? [d]
+  (and 
+    (d :humidity)
+    (< 0.60 (d :humidity))
+    (not (nice? d))))
+
+(defn hot-and-humid? [d]
+  (and
+    (d :humidity)
+    (d :temperature)
+    (hot? d)
+    (humid? d)))
+
+(defn dry? [d]
+  (and 
+    (d :humidity)
+    (< (d :humidity) 0.30)
+    (not (nice? d))))
+
+; other...
 
 (def hour-start 8)
 (def hour-end 20)
 (def hour-count (- hour-end hour-start))
 (def hour-threshold 6)
 
-(defn day-nice-hours-count [data]
+(defn day-factor-hours-count [f data]
   (->> data
        (drop hour-start)
        (take hour-count)
-       (map nice?)
+       (map f)
        (filter true?)
        count))
 
-(defn combined-filter [coll]
-  (->> coll
-       ; bridge 10-day false gaps
-       (filters/streak-filter false? 10)
-       ; only keep 21-day true streaks
-       (filters/streak-filter true? 21)))
+(defn combined-filter [f coll]
+  (if (= f nice?) 
+    (->> coll
+         ; bridge 10-day false gaps
+         (filters/streak-filter false? 10)
+         ; only keep 21-day true streaks
+         (filters/streak-filter true? 21))
+    (->> coll
+         (filters/streak-filter false? 21)
+         (filters/streak-filter true? 7))))
 
-(defn years->median-nice-days 
+(defn years->median-factor-days 
   "Given multiple years of hourly data points, returns a single year of median-nice-hour-% (within the relevant hour band)"
-  [data]
+  [f data]
   (->> data
        (partition 365)
        (apply interleave)
        (partition (/ (count data) 365))
        (map (fn [days]
               (->> days
-                   (map day-nice-hours-count)
+                   (map (partial day-factor-hours-count f))
                    ((fn [day-results]
                       (->> day-results
                            sort
@@ -122,13 +135,15 @@
                            ((fn [c]
                               (/ c hour-count)))))))))))
 
-(defn nice-days 
+(defn factor-days 
   "Expects multiple years of data;
    returns single year of boolean nice/not-nice"
-  [data]
+  [f data]
   (->> data
-       years->median-nice-days
+       (years->median-factor-days f)
        (filters/median-filter 7)
        (map (fn [day]
               (<= (/ hour-threshold hour-count) day)))
-       combined-filter))
+       (combined-filter f)))
+
+

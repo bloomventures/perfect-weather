@@ -34,7 +34,8 @@
      [:div.img [:img {:src "/images/sun.svg"}]]
      @message]))
 
-(defn calendar-view [ranges]
+(defn calendar-view
+  [ranges]
   [:div.calendar.main 
    (into
      [:div.columns.background]
@@ -46,31 +47,12 @@
        [[:div.range.loading [loading-message-view]]]
 
        (seq ranges)
-       (let [loop? (and 
-                     (= 0 (-> ranges first :range first))
-                     (= 364 (-> ranges last :range last)))]
-         (for [[start end text] 
-               (->> (concat [{:text nil :range [0 0]}] 
-                            ranges 
-                            [{:text nil :range [365 365]}])
-                    (partition 2 1)
-                    (mapcat (fn [[{[start end] :range text :text} {[next-start _] :range}]]
-                              [[start end text]
-                               [end next-start nil]]))
-                    rest
-                    butlast)]
-           [:div.range {:class [(when (and loop? (= start 0))
-                                  "start-loop")
-                                (when (and loop? (= end 364))
-                                  "end-loop")
-                                (when text "fill")]
-                        :title text
-                        :style {:width (str (* 100 (/ (- end start) 364)) "%")}}]))
-
-       :else
-       [[:div.range.never 
-         {:title "It's never nice"}
-         "☹ Never Nice"]]))
+       (for [[k start end text] ranges]
+         [:div.range {:class [(when (= start 0) "start")
+                              (when (= end 365) "end")
+                              (name k)]
+                      :title (str (name k) " - " text)
+                      :style {:width (str (* 100 (/ (- end start) 365)) "%")}}])))
    (into 
      [:div.columns.months]
      (for [month months-abbr]
