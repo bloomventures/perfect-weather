@@ -32,9 +32,10 @@
   (fn [{db :db} _]
     (let [title (case (db :page)
                   :faq "Best weather in... (FAQ)"
-                  :index (if-not (string/blank? (db :query))
-                           (str "Best weather in " (db :query))
-                           "Best weather in..."))]
+                  ; default
+                  (if-not (string/blank? (db :query))
+                    (str "Best weather in " (db :query))
+                    "Best weather in..."))]
       {:title title})))
 
 (reg-event-fx
@@ -89,7 +90,7 @@
   (fn [{db :db} _]
     (when (empty? (db :results))
       {:ajax {:method :get
-              :uri "/api/random/3"
+              :uri "/api/random/140"
               :on-success (fn [results]
                             (doseq [result results]
                               (dispatch [:-store-result! result])))}})))

@@ -144,6 +144,10 @@
      "FAQ"]]
 
    [:div
+    [:a {:href (routes/map-path)}
+     "Map"]]
+
+   [:div
     "Built by " 
     [:a {:href "https://bloomventures.io/"
          :rel "noopener"

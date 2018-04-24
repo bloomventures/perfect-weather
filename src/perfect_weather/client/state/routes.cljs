@@ -11,6 +11,10 @@
 (router/defroute faq-path "/faq" []
   (dispatch [:route-page! :faq]))
 
+(router/defroute map-path "/map" []
+  (dispatch [:route-page! :map])
+  (dispatch [:fetch-random!]))
+
 (defn place->slug [{:keys [city country]}]
   (-> (str city "--" country)
       (string/replace #" " "-")
