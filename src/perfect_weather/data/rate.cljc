@@ -116,7 +116,7 @@
          (filters/streak-filter true? 21))
     (->> coll
          (filters/streak-filter false? 21)
-         (filters/streak-filter true? 7))))
+         (filters/streak-filter true? 21))))
 
 (defn years->median-factor-days 
   "Given multiple years of hourly data points, returns a single year of median-nice-hour-% (within the relevant hour band)"
