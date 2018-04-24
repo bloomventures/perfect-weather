@@ -33,6 +33,16 @@
   (and 
     (< 20 (d :temperature) 25) 
     (< 0.35 (d :humidity) 0.55)))
+(defn fast-within-polygon?
+  [[x y] points]
+  (when (and x y)
+    (let [max-x (->> points (map first) (apply max))
+          min-x (->> points (map first) (apply min))]
+      (when (<= min-x x max-x)
+        (let [max-y (->> points (map second) (apply max))
+              min-y (->> points (map second) (apply min))]
+          (when (<= min-y y max-y)
+            (within-polygon? [x y] points)))))))
 
 (defn thermally-comfortable? 
   "Polygon:
@@ -51,22 +61,11 @@
     https://en.wikipedia.org/wiki/Humidex
     https://en.wikipedia.org/wiki/Heat_index"
   [d]
-  (let [t (d :temperature)
-        h (d :humidity)
-        pts [[16 0.80]
-             [14 0.30]
-             [32 0.20]
-             [28 0.60]]
-        max-t (->> pts (map first) (apply max))
-        min-t (->> pts (map first) (apply min))
-        max-h (->> pts (map second) (apply max))
-        min-h (->> pts (map second) (apply min))]
-    (and
-      t
-      h
-      (<= min-t t max-t)
-      (<= min-h h max-h)
-      (within-polygon? [t h] pts))))
+  (fast-within-polygon? [(d :temperature) (d :humidity)]
+                        [[16 0.80]
+                         [14 0.30]
+                         [32 0.20]
+                         [28 0.60]]))
 
 (defn rainy? [d]
   (= true (d :precipitation?)))
