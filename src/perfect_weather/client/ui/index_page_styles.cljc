@@ -214,7 +214,10 @@
              :color colors/text-light
              :display "inline-block"
              :pointer-events "none"
-             :white-space "nowrap"}
+             :white-space "nowrap"
+             :width "100%"
+             :overflow "hidden"
+             :text-overflow "clip"}
             (tiny-text)]
 
            ["&:nth-child(odd)"
@@ -239,7 +242,8 @@
              {:background [[colors/text-normal "!important"]]}]
 
             [:>.label
-             {:color [[colors/text-normal "!important"]]}]]
+             {:color [[colors/text-normal "!important"]]
+              :overflow "visible"}]]
 
            [:&.nice
 
