@@ -65,6 +65,8 @@
     (when data
       {:city city
        :country country
+       :lat lat 
+       :lon lon 
        :place-id place-id
        :ranges (calc-ranges data)})))
 
