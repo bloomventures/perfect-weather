@@ -180,6 +180,12 @@
 
          [:>.range
 
+          [:&.error
+           {:color colors/error
+            :width "100%"
+            :font-weight "bold"
+            :text-align "center"}]
+
           [:&.loading
            {:color colors/accent
             :width "100%"

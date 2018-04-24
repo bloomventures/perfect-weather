@@ -96,12 +96,14 @@
 
 (reg-event-fx
   :-fetch-result!
-  (fn [_ [_ place]]
+  (fn [_ [_ {:keys [city coutnry] :as place}]]
     {:ajax {:method :get
             :uri "/api/search"
             :params place 
             :on-success (fn [result]
-                          (dispatch [:-store-result! result]))}}))
+                          (dispatch [:-store-result! result]))
+            :on-error (fn [_]
+                        (dispatch [:-store-result-error! place]))}}))
 
 (reg-event-fx
   :-store-result!
@@ -112,3 +114,17 @@
                                                       (= :temp (r :place-id))
                                                       (= (result :place-id) (r :place-id)))) %)))
              (update :results conj result))}))
+
+(reg-event-fx
+  :-store-result-error!
+  (fn [{db :db} [_ {:keys [city country] :as place}]]
+    {:db (-> db
+             ; update the temporary placeholder for the place 
+             (update :results (fn [results]
+                                (->> results
+                                     (map (fn [r]
+                                            (if (and 
+                                                  (= country (r :country)) 
+                                                  (= city (r :city)))
+                                              (assoc r :error? true)
+                                              r)))))))}))

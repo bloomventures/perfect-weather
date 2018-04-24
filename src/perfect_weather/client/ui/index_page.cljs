@@ -35,7 +35,7 @@
      @message]))
 
 (defn calendar-view
-  [ranges]
+  [{:keys [ranges error?]}]
   [:div.calendar.main 
    (into
      [:div.columns.background]
@@ -43,6 +43,9 @@
    (into 
      [:div.ranges]
      (cond
+       error?
+       [[:div.range.error "☹ Uh oh, something went wrong..."]]
+
        (nil? ranges)
        [[:div.range.loading [loading-message-view]]]
 
@@ -51,11 +54,11 @@
          [:div.range.result
           {:class [(when (= start 0) "start")
                    (when (= end 365) "end")
-                   (name k)]
+                   (when k (name k))]
            :style {:width (str (* 100 (/ (- end start) 365)) "%")}}
           [:div.bar]
           [:div.label 
-           (name k)]])))
+           (when k (name k))]])))
    (into 
      [:div.columns.months]
      (for [month months-abbr]
@@ -70,7 +73,7 @@
      (result :city)] 
      [:div.country 
       (result :country)]]]
-   [calendar-view (result :ranges)]])
+   [calendar-view result]])
 
 (defn results-view []
   [:div.results
