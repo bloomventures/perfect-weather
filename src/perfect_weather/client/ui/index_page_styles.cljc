@@ -3,20 +3,29 @@
     [perfect-weather.client.ui.colors :as colors]
     [garden.stylesheet :refer [at-media]]))
 
-(def mobile {:max-width "750px"})
+(def mobile {:max-width "760px"})
+
+(defn tiny-text []
+  {:text-transform "uppercase"
+   :font-size "0.65rem"
+   :line-height "1rem"
+   :letter-spacing "0.1rem"})
+
+(defn small-text []
+  {:font-size "0.85rem"
+   :text-transform "uppercase"
+   :letter-spacing "0.1em"})
 
 (def row 
   [:&
    {:display "flex"
     :justify-content "flex-start"
     :flex-wrap "wrap"
-    :box-sizing "border-box"
-    :max-width "100vw"}
+    :box-sizing "border-box"}
 
    [:>.legend
     {:width "10rem"
      :flex-shrink 0
-     :flex-grow 1
      :box-sizing "border-box"}]
 
    [:>.main
@@ -25,7 +34,7 @@
 
     (at-media mobile
       [:&
-       {:min-width "100vw"}])
+       {:min-width "100%"}])
 
     [:>.columns
      {:display "flex"
@@ -54,11 +63,12 @@
     :min-height "100vh"
     :flex-direction "column"
     :justify-content "center"
-    :align-items "center"}
+    :align-items "center"
+    :width "100%"}
 
    [:>form
     {:font-size "1.5rem"
-     :max-width "100vw"
+     :color colors/text-normal
      :text-align "center"
      :line-height "1.5em"
      :margin "1rem 0 2rem"}
@@ -69,6 +79,7 @@
 
      [:>input
       {:font-size "1.5rem"
+       :color colors/text-normal
        :width "18rem"
        :padding "0.25rem"
        :border [["1px" "solid" colors/grid-border]]
@@ -111,9 +122,11 @@
         [:>.known]]]]]]
 
    [:>.results
-    {:width "100%"}
+    {:width "100%"
+     :max-width "50em"}
 
-    (let [height "4rem"]
+    (let [height "4rem"
+          bar-height "1rem"]
       [:>.result
        row
 
@@ -122,34 +135,37 @@
           {:margin-bottom "3rem"}])
 
        [:>.legend
-        {:position "relative"
-         :background "white"}
+        {:background "white"
+         :display "flex"
+         :flex-direction "column"
+         :justify-content "center"
+         :height height}
 
         [:>.label
-         {:position "absolute"
-          :right 0
-          :height height
-          :line-height height
-          :text-transform "uppercase"
-          :padding "0 0.25rem"
+         {:padding "0 0.25rem"
           :box-sizing "border-box"
-          :font-size "0.85rem"
-          :letter-spacing "0.1em"
           :text-align "right"
           :white-space "nowrap"
           :font-weight "bold"
           :color colors/accent}
-         
+
+         [:>.city
+          (small-text)
+          {:height bar-height
+           :line-height bar-height}
+
+          [:&:first-letter
+           {:font-size "1.15em"}]]
+
+         [:>.country
+          (tiny-text)]
+
          (at-media mobile
            [:&
-            {:position "static"
-             :height "3rem"
-             :line-height "3rem"
+            {:height "2rem"
+             :line-height "2rem"
              :margin-left "0.5rem"
-             :text-align "left"}])]
-
-        [:&:first-letter
-         {:font-size "1.15em"}]]
+             :text-align "left"}])]]
 
        [:>.calendar
 
@@ -163,7 +179,6 @@
           :align-items "center"}
 
          [:>.range
-          {:height "1em"}
 
           [:&.loading
            {:color colors/accent
@@ -186,41 +201,72 @@
                :margin-right "0.25em"
                :animation [["spin" "8s" "infinite" "linear"]]}]]]]
 
-          [:&.nice
-           {:background colors/accent
-            :border-radius "1em"}]
+          [:&.result
 
-          [:&.hot
-           :&.hot-and-humid
-           :&.humid
-           :&.cold
-           :&.dry
-           {:height "0.5em" 
-            :opacity 0.5
-            :background-size "contain"}]
+           [:>.label
+            {:margin-left "0.2em"
+             :color colors/text-light
+             :display "inline-block"
+             :pointer-events "none"}
+            (tiny-text)]
 
-          [:&.hot-and-humid
-           {:background-image "url(/images/hot-and-humid.svg?1244)"}]
+           ["&:nth-child(odd)"
 
-          [:&.hot
-           {:background-image "url(/images/hot.svg?124)"}]
+            [:>.bar
+             {:background "#999"}]
 
-          [:&.cold
-           {:background-image "url(/images/cold.svg?124)"}]
+            [:>.label
+             {:color "#999"}]]
 
-          [:&.humid
-           {:background-image "url(/images/humid.svg?124)"}]
+           ["&:nth-child(even)"
 
-          [:&.dry
-           {:background-image "url(/images/dry.svg?124)"}]
+            [:>.bar
+             {:background "#bbb"}]
 
-          [:&.start
-           {:border-top-left-radius 0
-            :border-bottom-left-radius 0}]
+            [:>.label
+             {:color "#bbb"}]]
 
-          [:&.end
-           {:border-top-right-radius 0
-            :border-bottom-right-radius 0}]]]
+           [:&:hover 
+
+            [:>.bar
+             {:background [[colors/text-normal "!important"]]}]
+
+            [:>.label
+             {:color [[colors/text-normal "!important"]]}]]
+
+           [:&.nice
+
+            [:>.bar
+             {:background colors/accent 
+              :width "100%"
+              :height bar-height
+              :border-radius bar-height}]
+
+            [:>.label 
+             {:color colors/accent}]]
+
+           [:&.hot
+            :&.hot-and-humid
+            :&.humid
+            :&.cold
+            :&.dry
+
+            [:>.bar
+             {:height "0.2em" ; bar-height * 0.2
+              :margin "0.4em 0" ; bar-height * 0.2 * 2
+              :border-radius "0.125em"}]]
+
+           [:&.start
+
+            [:>.bar
+             {:border-top-left-radius 0
+              :border-bottom-left-radius 0}]]
+
+           [:&.end
+
+            [:>.bar
+             {:border-top-right-radius 0
+              :border-bottom-right-radius 0}]]]]]
 
         (let [height "2rem"]
           [:>.columns.months
@@ -231,14 +277,12 @@
               {:display "flex"}])
 
            [:>.column
-            
+
             [:>.label
              {:height height
               :line-height height
-              :text-transform "uppercase"
-              :font-size "0.7em"
-              :letter-spacing "0.1em"
               :text-align "center"}
+             (tiny-text)
 
              (at-media {:max-width "400px"}
                [:&
@@ -248,7 +292,7 @@
                 [:&:first-letter
                  {:visibility "visible"
                   :font-size "0.8rem"}]])]]])]])
-    
+
     [:>.result:last-child>.calendar>.months
      {:display "flex"}]]
 
@@ -261,7 +305,6 @@
      :flex-wrap "wrap"
      :box-sizing "border-box"
      :width "100%"
-     :max-width "100vw"
      :padding "0.25rem"}
 
     [:>div

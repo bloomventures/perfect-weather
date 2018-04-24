@@ -3,4 +3,5 @@
 (def accent "#4cafef")
 (def grid-background "#f5f5f5")
 (def grid-border "#ddd")
+(def text-normal "#111")
 (def text-light "#666")

@@ -48,11 +48,14 @@
 
        (seq ranges)
        (for [[k start end text] ranges]
-         [:div.range {:class [(when (= start 0) "start")
-                              (when (= end 365) "end")
-                              (name k)]
-                      :title (str (name k) " - " text)
-                      :style {:width (str (* 100 (/ (- end start) 365)) "%")}}])))
+         [:div.range.result
+          {:class [(when (= start 0) "start")
+                   (when (= end 365) "end")
+                   (name k)]
+           :style {:width (str (* 100 (/ (- end start) 365)) "%")}}
+          [:div.bar]
+          [:div.label 
+           (name k)]])))
    (into 
      [:div.columns.months]
      (for [month months-abbr]
@@ -63,7 +66,10 @@
   [:div.result.row
    [:div.legend
     [:div.label
-     (result :city) ", " (result :country)]]
+     [:div.city
+     (result :city)] 
+     [:div.country 
+      (result :country)]]]
    [calendar-view (result :ranges)]])
 
 (defn results-view []
