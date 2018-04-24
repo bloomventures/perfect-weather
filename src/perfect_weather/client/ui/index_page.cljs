@@ -101,7 +101,7 @@
                        [:div.name
                         (str (result :city) ", " (result :country))]
                        (when (result :known?) 
-                         [:div.known "★"])])}] 
+                         [:div.known "⚡"])])}] 
    "?"])
 
 (defn footer-view []
