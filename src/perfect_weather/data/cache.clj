@@ -26,6 +26,12 @@
   [cache-id query-id]
   (.exists (io/file (cache-path cache-id query-id))))
 
+(defn cache-list-top
+  "Lists just the top-level for a given cache"
+  [cache-id]
+  (->> (io/file (cache-base-path cache-id))
+       (.listFiles)))
+
 (defn cache-list 
   [cache-id]
   (->> (io/file (cache-base-path cache-id))

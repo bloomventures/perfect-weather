@@ -57,13 +57,13 @@
               [(r :factor) (r :start) (r :end) (summary/range->text [(r :start) (r :end)])]))))
 
 (defn compute [{:keys [lat lon city country place-id]}]
-  (let [equivalent-place (or (places/closest-to {:lat lat :lon lon}) 
-                             {:lat lat :lon lon})
-        data (data/city-day-data {:lat (equivalent-place :lat) 
-                                  :lon (equivalent-place :lon)})]
+  (let [equivalent-coords (or (places/equivalent-coords {:lat lat :lon lon}) 
+                              {:lat lat :lon lon})
+        data (data/city-day-data {:lat (equivalent-coords :lat) 
+                                  :lon (equivalent-coords :lon)})]
     {:city city
      :country country
-     :place-id (or place-id (equivalent-place :place-id))
+     :place-id place-id
      :ranges (calc-ranges data)}))
 
 (defn compute-by-place-id [place-id]
@@ -73,5 +73,3 @@
               :country (place :country)
               :city (place :city)
               :place-id place-id})))
-
-(defn compute-by-place-id-cached [])

@@ -31,13 +31,20 @@
           a (+ (* (Math/sin (/ dlat 2)) (Math/sin (/ dlat 2))) (* (Math/sin (/ dlon 2)) (Math/sin (/ dlon 2)) (Math/cos lat1) (Math/cos lat2)))]
       (* R 2 (Math/asin (Math/sqrt a))))))
 
-(defn closest-to 
-  "Returns closest place that is within threshold"
+(defn known-lat-lons []
+  (->> (cache/cache-list-top :darksky)
+       (map (fn [f]
+              (let [[_ lat lon] (re-matches #"(.*) (.*)" (.getName f))]
+                {:lat (Float/parseFloat lat)
+                 :lon (Float/parseFloat lon)})))))
+
+(defn equivalent-coords 
+  "Returns closest {:lat _ :lon _} for which data is known (within a threshold)"
   [{:keys [lat lon] :as needle}]
   (let [threshold 100]
-    (->> (all)
-         (map (fn [{:keys [lat lon] :as city}]
-                [city (distance city needle)]))
+    (->> (known-lat-lons)
+         (map (fn [{:keys [lat lon] :as coords}]
+                [coords (distance coords needle)]))
          (remove (fn [[_ dist]]
                    (> dist threshold)))
          (sort-by (fn [[_ dist]]
