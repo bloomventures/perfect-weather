@@ -24,7 +24,7 @@
     :box-sizing "border-box"}
 
    [:>.legend
-    {:width "10rem"
+    {:width "11rem"
      :flex-shrink 0
      :box-sizing "border-box"}]
 
