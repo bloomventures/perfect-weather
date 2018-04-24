@@ -257,6 +257,10 @@
               :margin "0.4em 0" ; bar-height * 0.2 * 2
               :border-radius "0.125em"}]]
 
+           [:&.null
+            [:>.label
+             {:display "none"}]]
+
            [:&.start
 
             [:>.bar

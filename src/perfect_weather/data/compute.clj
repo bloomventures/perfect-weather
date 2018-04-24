@@ -13,7 +13,8 @@
    [:hot rate/hot?]
    [:cold rate/cold?]
    [:humid rate/humid?]
-   [:dry rate/dry?]])
+   [:dry rate/dry?]
+   [:null any?]])
 
 (defn calc-ranges 
   [data]
