@@ -87,7 +87,7 @@
            query)
          deref
          (map (fn [place]
-                (if (in-cache? :places (place :place-id))
+                (if (in-cache? :places [(place :place-id)])
                   (assoc place :known? true)
                   place))))))
 
