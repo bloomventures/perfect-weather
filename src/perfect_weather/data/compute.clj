@@ -46,6 +46,13 @@
                {:count 0
                 :ranges []})
        :ranges
+       ; due to precedence, some ranges might have become clippedv
+       ; and fall below the relevant length threshold
+       ; remove those ranges (by marking as :null)
+       (map (fn [r]
+              (if (< (- (r :end) (r :start)) 21)
+                (assoc r :factor :null)
+                r)))
        (map (fn [r]
               [(r :factor) (r :start) (r :end) (summary/range->text [(r :start) (r :end)])]))))
 
