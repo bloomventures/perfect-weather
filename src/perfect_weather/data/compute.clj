@@ -56,7 +56,7 @@
        (map (fn [r]
               [(r :factor) (r :start) (r :end) (summary/range->text [(r :start) (r :end)])]))))
 
-(defn compute [{:keys [lat lon city country place-id]}]
+(defn by-lat-lon [{:keys [lat lon city country place-id]}]
   (let [equivalent-coords (or (places/equivalent-coords {:lat lat :lon lon}) 
                               {:lat lat :lon lon})
         data (data/city-day-data {:lat (equivalent-coords :lat) 
@@ -66,10 +66,16 @@
      :place-id place-id
      :ranges (calc-ranges data)}))
 
-(defn compute-by-place-id [place-id]
+(defn by-place-id [place-id]
   (let [place @(google-maps/place place-id)]
-    (compute {:lat (place :lat)
-              :lon (place :lon)
-              :country (place :country)
-              :city (place :city)
-              :place-id place-id})))
+    (by-lat-lon {:lat (place :lat)
+                 :lon (place :lon)
+                 :country (place :country)
+                 :city (place :city)
+                 :place-id place-id})))
+
+(defn by-autocomplete [query]
+  (->> (google-maps/autocomplete query)
+       first
+       :place-id
+       by-place-id))
