@@ -1,5 +1,6 @@
 (ns perfect-weather.data.compute
   (:require
+    [perfect-weather.data.cache :refer [with-cache]]
     [perfect-weather.data.core :as data]
     [perfect-weather.data.summary :as summary]
     [perfect-weather.data.google-maps :as google-maps]
@@ -56,15 +57,26 @@
        (map (fn [r]
               [(r :factor) (r :start) (r :end) (summary/range->text [(r :start) (r :end)])]))))
 
-(defn by-lat-lon [{:keys [lat lon city country place-id]}]
+(defn by-lat-lon-raw [{:keys [lat lon city country place-id]}]
   (let [equivalent-coords (or (places/equivalent-coords {:lat lat :lon lon}) 
                               {:lat lat :lon lon})
         data (data/city-day-data {:lat (equivalent-coords :lat) 
                                   :lon (equivalent-coords :lon)})]
-    {:city city
-     :country country
-     :place-id place-id
-     :ranges (calc-ranges data)}))
+    (when data
+      {:city city
+       :country country
+       :place-id place-id
+       :ranges (calc-ranges data)})))
+
+(defn by-lat-lon [{:keys [lat lon city country place-id] :as args}]
+  (->>
+    (with-cache
+      :results
+      [place-id]
+      (fn [& args]
+        (future (apply by-lat-lon-raw args)))
+      args)
+    deref))
 
 (defn by-place-id [place-id]
   (let [place @(google-maps/place place-id)]
