@@ -18,7 +18,9 @@
 
 (defn- cache-path 
   [cache-id query-id]
-  (str (cache-base-path cache-id) "/" (sanitize query-id) ".edn"))
+  (str (cache-base-path cache-id) "/"
+       (string/join "/" (map sanitize query-id))
+       ".edn"))
 
 (defn in-cache? 
   [cache-id query-id]
@@ -29,6 +31,10 @@
   (->> (io/file (cache-base-path cache-id))
        file-seq 
        (filter #(.isFile %))))
+
+(defn- make-parent-dirs 
+  [path]
+  (.mkdirs (io/file (.getParent (io/file path)))))
 
 (defn with-cache 
   [cache-id query-id fetch-fn args]
@@ -43,8 +49,7 @@
         (if-let [result @(fetch-fn args)]
           (do
             (log "Successful.")
+            (make-parent-dirs (cache-path cache-id query-id))
             (spit (cache-path cache-id query-id) result)
             result)
           (log "Fetch failed."))))))
-
-

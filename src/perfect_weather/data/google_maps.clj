@@ -82,7 +82,7 @@
   (let [query (string/lower-case query)]
     (->> (with-cache 
            :autocomplete
-           query
+           [query]
            autocomplete-raw
            query)
          deref
@@ -94,6 +94,6 @@
 (defn place [place-id]
   (->> (with-cache 
          :places
-         place-id
+         [place-id]
          place-details
          place-id)))
