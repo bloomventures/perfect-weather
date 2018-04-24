@@ -51,7 +51,7 @@
        ; and fall below the relevant length threshold
        ; remove those ranges (by marking as :null)
        (map (fn [r]
-              (if (< (- (r :end) (r :start)) 21)
+              (if (< (- (r :end) (r :start)) 14)
                 (assoc r :factor :null)
                 r)))
        (map (fn [r]
