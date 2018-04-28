@@ -172,24 +172,24 @@
           [:tr
            [:td "-> Combine Days w/ Median"]
            [:td [graph-view (->> (place :data)
-                                 (rate/years->median-factor-days rate/nice?))]]]
+                                 (rate/years->factor-days rate/nice?))]]]
           [:tr
            [:td "-> Median Filter"]
            [:td [graph-view (->> (place :data)
-                                 (rate/years->median-factor-days rate/nice?)
+                                 (rate/years->factor-days rate/nice?)
                                  (filters/median-filter 7))]]]
 
           [:tr
            [:td "-> Threshold " rate/hour-threshold]
            [:td [bar-view (->> (place :data)
-                               (rate/years->median-factor-days rate/nice?)
+                               (rate/years->factor-days rate/nice?)
                                (filters/median-filter 7)
                                (map (partial rate/factor-day? rate/nice?)))]]]
 
           [:tr
            [:td "-> Filter Streaks"]
            [:td [bar-view (->> (place :data)
-                               (rate/years->median-factor-days rate/nice?)
+                               (rate/years->factor-days rate/nice?)
                                (filters/median-filter 7)
                                (map (partial rate/factor-day? rate/nice?))
                                (rate/combined-filter rate/nice?))]]]]

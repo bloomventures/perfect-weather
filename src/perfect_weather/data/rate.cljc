@@ -123,7 +123,7 @@
     (<= (/ hour-threshold hour-count) day)
     (<= (/ (- hour-count hour-threshold) hour-count) day)))
 
-(defn years->median-factor-days 
+(defn years->factor-days 
   "Given multiple years of hourly data points, returns a single year of median-nice-hour-% (within the relevant hour band)"
   [f data]
   (->> data
@@ -134,18 +134,24 @@
               (->> days
                    (map (partial day-factor-hours-count f))
                    ((fn [day-results]
-                      (->> day-results
-                           sort
-                           second
-                           ((fn [c]
-                              (/ c hour-count)))))))))))
+                      (min
+                        ; median
+                        (->> day-results
+                             sort
+                             second
+                             ((fn [c]
+                                (/ c hour-count))))
+                        ; avg
+                        (/ (apply + day-results)
+                           (count day-results)
+                           hour-count)))))))))
 
 (defn factor-days 
   "Expects multiple years of data;
    returns single year of boolean nice/not-nice"
   [f data]
   (->> data
-       (years->median-factor-days f)
+       (years->factor-days f)
        (filters/median-filter 7)
        (map (partial factor-day? f))
        (combined-filter f)))
