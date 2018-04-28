@@ -74,31 +74,17 @@
                                                               :background (row :value)}}])])]])))])))]))
 
 (defn bar-view [data]
-  "Expects a sequence of boolean values; handles multiple years (ie. more than 365 values)"
-  [:div 
+  "Expects a sequence of boolean values"
+  [:div {:style {:display "flex"}}
    (->> data
-        (partition 365)
         (map-indexed 
-          (fn [i year]
+          (fn [i day]
             ^{:key i}
-            [:div.year {:style {:display "flex"
-                                :position "relative"}}
-             (->> year
-                  (partition 30)
-                  (map-indexed 
-                    (fn [i month]
-                      ^{:key i}
-                      [:div.month 
-                       [:div {:style {:display "flex"}}
-                        (->> month
-                             (map-indexed (fn [i day]
-                                            ^{:key i}
-                                            [:div.day 
-                                             [:div.hour {:style {:width "2px"
-                                                                 :height "5px"
-                                                                 :background (if day
-                                                                               accent-color
-                                                                               "white")}}]])))]])))])))])
+            [:div.day {:style {:width "2px"
+                               :height "5px"
+                               :background (if day
+                                             accent-color
+                                             "white")}}])))])
 
 (defn app-view []
   [:div
