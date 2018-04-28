@@ -96,32 +96,38 @@
                     top
                     mid)))))))
 
-(defn convolve 
-  "From: 
-  https://stackoverflow.com/questions/3259825/trouble-with-lazy-convolution-fn-in-clojure"
-  [xs is]
-  (if (> (count xs) (count is))
-    (convolve is xs)
-    (let [is (concat (repeat (dec (count xs)) 0) is)]
-      (for [s (take-while not-empty (iterate rest is))]
-         (reduce + (map * (rseq xs) s))))))
+(defn weighted-moving-average
+  "Calculates a weighted moving average given a coll and weights
+   Weights should be odd, and add up to 1. Loops around for beginning / end values.
+  Effectively, a convolution."
+  [coll weights]
+  (let [window (count weights)
+        loopw (dec (/ window 2))
+        coll (concat (take-last loopw coll) 
+                     coll
+                     (take loopw coll))]
+    (->> coll
+         (partition window 1)
+         (map (fn [x]
+                (reduce + (map * x weights)))))))
+
 
 (defn gaussian-filter-numbers 
   "Given a collection of numbers, applies a gaussian filter / performs a weirstrauss transform 
   for the given standard deviation"
-  [std-dev coll]
-  (convolve coll [0.0545 0.2442 0.4026 0.2442 0.0545]))
+  [coll]
+  (weighted-moving-average coll [0.0545 0.2442 0.4026 0.2442 0.0545]))
 
-(defn median-filter 
-  "Given a collection of numbers, transforms each to be the median of the window around each
+(defn median-filter
+  "Given a collection of numbers, transforms each value to be the median of the values in the window around that value.
   
-  Window should be odd"
+  Window size should be odd. Loops around for beginning / end values."
   [window coll]
   (let [hw (int (/ window 2))]
     (->> 
-      (concat (repeat hw (first coll)) 
+      (concat (take-last hw coll) 
               coll 
-              (repeat hw (last coll)))
+              (take hw coll))
       (partition window 1)
       (map median))))
 
