@@ -118,6 +118,11 @@
          (filters/streak-filter false? 21)
          (filters/streak-filter true? 21))))
 
+(defn factor-day? [f day]
+  (if (= f nice?) 
+    (<= (/ hour-threshold hour-count) day)
+    (<= (/ (- hour-count hour-threshold) hour-count) day)))
+
 (defn years->median-factor-days 
   "Given multiple years of hourly data points, returns a single year of median-nice-hour-% (within the relevant hour band)"
   [f data]
@@ -142,8 +147,7 @@
   (->> data
        (years->median-factor-days f)
        (filters/median-filter 7)
-       (map (fn [day]
-              (<= (/ hour-threshold hour-count) day)))
+       (map (partial factor-day? f))
        (combined-filter f)))
 
 

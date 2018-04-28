@@ -198,16 +198,14 @@
            [:td [bar-view (->> (place :data)
                                (rate/years->median-factor-days rate/nice?)
                                (filters/median-filter 7)
-                               (map (fn [day]
-                                      (<= (/ rate/hour-threshold rate/hour-count) day))))]]]
+                               (map (partial rate/factor-day? rate/nice?)))]]]
 
           [:tr
            [:td "-> Filter Streaks"]
            [:td [bar-view (->> (place :data)
                                (rate/years->median-factor-days rate/nice?)
                                (filters/median-filter 7)
-                               (map (fn [day]
-                                      (<= (/ rate/hour-threshold rate/hour-count) day)))
+                               (map (partial rate/factor-day? rate/nice?))
                                (rate/combined-filter rate/nice?))]]]]
 
          [:tbody
@@ -219,12 +217,7 @@
             ^{:key label}
             [:tr
              [:td label]
-             [:td [bar-view (->> (place :data)
-                                 (rate/years->median-factor-days f)
-                                 (filters/median-filter 7)
-                                 (map (fn [day]
-                                        (<= (/ rate/hour-threshold rate/hour-count) day)))
-                                 (rate/combined-filter f))]]])]
+             [:td [bar-view (rate/factor-days f (place :data))]]])]
          #_[:tbody
             [:tr
              [:td "Summary"]
