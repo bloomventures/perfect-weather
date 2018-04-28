@@ -10,7 +10,6 @@
 (def factors
   ; the order of these determines their precedence in the final result
   [[:nice rate/nice?]
-   [:hot-and-humid rate/hot-and-humid?]
    [:hot rate/hot?]
    [:cold rate/cold?]
    [:humid rate/humid?]
