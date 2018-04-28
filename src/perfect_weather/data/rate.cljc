@@ -94,10 +94,10 @@
 
 ; other...
 
-(def hour-start 8)
-(def hour-end 20)
+(def hour-start 9)
+(def hour-end 18)
 (def hour-count (- hour-end hour-start))
-(def hour-threshold 6)
+(def hour-threshold 5)
 
 (defn day-factor-hours-count [f data]
   (->> data
@@ -110,8 +110,8 @@
 (defn combined-filter [f coll]
   (if (= f nice?) 
     (->> coll
-         ; bridge 14-day false gaps
-         (filters/streak-filter false? 14)
+         ; bridge 7-day false gaps
+         (filters/streak-filter false? 7)
          ; only keep 21-day true streaks
          (filters/streak-filter true? 21))
     (->> coll
