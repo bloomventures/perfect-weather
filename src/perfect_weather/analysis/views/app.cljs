@@ -106,7 +106,7 @@
      (for [place @(subscribe [:data])]
        ^{:key (place :city)}
        [:div
-        [:h2 (place :city)]
+        [:h2 (place :city) ", " (place :country)]
 
         [:table
 
