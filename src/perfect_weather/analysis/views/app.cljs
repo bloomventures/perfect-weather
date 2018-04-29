@@ -97,6 +97,15 @@
                                              accent-color
                                              "white")}}])))])
 
+(defn pow [a b]
+  (js/Math.pow a b))
+
+(defn s-curve
+  [n]
+  (fn [x]
+      (/ (pow x n)
+         (+ (pow x n) (pow (- 1 x) n)))))
+
 (defn app-view []
   [:div
    (doall
@@ -211,13 +220,17 @@
                                  (map (partial rate/factor-day? f))
                                  (rate/combined-filter f))]]]])
 
+         [:tbody
+
           [:tr
-           [:td "-> Filter Streaks"]
-           [:td [bar-view (->> (place :data)
-                               (rate/years->factor-days rate/nice?)
-                               (filters/median-filter 7)
-                               (map (partial rate/factor-day? rate/nice?))
-                               (rate/combined-filter rate/nice?))]]]]
+           [:td "Warm (smoothed)"]
+           [:td [graph-view (->> (place :data)
+                                 (rate/years->factor-days rate/warm?)
+                                 (filters/median-filter 7)
+                                 (filters/median-filter 7)
+                                 (filters/median-filter 7)
+                                 (filters/gaussian-filter-numbers)
+                                 (map (s-curve 2)))]]]]
 
          [:tbody
           (for [[label f] [["warm" rate/warm?]
@@ -232,6 +245,7 @@
             [:tr
              [:td label]
              [:td [bar-view (rate/factor-days f (place :data))]]])]
+
          #_[:tbody
             [:tr
              [:td "Summary"]
