@@ -13,15 +13,25 @@
 (defn graph-view 
   "Expects a sequence of 365 values between 0 and 1"
   [data]
-  [:div {:style {:height "20px"
-                 :display "flex"}} 
-   (->> data
-        (map-indexed (fn [i v]
-                       ^{:key i}
-                       [:div {:style {:width "2px"
-                                      :height (str (* v 20) "px")
-                                      :background accent-color
-                                      :margin-top (str (- 20 (* v 20)) "px")}}])))])
+  (let [center-align? false
+        factor (if center-align? 0.5 1)]
+    [:div {:style {:height "20px"
+                   :background "black"
+                   :display "flex"
+                   :position "relative"}} 
+     [:div {:style {:position "absolute"
+                    :top (str (* factor (- 20 (* (/ rate/hour-threshold rate/hour-count) 20))) "px")
+                    :z-index 10
+                    :width "100%"
+                    :height "1px"
+                    :background "white"}}]
+     (->> data
+          (map-indexed (fn [i v]
+                         ^{:key i}
+                         [:div {:style {:width "2px"
+                                        :height (str (* v 20) "px")
+                                        :background accent-color
+                                        :margin-top (str (* factor (- 20 (* v 20))) "px")}}])))]))
 
 (defn hourly-view [data {:keys [bars? clip?]}]
   (let [h 2
