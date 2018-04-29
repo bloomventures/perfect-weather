@@ -195,7 +195,10 @@
                                (rate/combined-filter rate/nice?))]]]]
 
          [:tbody
-          (for [[label f] [["hot" rate/hot?]
+          (for [[label f] [["warm" rate/warm?]
+                           ["cool" rate/cool?]
+                           ["nice" rate/nice?]
+                           ["hot" rate/hot?]
                            ["cold" rate/cold?]
                            ["humid" rate/humid?]
                            ["dry" rate/dry?]
