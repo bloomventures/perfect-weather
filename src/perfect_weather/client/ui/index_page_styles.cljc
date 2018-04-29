@@ -245,7 +245,7 @@
              {:color [[colors/text-normal "!important"]]
               :overflow "visible"}]]
 
-           [:&.nice
+           [:&.warm
 
             [:>.bar
              {:background colors/accent 
@@ -256,8 +256,18 @@
             [:>.label 
              {:color colors/accent}]]
 
+           [:&.cool
+
+            [:>.bar
+             {:background colors/accent-light
+              :width "100%"
+              :height bar-height
+              :border-radius bar-height}]
+
+            [:>.label 
+             {:color colors/accent}]]
+
            [:&.hot
-            :&.hot-and-humid
             :&.humid
             :&.cold
             :&.dry
@@ -272,12 +282,14 @@
              {:display "none"}]]
 
            [:&.start
+            :&.join-prev
 
             [:>.bar
              {:border-top-left-radius 0
               :border-bottom-left-radius 0}]]
 
            [:&.end
+            :&.join-next
 
             [:>.bar
              {:border-top-right-radius 0

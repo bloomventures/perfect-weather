@@ -50,10 +50,25 @@
        [[:div.range.loading [loading-message-view]]]
 
        (seq ranges)
-       (for [[k start end text] ranges]
+       (for [[[prev-k _ _ _] 
+              [k start end text] 
+              [next-k _ _ _]] (->> (concat [(first ranges)] ranges [(last ranges)])
+                                                 (partition 3 1))]
          [:div.range.result
           {:class [(when (= start 0) "start")
                    (when (= end 365) "end")
+                   (when (and 
+                           (or (= k :warm) 
+                               (= k :cool))
+                           (or (= next-k :warm)
+                               (= next-k :cool)))
+                     "join-next")
+                   (when (and 
+                           (or (= k :warm) 
+                               (= k :cool))
+                           (or (= prev-k :warm)
+                               (= prev-k :cool)))
+                     "join-prev")
                    (when k (name k))]
            :style {:width (str (* 100 (/ (- end start) 365)) "%")}}
           [:div.bar]

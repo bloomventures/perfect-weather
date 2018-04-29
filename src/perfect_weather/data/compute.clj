@@ -7,28 +7,20 @@
     [perfect-weather.data.places :as places]
     [perfect-weather.data.rate :as rate]))
 
-(def factors
-  ; the order of these determines their precedence in the final result
-  [[:nice rate/nice?]
-   [:hot rate/hot?]
-   [:cold rate/cold?]
-   [:humid rate/humid?]
-   [:dry rate/dry?]
-   [:null any?]])
 
 (defn calc-ranges 
   [data]
-  (->> factors 
+  (->> rate/factors 
        (map (fn [[k f]]
                  (->> (rate/factor-days f data)
                       (map (fn [bool]
                              (if bool k nil))))))
        (apply interleave)
-       (partition (count factors))
+       (partition (count rate/factors))
        (map set)
        ; [ #{nil :nice :humid} ... x365 ]
        (map (fn [day]
-              (->> factors
+              (->> rate/factors
                    (map (fn [[k f]]
                           (when (contains? day k) k)))
                    (some identity))))
@@ -50,7 +42,7 @@
        ; and fall below the relevant length threshold
        ; remove those ranges (by marking as :null)
        (map (fn [r]
-              (if (< (- (r :end) (r :start)) 14)
+              (if (< (- (r :end) (r :start)) 5)
                 (assoc r :factor :null)
                 r)))
        (map (fn [r]
