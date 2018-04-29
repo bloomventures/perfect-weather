@@ -34,6 +34,13 @@
      [:div.img [:img {:src "/images/sun.svg"}]]
      @message]))
 
+(defn month-labels-view []
+  (into 
+     [:div.columns.months]
+     (for [month months-abbr]
+       [:div.column 
+        [:div.label month]])))
+
 (defn calendar-view
   [{:keys [ranges error?]}]
   [:div.calendar.main 
@@ -74,11 +81,7 @@
           [:div.bar]
           [:div.label 
            (when k (name k))]])))
-   (into 
-     [:div.columns.months]
-     (for [month months-abbr]
-       [:div.column 
-        [:div.label month]]))])
+   [month-labels-view]])
 
 (defn result-view [result]
   [:div.result.row
@@ -90,12 +93,26 @@
       (result :country)]]]
    [calendar-view result]])
 
+(defn extra-month-labels-row []
+  [:div.row.labels
+   [:div.legend]
+   [:div.calendar.main
+    (into 
+      [:div.columns.months]
+      (for [month months-abbr]
+        [:div.column 
+         [:div.label month]]))]])
+
 (defn results-view []
-  [:div.results
-   (doall
-     (for [result @(subscribe [:results])]
-       ^{:key (result :place-id)}
-       [result-view result]))])
+  (let [results @(subscribe [:results])]
+    (when (seq results)
+      [:div.results {:class (when (<= 5 (count results)) "many")}
+       [extra-month-labels-row]  
+       (doall
+         (for [result results]
+           ^{:key (result :place-id)}
+           [result-view result]))
+       [extra-month-labels-row]])))
 
 (defn form-view []
   [:form {:on-submit (fn [e]

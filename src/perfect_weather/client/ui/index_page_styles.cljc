@@ -16,6 +16,27 @@
    :text-transform "uppercase"
    :letter-spacing "0.1em"})
 
+(defn months []
+  (let [height "2rem"]
+    [:&
+
+     [:>.column
+
+      [:>.label
+       {:height height
+        :line-height [[height "!important"]] 
+        :text-align "center"}
+       (tiny-text)
+
+       (at-media {:max-width "400px"}
+         [:&
+          {:visibility "hidden"
+           :font-size "0.000001px"}
+
+          [:&:first-letter
+           {:visibility "visible"
+            :font-size "0.8rem"}]])]]]))
+
 (def row 
   [:&
    {:display "flex"
@@ -124,6 +145,23 @@
    [:>.results
     {:width "100%"
      :max-width "50em"}
+
+    [:>.labels
+     row
+
+     (at-media mobile
+       [:&
+        {:display "none !important"}])
+
+     [:>.calendar
+      [:>.months
+       (months)]]]
+
+    [:>.labels:first-child
+     {:display "none"}]
+
+    [:&.many>.labels:first-child
+     {:display "flex"}]
 
     (let [height "4rem"
           bar-height "1rem"]
@@ -295,33 +333,14 @@
              {:border-top-right-radius 0
               :border-bottom-right-radius 0}]]]]]
 
-        (let [height "2rem"]
-          [:>.columns.months
-           {:display "none"}
+        [:>.columns.months
+         {:display "none"}
 
-           (at-media mobile
-             [:&
-              {:display "flex"}])
+         (at-media mobile
+           [:&
+            {:display "flex"}])
 
-           [:>.column
-
-            [:>.label
-             {:height height
-              :line-height height
-              :text-align "center"}
-             (tiny-text)
-
-             (at-media {:max-width "400px"}
-               [:&
-                {:visibility "hidden"
-                 :font-size "0.000001px"}
-
-                [:&:first-letter
-                 {:visibility "visible"
-                  :font-size "0.8rem"}]])]]])]])
-
-    [:>.result:last-child>.calendar>.months
-     {:display "flex"}]]
+         (months)]]])]
 
    [:>.gap
     {:flex-grow 1}]
