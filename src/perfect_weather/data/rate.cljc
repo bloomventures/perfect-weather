@@ -93,7 +93,6 @@
 (def hour-start 8)
 (def hour-end 20)
 (def hour-count (- hour-end hour-start))
-(def hour-threshold 7) ; not used anymore, except in docs
 
 (defn day-factor-hours-count [f data]
   (->> data
@@ -137,6 +136,9 @@
                  (= f f')))
        first
        last))
+
+; used in docs
+(def hour-threshold (int (* hour-count (threshold nice?))))
 
 (defn factor-day? [f day]
   (<= (threshold f) day))
