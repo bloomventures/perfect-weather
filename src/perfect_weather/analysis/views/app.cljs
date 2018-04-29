@@ -8,6 +8,7 @@
 
 (def missing-color "red")
 (def accent-color "#4cafef")
+(def accent-color-light "#96d0f7")
 
 (defn graph-view 
   "Expects a sequence of 365 values between 0 and 1"
@@ -161,8 +162,12 @@
                   (map (fn [day]
                          (map (fn [row]
                                 {:id (row :epoch)
-                                 :value (if (rate/nice? row)
+                                 :value (cond 
+                                          (rate/warm? row)
                                           accent-color
+                                          (rate/cool? row)
+                                          accent-color-light
+                                          :else
                                           "black")})
                               day))))
              {:bars? true
