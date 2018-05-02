@@ -1,7 +1,7 @@
 (ns perfect-weather.client.ui.index-page
   (:require
     [clojure.string :as string]
-    [re-frame.core :refer [dispatch subscribe]]
+    [re-frame.core :refer [dispatch dispatch-sync subscribe]]
     [reagent.core :as r]
     [perfect-weather.client.state.routes :as routes]
     [perfect-weather.data.months :refer [months months-abbr]]
@@ -122,7 +122,7 @@
     {:auto-focus? true
      :value (subscribe [:query])
      :on-change (fn [value]
-                  (dispatch [:update-query! value]))
+                  (dispatch-sync [:update-query! value]))
      :results @(subscribe [:autocomplete-results])
      :on-clear (fn []
                  (dispatch [:clear-autocomplete-results!]))
