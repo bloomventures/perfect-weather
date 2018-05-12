@@ -214,7 +214,9 @@
         [:>.ranges
          {:display "flex"
           :height height
-          :align-items "center"}
+          :align-items "center"
+          ; due to rounding, sum of ranges may get > 100%  
+          :overflow "hidden"}
 
          [:>.range
 
