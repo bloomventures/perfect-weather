@@ -42,8 +42,16 @@
                   :height (str size "px")})
      (into [:g]
            (for [[k start end text] ranges]
-             (let [stroke-width (if (= k :nice) stroke-width-nice 2)
-                   stroke-color (if (= k :nice) "#4cafef" "#ccc")
+             (let [stroke-width (case k
+                                 :warm stroke-width-nice
+                                 :cool stroke-width-nice
+                                 ; other
+                                 1)
+                   stroke-color (case k
+                                 :warm "#4cafef"
+                                 :cool "#96d0f7"
+                                 ; other
+                                 "#ccc")
                    start-degrees (* 360 (/ start 365))
                    end-degrees  (* 360 (/ end 365))]
                [:path {:fill "none"
@@ -63,18 +71,24 @@
                 (+ 50 (* 2.1 (+ 90 (merc-lat lat)))))
         lon-> (fn [lon]
                 (+ 15 (* 2.1 (+ 180 lon))))]
-    [:div.map 
-     [:div {:style {:position "relative"
-                    ; https://commons.wikimedia.org/wiki/File:Mercator_Projection.svg
+    [:div.map {:style {:position "relative"
+                       :width 800
+                       :height 591}}
+     [:div {:style {; https://commons.wikimedia.org/wiki/File:Mercator_Projection.svg
                     :background "url(/images/map.svg)"
                     :background-size "contain"
-                    :width 800
-                    :height 591}}
-      (for [result results]
-          ^{:key (result :place-id)}
-          [:div {:title (result :city)
-                 :style {:position "absolute"
-                         :bottom (lat-> (result :lat))
-                         :left (lon-> (result :lon))}}
-           [circle-graph-view {}
-            (:ranges result)]])]]))
+                    :position "absolute"
+                    :opacity 0.25
+                    :top 0
+                    :left 0
+                    :right 0
+                    :bottom 0
+                    }}]
+     (for [result results]
+       ^{:key (result :place-id)}
+       [:div {:title (result :city)
+              :style {:position "absolute"
+                      :bottom (lat-> (result :lat))
+                      :left (lon-> (result :lon))}}
+        [circle-graph-view {}
+         (:ranges result)]])]))
