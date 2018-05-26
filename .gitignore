@@ -6,5 +6,6 @@ checkouts
 .lein-repl-history
 .nrepl-port
 .lein-env
-profiles.clj
 /data
+/notes
+config.edn
