@@ -1,6 +1,6 @@
 (ns perfect-weather.data.compute
   (:require
-    [perfect-weather.data.cache :refer [with-cache]]
+    [perfect-weather.data.cache :as cache :refer [with-cache]]
     [perfect-weather.data.core :as data]
     [perfect-weather.data.summary :as summary]
     [perfect-weather.data.google-maps :as google-maps]
@@ -70,6 +70,12 @@
         (future (apply by-lat-lon-raw args)))
       args)
     deref))
+
+(defn n-random [n]
+  (->> (cache/cache-list :results)
+       shuffle
+       (take n)
+       (map (comp read-string slurp))))
 
 (defn by-place-id [place-id]
   (let [place @(google-maps/place place-id)]
