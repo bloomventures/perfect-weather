@@ -27,19 +27,19 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="-488.35213"
-     inkscape:cy="682.51459"
+     inkscape:zoom="1.979899"
+     inkscape:cx="562.96836"
+     inkscape:cy="872.09016"
      inkscape:document-units="mm"
-     inkscape:current-layer="svg8"
+     inkscape:current-layer="g6403"
      showgrid="false"
      showborder="false"
-     inkscape:window-width="3840"
-     inkscape:window-height="2049"
-     inkscape:window-x="0"
+     inkscape:window-width="3232"
+     inkscape:window-height="2036"
+     inkscape:window-x="188"
      inkscape:window-y="55"
-     inkscape:window-maximized="1"
-     showguides="false" />
+     inkscape:window-maximized="0"
+     showguides="true" />
   <defs
      id="defs2" />
   <metadata
@@ -54,16 +54,6 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <rect
-     inkscape:export-ydpi="140.14"
-     inkscape:export-xdpi="140.14"
-     y="-20.122028"
-     x="75.59523"
-     height="134.55951"
-     width="144.99973"
-     id="rect1160"
-     style="opacity:1;fill:#ffffff;fill-opacity:0.99402095;stroke:none;stroke-width:0.56977034;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-     inkscape:export-filename="/home/rafal/Code/personal/perfect-weather/resources/public/images/psychometric-graph.png" />
   <rect
      style="opacity:1;fill:#ffffff;fill-opacity:0.99402095;stroke:none;stroke-width:0.83155751;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
      id="rect6539"
@@ -124,7 +114,30 @@
   </g>
   <g
      id="g6403"
-     transform="translate(0,6.0164946)">
+     transform="translate(38.754081,6.0164946)">
+    <rect
+       style="opacity:1;vector-effect:none;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.94324338;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect1146"
+       width="154.74905"
+       height="128.423"
+       x="65.748299"
+       y="-19.984587" />
+    <g
+       transform="translate(-21.166667)"
+       id="g1422">
+      <path
+         sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+         inkscape:connector-curvature="0"
+         id="path1418"
+         style="fill:none;stroke:#e6e6e6;stroke-width:0.26458299px"
+         d="M 106.16497,-14.023997 V 91.97811 m 15.875,-106.002107 V 91.97811 m 5.29166,-106.002107 V 91.97811 M 132.6233,-14.023997 V 91.97811 m 5.29167,-106.002107 V 91.97811 m 5.29166,-106.002107 V 91.97811 M 148.4983,-14.023997 V 91.97811 m 5.29167,-106.002107 V 91.97811 m 5.29166,-106.002107 V 91.97811 M 164.3733,-14.023997 V 91.97811 m 5.29167,-106.002107 V 91.97811 m 5.29166,-106.002107 V 91.97811 M 180.2483,-14.023997 V 91.97811 m 5.29167,-106.002107 V 91.97811 m 5.29166,-106.002107 V 91.97811 M 196.1233,-14.023997 V 91.97811 m 5.29167,-106.002107 V 91.97811 m 5.29166,-106.002107 V 91.97811 M 211.9983,-14.023997 V 91.97811 m 5.29167,-106.002107 V 91.97811 m 5.29166,-106.002107 V 91.97811 M 106.16497,-14.023997 h 116.58544 m -116.58544,5.29166 h 116.58544 m -116.58544,5.29167 H 222.75041 M 106.16497,1.851003 H 222.75041 M 106.16497,7.1426633 H 222.75041 M 106.16497,12.434333 h 116.58544 m -116.58544,5.29167 h 116.58544 m -116.58544,5.29166 h 116.58544 m -116.58544,5.29167 h 116.58544 m -116.58544,5.29167 h 116.58544 m -116.58544,5.29166 h 116.58544 m -116.58544,5.29167 h 116.58544 m -116.58544,5.29167 h 116.58544 m -116.58544,5.29166 h 116.58544 m -116.58544,5.29167 h 116.58544 m -116.58544,5.29167 h 116.58544 m -116.58544,5.29166 h 116.58544 m -116.58544,5.29167 H 222.75041 M 106.16497,81.226 h 116.58544 m -116.58544,5.29166 h 116.58544 m -116.58544,5.29167 h 116.58544" />
+      <path
+         d="M 111.45663,-14.024001 V 91.97811 m 5.29166,-106.002111 V 91.97811"
+         style="fill:none;stroke:#e6e6e6;stroke-width:0.26458299px"
+         id="path1420"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cccc" />
+    </g>
     <g
        id="g1154"
        transform="translate(-10.583333)">
@@ -144,7 +157,7 @@
     <path
        inkscape:connector-curvature="0"
        id="path992"
-       d="M 106.07047,60.153827 116.97134,6.9731982 180.15267,28.152825 201.4613,70.592253 Z"
+       d="m 111.07031,70.58731 5.62562,-68.6026722 15.72842,-0.016213 5.51517,68.7295952 z"
        style="fill:#4cafef;fill-opacity:0.24962631;stroke:#4cafef;stroke-width:0.5291667;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        sodipodi:nodetypes="ccccc" />
     <text
@@ -260,122 +273,122 @@
     <text
        id="text5121"
        y="92.70385"
-       x="90.54686"
+       x="79.963531"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;stroke-width:0.26458332"
          y="92.70385"
-         x="90.54686"
+         x="79.963531"
          id="tspan5119"
          sodipodi:role="line">0</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="88.862213"
+       x="78.278885"
        y="82.129967"
        id="text5125"><tspan
          sodipodi:role="line"
          id="tspan5123"
-         x="88.862213"
+         x="78.278885"
          y="82.129967"
          style="font-size:2.64583325px;stroke-width:0.26458332">10</tspan></text>
     <text
        id="text5129"
        y="71.556084"
-       x="88.862213"
+       x="78.278885"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;stroke-width:0.26458332"
          y="71.556084"
-         x="88.862213"
+         x="78.278885"
          id="tspan5127"
          sodipodi:role="line">20</tspan></text>
     <text
        id="text5133"
        y="60.982201"
-       x="88.862213"
+       x="78.278885"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;stroke-width:0.26458332"
          y="60.982201"
-         x="88.862213"
+         x="78.278885"
          id="tspan5131"
          sodipodi:role="line">30</tspan></text>
     <text
        id="text5137"
        y="50.408318"
-       x="88.862213"
+       x="78.278885"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;stroke-width:0.26458332"
          y="50.408318"
-         x="88.862213"
+         x="78.278885"
          id="tspan5135"
          sodipodi:role="line">40</tspan></text>
     <text
        id="text5141"
        y="39.834438"
-       x="88.862213"
+       x="78.278885"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;stroke-width:0.26458332"
          y="39.834438"
-         x="88.862213"
+         x="78.278885"
          id="tspan5139"
          sodipodi:role="line">50</tspan></text>
     <text
        id="text5145"
        y="29.260555"
-       x="88.862213"
+       x="78.278885"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;stroke-width:0.26458332"
          y="29.260555"
-         x="88.862213"
+         x="78.278885"
          id="tspan5143"
          sodipodi:role="line">60</tspan></text>
     <text
        id="text5149"
        y="18.686672"
-       x="88.862213"
+       x="78.278885"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;stroke-width:0.26458332"
          y="18.686672"
-         x="88.862213"
+         x="78.278885"
          id="tspan5147"
          sodipodi:role="line">70</tspan></text>
     <text
        id="text5153"
        y="8.1127892"
-       x="88.862213"
+       x="78.278885"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;stroke-width:0.26458332"
          y="8.1127892"
-         x="88.862213"
+         x="78.278885"
          id="tspan5151"
          sodipodi:role="line">80</tspan></text>
     <text
        id="text5157"
        y="-2.4611092"
-       x="88.862213"
+       x="78.278885"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;stroke-width:0.26458332"
          y="-2.4611092"
-         x="88.862213"
+         x="78.278885"
          id="tspan5155"
          sodipodi:role="line">90</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="87.177551"
+       x="76.594223"
        y="-13.034978"
        id="text5161"><tspan
          sodipodi:role="line"
          id="tspan5159"
-         x="87.177551"
+         x="76.594223"
          y="-13.034978"
          style="font-size:2.64583325px;stroke-width:0.26458332">100</tspan></text>
     <text
@@ -392,81 +405,70 @@
     <text
        id="text5194"
        y="101.88876"
-       x="142.69286"
+       x="132.1291"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;stroke-width:0.26458332"
          y="101.88876"
-         x="142.69286"
+         x="132.1291"
          id="tspan5192"
          sodipodi:role="line">Dry-Bulb Temperature °C</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="-52.36274"
-       y="84.135315"
+       y="73.551987"
        id="text5198"
        transform="rotate(-90)"><tspan
          sodipodi:role="line"
          id="tspan5196"
          x="-52.36274"
-         y="84.135315"
+         y="73.551987"
          style="font-size:2.64583325px;stroke-width:0.26458332">Relative Humidity %</tspan></text>
     <text
        id="text5212"
-       y="0.21308516"
-       x="144.29019"
+       y="-5.0002999"
+       x="132.51711"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;stroke-width:0.26458332"
-         y="0.21308516"
-         x="144.29019"
+         y="-5.0002999"
+         x="132.51711"
          id="tspan5210"
          sodipodi:role="line">HUMID</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="197.35626"
-       y="42.451214"
+       y="37.058807"
        id="text5216"><tspan
          sodipodi:role="line"
          id="tspan5214"
          x="197.35626"
-         y="42.451214"
+         y="37.058807"
          style="font-size:2.64583325px;stroke-width:0.26458332">HOT</tspan></text>
     <text
        id="text5220"
-       y="80.060493"
-       x="146.06334"
+       y="79.571815"
+       x="151.14539"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;stroke-width:0.26458332"
-         y="80.060493"
-         x="146.06334"
+         y="79.571815"
+         x="151.14539"
          id="tspan5218"
          sodipodi:role="line">DRY</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="100.02739"
-       y="42.451214"
+       x="94.724594"
+       y="37.058807"
        id="text5224"><tspan
          sodipodi:role="line"
          id="tspan5222"
-         x="100.02739"
-         y="42.451214"
+         x="94.724594"
+         y="37.058807"
          style="font-size:2.64583325px;stroke-width:0.26458332">COLD</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="140.45064"
-       y="-19.986141"
-       id="text5705"><tspan
-         sodipodi:role="line"
-         id="tspan5703"
-         x="140.45064"
-         y="-19.986141"
-         style="font-size:2.64583325px;stroke-width:0.26458332">nice? = f(t, h)</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
@@ -478,17 +480,45 @@
          x="104.6994"
          y="96.278679"
          style="font-size:2.64583325px;stroke-width:0.26458332">14</tspan></text>
+    <path
+       sodipodi:nodetypes="ccccc"
+       style="fill:#4cafef;fill-opacity:0.24962631;stroke:#4cafef;stroke-width:0.5291667;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 137.93952,70.69802 -5.51517,-68.7295952 31.47534,0.104043 37.68405,68.5701952 z"
+       id="path1236"
+       inkscape:connector-curvature="0" />
     <text
        id="text5204"
-       y="42.451214"
-       x="145.35695"
+       y="37.326077"
+       x="154.89528"
        style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;stroke-width:0.26458332"
-         y="42.451214"
-         x="145.35695"
+         y="37.326077"
+         x="154.89528"
          id="tspan5202"
-         sodipodi:role="line">NICE</tspan></text>
+         sodipodi:role="line">WARM</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="83.558929"
+       y="96.278679"
+       id="text1426"><tspan
+         sodipodi:role="line"
+         id="tspan1424"
+         x="83.558929"
+         y="96.278679"
+         style="font-size:2.64583325px;stroke-width:0.26458332">10</tspan></text>
+    <text
+       id="text5275"
+       y="37.192444"
+       x="120.81416"
+       style="font-style:normal;font-weight:normal;font-size:2.64583325px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       xml:space="preserve"><tspan
+         style="font-size:2.64583325px;stroke-width:0.26458332"
+         y="37.192444"
+         x="120.81416"
+         id="tspan5273"
+         sodipodi:role="line">COOL</tspan></text>
   </g>
   <g
      id="g6537">
@@ -523,7 +553,7 @@
        xml:space="preserve"
        id="flowRoot5877"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,56.285429,61.569749)"><flowRegion
+       transform="matrix(0.26458333,0,0,0.26458333,56.285429,72.153083)"><flowRegion
          id="flowRegion5879"><rect
            id="rect5881"
            width="219.70821"
@@ -531,8 +561,8 @@
            x="-617.20319"
            y="559.86469" /></flowRegion><flowPara
          id="flowPara5883"
-         style="font-size:10px;line-height:1.25">Filter out small streaks to get the final NICE day ranges for the year.</flowPara></flowRoot>    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,56.360359,42.150995)"
+         style="font-size:10px;line-height:1.25">Filter out small streaks to get the final WARM day ranges for the year.</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,56.360359,52.734329)"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot6205"
        xml:space="preserve"><flowRegion
@@ -543,7 +573,7 @@
            width="218.69804"
            id="rect6199" /></flowRegion><flowPara
          style="font-size:10px;line-height:1.25"
-         id="flowPara6203">For each day, if 6 or more of the 12 selected hours are NICE, then consider the day as NICE.</flowPara></flowRoot>    <flowRoot
+         id="flowPara6203">For each day, if 60% or more of the selected hours are WARM, then consider the day as WARM.</flowPara></flowRoot>    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,56.360359,-133.83139)"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot6205-2"
@@ -556,7 +586,7 @@
            id="rect6199-0" /></flowRegion><flowPara
          id="flowPara6259"
          style="font-size:10px;line-height:1.25">Query the DarkSky API (many times) to get the last 3 years of hourly weather data for that location. The values we care about are: temperature, humidity and precipitation.</flowPara></flowRoot>    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,56.282844,-23.115053)"
+       transform="matrix(0.26458333,0,0,0.26458333,56.282844,-12.531719)"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot6205-2-3"
        xml:space="preserve"><flowRegion
@@ -567,8 +597,8 @@
            width="218.69804"
            id="rect6199-0-0" /></flowRegion><flowPara
          style="font-size:10px;line-height:1.25"
-         id="flowPara6203-9-6">Clip the NICE hours to just include the hours we're interested in (8am - 8pm).</flowPara></flowRoot>    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,56.272509,-51.988418)"
+         id="flowPara6203-9-6">Clip the hours to just include the hours we're interested in (8am - 8pm).</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,56.272509,-41.405084)"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot6205-2-2"
        xml:space="preserve"><flowRegion
@@ -579,7 +609,7 @@
            width="218.69804"
            id="rect6199-0-8" /></flowRegion><flowPara
          id="flowPara6335"
-         style="font-size:10px;line-height:1.25">For each hour determine if it's NICE or not.</flowPara></flowRoot>    <flowRoot
+         style="font-size:10px;line-height:1.25">For each hour determine if it is WARM.</flowPara></flowRoot>    <flowRoot
        transform="matrix(0.26458333,0,0,0.26458333,56.257005,-164.85037)"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot6205-2-9"
@@ -739,7 +769,7 @@
     </g>
     <g
        id="g5592"
-       transform="translate(-56.581229,37.663886)">
+       transform="translate(-56.581229,48.24722)">
       <image
          width="95.25"
          height="12.7"
@@ -802,10 +832,10 @@
            y="61.181911"
            x="68.612633"
            id="tspan5477"
-           sodipodi:role="line">NICE HOURS</tspan></text>
+           sodipodi:role="line">WARM HOURS</tspan></text>
     </g>
     <image
-       y="130.04742"
+       y="140.63077"
        x="-35.671036"
        id="image5441"
        xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAAwCAYAAADn/t0sAAAFdklEQVR42u3dwZHsJhQFUH/Xz+AH 4IwcrDNyAI6hvZ/FyPhx4YHO2c50twRPgCjV1Y/P5/P5DQCI+uOvf779+99//hr6/9mfH/X0e6N/ r7Zfuj2q57vb7Pqq9s9t7T3aPun672Z1/Zzu9vZKj0e755Pd8/Ho+NNtfpw9nlZ/b/b6b/Xvza4n zr7/uL1/V88njPldEwAAAAAAkGADGgAAAACACBvQAAAAAABE/NQEAP/P2zK1ZrfXV7MzHXdn7H39 /dkZkk/nV/18OtO32r7U2ruaAZrODJ19vKvrtzperc5kXX09vv36rtZT98z52f2/erxIr0fS8/HT /88eD6rrk+rxdav/1ceTHp9PX5+ffn/WfX0EIzwBDQAAAABAhA1oAAAAAAAibEADAAAAABDx4/P5 fDQDcKPuGYHa/9fS/599Pqd9/+7+Pe37R+svnVG5OyM4nSmY/r1u19Pq9ux+vOnzOf34T6u/060e j97WH6dfz6PnM3t+rWZ2n/aOkPQ7U9Lja/qdC93O/7T57LT7rdP72xPQAAAAAABE2IAGAAAAACDC BjQAAAAAABE/NQHAnVZnys3+/tHf654p2C1DWqb19/VTrYfZ9dT9+7r35+28k6DXeHB7f3TLkJ19 /LMzWN823jydf3V9cPo7Clavj56+3/yR7Z/V9xdY33XmCWgAAAAAACJsQAMAAAAAEGEDGgAAAACA CBnQMNHqzF2ZXWPtU834290fp2fqVj/fLTPytPEGbvb2zN3bf1/9qKebjmf296ePf/f10W39uzvj vNoeszO4V98vd5t/Rt9RUz3+0+bj0fvz1dd3t9+/fb/AE9AAAAAAAETYgAYAAAAAIMIGNAAAAAAA ETKg4UVGM6o4qz9mZ5CnM82fPn96ptnqejm9/ndnGM7OhH/7+CSjHO7xdL2fvn5cvd5J90e3enlq 3/R8MXo83TNo0/cH6fOp9ke6f9wPa09yPAENAAAAAECEDWgAAAAAACJsQAMAAAAAECEDGhqTSTpm NDOt2j7dM9hGj6ea0bU6Ezl9faXrZXUm4u3jQTXDczTTWAZy7/He+Ts/x6ueTlk/ze6f2fPZbfdH rr+59b07Y3r1+a++H7htPW6+eTdPQAMAAAAAEGEDGgAAAACACBvQAAAAAABEyIDmW6dnhJ2umhF1 e8bUaL2edv7VjODVmcOzx4fq8a8er96Wedbt+no6nvTfAetl6+Uz5qtu33d6e7x9/TH7nT3dMrxX n1/3/q9mYntHk+N78/l4AhoAAAAAgAgb0AAAAAAARNiABgAAAAAgQgY035Jhpz1Pls7Y2p1p1j0D 7/Z6H80MTtfD7vrvfr1XM51lQmfrQaY21ndAYr7oPn+Pjh/p8aaaQZ1+p4z1Qu/5qFs9n34/eVt7 eQIaAAAAAIAIG9AAAAAAAETYgAYAAAAAIEIGNEy0O5Nr9PNvy9Cqnv/qz6f7q5phPPt4umVIz860 df2uHc9Wt1f3TEmZibBuvjgto/Ft73BQb3etz1nbvk/19vR71fpd/Q6W9OfVP2+afz0BDQAAAABA hA1oAAAAAAAibEADAAAAABAhAxpe7LaMoWrm1pNuma631UM1U272752WwdY9g3h1fXS/ntNur1+Z teqJdf1dfYfF7nqa/c6N1ePP6PHsns9PHy+q73jp3h7Vet19/X49/tPm/9n3O9Y/Z93vvp0noAEA AAAAiLABDQAAAABAhA1oAAAAAAAiZEAD/EfdMnafjq/b783O1Ove37Mzi1f3X/eM3e6ZeKdlco9m vsoEVu/J+t+dsSsjMluvnN2f6flt9fxZzdytHl/39fHt78C5/fqETjwBDQAAAABAhA1oAAAAAAAi bEADAAAAABDxL12H5CxHt9K3AAAAAElFTkSuQmCC "
@@ -816,32 +846,32 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="-34.476536"
-       y="127.71918"
+       y="138.30252"
        id="text5598"><tspan
          sodipodi:role="line"
          id="tspan5596"
          x="-34.476536"
-         y="127.71918"
+         y="138.30252"
          style="font-size:2.64583325px;stroke-width:0.26458332">JAN</tspan></text>
     <text
        id="text5602"
-       y="127.71918"
+       y="138.30252"
        x="60.39312"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332"
-         y="127.71918"
+         y="138.30252"
          x="60.39312"
          id="tspan5600"
          sodipodi:role="line">DEC</tspan></text>
     <text
        id="text5606"
-       y="131.71545"
+       y="142.2988"
        x="-36.677361"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332"
-         y="131.71545"
+         y="142.2988"
          x="-36.677361"
          id="tspan5604"
          sodipodi:role="line">8</tspan></text>
@@ -849,27 +879,27 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="-36.704491"
-       y="136.39743"
+       y="146.98077"
        id="text5610"><tspan
          sodipodi:role="line"
          id="tspan5608"
          x="-36.704491"
-         y="136.39743"
+         y="146.98077"
          style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332">20</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="11.897767"
-       y="127.71918"
+       y="138.30252"
        id="text5479-3"><tspan
          sodipodi:role="line"
          id="tspan5477-5"
          x="11.897767"
-         y="127.71918"
-         style="font-size:2.64583325px;text-align:center;text-anchor:middle;stroke-width:0.26458332">NICE HOURS</tspan></text>
+         y="138.30252"
+         style="font-size:2.64583325px;text-align:center;text-anchor:middle;stroke-width:0.26458332">WARM HOURS</tspan></text>
     <g
        id="g5867"
-       transform="translate(5.2916667,67.630864)">
+       transform="translate(5.2916667,78.214198)">
       <image
          y="128.10916"
          x="-40.294529"
@@ -908,13 +938,13 @@
          id="text5479-3-6"><tspan
            sodipodi:role="line"
            id="tspan5477-5-2"
-           x="7.2742729"
+           x="7.2742724"
            y="125.35435"
-           style="font-size:2.64583325px;text-align:center;text-anchor:middle;stroke-width:0.26458332">NICE DAYS</tspan></text>
+           style="font-size:2.64583325px;text-align:center;text-anchor:middle;stroke-width:0.26458332">WARM DAYS</tspan></text>
     </g>
     <g
        id="g5858"
-       transform="translate(5.2916667,66.91138)">
+       transform="translate(5.2916667,77.494714)">
       <image
          y="147.91328"
          x="-40.294529"
@@ -953,9 +983,9 @@
          id="text5479-3-6-9"><tspan
            sodipodi:role="line"
            id="tspan5477-5-2-1"
-           x="7.2742729"
+           x="7.2742724"
            y="145.49258"
-           style="font-size:2.64583325px;text-align:center;text-anchor:middle;stroke-width:0.26458332">NICE DAYS</tspan></text>
+           style="font-size:2.64583325px;text-align:center;text-anchor:middle;stroke-width:0.26458332">WARM DAYS</tspan></text>
     </g>
     <text
        xml:space="preserve"
@@ -983,68 +1013,37 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="63.012455"
-       y="108.89206"
+       y="119.47539"
        id="text1007"><tspan
          sodipodi:role="line"
          id="tspan1005"
          x="63.012455"
-         y="108.89206"
+         y="119.47539"
          style="font-size:4.23333311px;stroke-width:0.26458332">× 3</tspan></text>
     <text
        id="text1011"
-       y="134.76343"
+       y="145.34677"
        x="63.012455"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:4.23333311px;stroke-width:0.26458332"
-         y="134.76343"
+         y="145.34677"
          x="63.012455"
          id="tspan1009"
          sodipodi:role="line">× 3</tspan></text>
     <image
-       y="177.30057"
+       y="187.88391"
        x="-35.671036"
        id="image1110"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAAoCAYAAAAIe13aAAAABmJLR0QA/wD/AP+gvaeTAAAACXBI
-WXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gQGCyIbZjGJGAAAAodJREFUeNrt3dtNAzEQBVBAdEAB
-dESx6YgCqGH5RZaIWeyb9eOc/yhex2uPRp7J83EcxxMA0NX77csksI3PjzeTQGw/tL6sH/vZuu/j
-2fGU3z9avDX6+mmdb4D/ejEFAAAAAAAkSEADAAAAABDxagoAeITRS2i1zAAAxFsk57+1pcWjf9/0
-8wD7cAMaAAAAAIAICWgAAAAAACIkoAEAAAAAiNADGmARZY+2sifbbj0B9UAEABDfGf++z1PrUT37
-76EHNzNxAxoAAAAAgAgJaAAAAAAAIrTgALbVWnLVWvKULvnSggK4aj89uz+2fp61zlesH+Nfdz+0
-P8A48Rc8khvQAAAAAABESEADAAAAABChBQcMrHdJc83qJTtK/gDm2G9rn1di6vwE75/xgPV6/3nF
-S4zEDWgAAAAAACIkoAEAAAAAiJCABgAAAAAgQg9omEitp1Pvnpuz94zSow5gj/Ow5Pxaez70tGSk
-9SbeBMRf18Qj4oO5uAENAAAAAECEBDQAAAAAABFacMCFerfMAADmK8lMn+dKVEG8DXD1/mc/3Zsb
-0AAAAAAAREhAAwAAAAAQoQXH5tIlEKuVeCoZAQDED+D9ALC/wt+5AQ0AAAAAQIQENAAAAAAAERLQ
-AAAAAABE6AENd+iZBADO85ryPy9Gjx9mj2/Ojn+1/ySxPgAgf361xg+18ewWn7gBDQAAAABAhAQ0
-AAAAAAARWnAAvypLRpSwAkD9vEQ8Y30CAD3P59njFzegAQAAAACIkIAGAAAAACBCCw74QYki1gsA
-OL8BAOgXb7kBDQAAAABAhAQ0AAAAAAAREtAAAAAAAERIQAMAAAAAECEBDQAAAABAhAQ0AAAAAAAR
-3z1Uw85XAi2WAAAAAElFTkSuQmCC
-"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAAoCAYAAAAIe13aAAAABmJLR0QA/wD/AP+gvaeTAAAACXBI WXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gQGCyIbZjGJGAAAAodJREFUeNrt3dtNAzEQBVBAdEAB dESx6YgCqGH5RZaIWeyb9eOc/yhex2uPRp7J83EcxxMA0NX77csksI3PjzeTQGw/tL6sH/vZuu/j 2fGU3z9avDX6+mmdb4D/ejEFAAAAAAAkSEADAAAAABDxagoAeITRS2i1zAAAxFsk57+1pcWjf9/0 8wD7cAMaAAAAAIAICWgAAAAAACIkoAEAAAAAiNADGmARZY+2sifbbj0B9UAEABDfGf++z1PrUT37 76EHNzNxAxoAAAAAgAgJaAAAAAAAIrTgALbVWnLVWvKULvnSggK4aj89uz+2fp61zlesH+Nfdz+0 P8A48Rc8khvQAAAAAABESEADAAAAABChBQcMrHdJc83qJTtK/gDm2G9rn1di6vwE75/xgPV6/3nF S4zEDWgAAAAAACIkoAEAAAAAiJCABgAAAAAgQg9omEitp1Pvnpuz94zSow5gj/Ow5Pxaez70tGSk 9SbeBMRf18Qj4oO5uAENAAAAAECEBDQAAAAAABFacMCFerfMAADmK8lMn+dKVEG8DXD1/mc/3Zsb 0AAAAAAAREhAAwAAAAAQoQXH5tIlEKuVeCoZAQDED+D9ALC/wt+5AQ0AAAAAQIQENAAAAAAAERLQ AAAAAABE6AENd+iZBADO85ryPy9Gjx9mj2/Ojn+1/ySxPgAgf361xg+18ewWn7gBDQAAAABAhAQ0 AAAAAAARWnAAvypLRpSwAkD9vEQ8Y30CAD3P59njFzegAQAAAACIkIAGAAAAACBCCw74QYki1gsA OL8BAOgXb7kBDQAAAABAhAQ0AAAAAAAREtAAAAAAAERIQAMAAAAAECEBDQAAAABAhAQ0AAAAAAAR 3z1Uw85XAi2WAAAAAElFTkSuQmCC "
        preserveAspectRatio="none"
        height="6.3499999"
        width="95.25" />
     <image
-       y="154.4558"
+       y="165.03914"
        x="-35.671036"
        id="image1121"
-       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAAoCAYAAAAIe13aAAAABmJLR0QA/wD/AP+gvaeTAAAACXBI
-WXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gQGCyERrckzxQAAA0FJREFUeNrt3duNFDEQBVBAkwEB
-kBHBkhEBEMPwzYrRYOxrl+1z/lba3e4uP7rGsms+P5/P5ycAmOzbj19//Pzz+9ehv1/t+Wb7GJ/V
-98PZRo/H6uN99P3Nft7V11vdv9g7X1g9f/XmL63XT883s8fju+dpvb/e9kv3n9Xvs9b+19tfAV75
-IgQAAAAAACRYgAYAAAAAIOIhBAB/5wja3Hi2HolsPcK5+ohmtXjDzv3Z/AsgH7gxvqOv1/v/di9J
-Ve1+0p9vYCU7oAEAAAAAiLAADQAAAABAhAVoAAAAAAAi1IAGKGp2DeN3NcZ2i9fsvweoMv9Xvx7A
-rPyv2nx2+neMtL5Per8jpvXzy+ga1foL/Ds7oAEAAAAAiLAADQAAAABAhBIcsLHdjpztFr9q13dE
-emy8xQ/2HW/Gs/mVc9vztiPnt4+fdHsrYYD5A2qwAxoAAAAAgAgL0AAAAAAARCjBcRlHNGrF/6Pq
-Rxx37y+nHcEb/Ty3H3kF5COYX6H6+Hk3f84uafHu+uZ3Kr9vTv98uNv4G33/5qNa7IAGAAAAACDC
-AjQAAAAAABEWoAEAAAAAiFADGg52e80jNSgB7piPT3/f3V5zVQ1H8fe85n/0B+q1V2sN+vR82ltD
-nyw7oAEAAAAAiLAADQAAAABARPkSHLbIj42f9ti7vzqyBIB8Rb4pH5DPMm88OdINMCYfkb/cnZ/Y
-AQ0AAAAAQIQFaAAAAAAAIoaX4HAE6Sy9R9J2a//R3zLviAkA8oX7nl/+y8n9b/T15MsA8jnxPZ8d
-0AAAAAAARFiABgAAAAAgwgI0AAAAAAARDyGA19RAmhtfNTMBqPh+2S0f6H3+1u/EOK195SPyZbQ/
-yIfER3zHsgMaAAAAAIAIC9AAAAAAAEQcX4LDlnh4PR4AwPvv/PzT+39t+83uD63X0z/Omm8ATpkv
-qpcEuy2f7L1/O6ABAAAAAIiwAA0AAAAAQMRDCOD/jT7yoWTM3u3viCuA9/uJ83/1+0/fX7X+0Jof
-yj8AkJ+xmh3QAAAAAABEWIAGAAAAACDCAjQAAAAAABHNNaDVXIF5jLe920sNbwBAfghg/oTb2QEN
-AAAAAECEBWgAAAAAACJ+A7ECtNlyZlzFAAAAAElFTkSuQmCC
-"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABaAAAAAoCAYAAAAIe13aAAAABmJLR0QA/wD/AP+gvaeTAAAACXBI WXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH4gQGCyERrckzxQAAA0FJREFUeNrt3duNFDEQBVBAkwEB kBHBkhEBEMPwzYrRYOxrl+1z/lba3e4uP7rGsms+P5/P5ycAmOzbj19//Pzz+9ehv1/t+Wb7GJ/V 98PZRo/H6uN99P3Nft7V11vdv9g7X1g9f/XmL63XT883s8fju+dpvb/e9kv3n9Xvs9b+19tfAV75 IgQAAAAAACRYgAYAAAAAIOIhBAB/5wja3Hi2HolsPcK5+ohmtXjDzv3Z/AsgH7gxvqOv1/v/di9J Ve1+0p9vYCU7oAEAAAAAiLAADQAAAABAhAVoAAAAAAAi1IAGKGp2DeN3NcZ2i9fsvweoMv9Xvx7A rPyv2nx2+neMtL5Per8jpvXzy+ga1foL/Ds7oAEAAAAAiLAADQAAAABAhBIcsLHdjpztFr9q13dE emy8xQ/2HW/Gs/mVc9vztiPnt4+fdHsrYYD5A2qwAxoAAAAAgAgL0AAAAAAARCjBcRlHNGrF/6Pq Rxx37y+nHcEb/Ty3H3kF5COYX6H6+Hk3f84uafHu+uZ3Kr9vTv98uNv4G33/5qNa7IAGAAAAACDC AjQAAAAAABEWoAEAAAAAiFADGg52e80jNSgB7piPT3/f3V5zVQ1H8fe85n/0B+q1V2sN+vR82ltD nyw7oAEAAAAAiLAADQAAAABARPkSHLbIj42f9ti7vzqyBIB8Rb4pH5DPMm88OdINMCYfkb/cnZ/Y AQ0AAAAAQIQFaAAAAAAAIoaX4HAE6Sy9R9J2a//R3zLviAkA8oX7nl/+y8n9b/T15MsA8jnxPZ8d 0AAAAAAARFiABgAAAAAgwgI0AAAAAAARDyGA19RAmhtfNTMBqPh+2S0f6H3+1u/EOK195SPyZbQ/ yIfER3zHsgMaAAAAAIAIC9AAAAAAAEQcX4LDlnh4PR4AwPvv/PzT+39t+83uD63X0z/Omm8ATpkv qpcEuy2f7L1/O6ABAAAAAIiwAA0AAAAAQMRDCOD/jT7yoWTM3u3viCuA9/uJ83/1+0/fX7X+0Jof yj8AkJ+xmh3QAAAAAABEWIAGAAAAACDCAjQAAAAAABHNNaDVXIF5jLe920sNbwBAfghg/oTb2QEN AAAAAECEBWgAAAAAACJ+A7ECtNlyZlzFAAAAAElFTkSuQmCC "
        preserveAspectRatio="none"
        height="6.3499999"
        width="95.25" />
@@ -1052,7 +1051,7 @@ AAAAAECEBWgAAAAAACJ+A7ECtNlyZlzFAAAAAElFTkSuQmCC
        xml:space="preserve"
        id="flowRoot1130"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-       transform="matrix(0.26458333,0,0,0.26458333,56.282844,0.93383303)"><flowRegion
+       transform="matrix(0.26458333,0,0,0.26458333,56.282844,11.517166)"><flowRegion
          id="flowRegion1126"><rect
            id="rect1124"
            width="218.69804"
@@ -1060,21 +1059,21 @@ AAAAAECEBWgAAAAAACJ+A7ECtNlyZlzFAAAAAElFTkSuQmCC
            x="-617.20319"
            y="559.86469" /></flowRegion><flowPara
          id="flowPara1128"
-         style="font-size:10px;line-height:1.25">Combine the 3 years by taking the median NICE hours for each day.</flowPara></flowRoot>    <flowRoot
-       transform="matrix(0.26458333,0,0,0.26458333,56.282844,23.897524)"
+         style="font-size:10px;line-height:1.25">Combine the 3 years by taking the median WARM hours for each day.</flowPara></flowRoot>    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,56.282844,34.480858)"
        style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
        id="flowRoot1138"
        xml:space="preserve"><flowRegion
          id="flowRegion1134"><rect
            y="559.86469"
            x="-617.20319"
-           height="33.334988"
-           width="232.84019"
+           height="30.80958"
+           width="234.86052"
            id="rect1132" /></flowRegion><flowPara
          style="font-size:10px;line-height:1.25"
-         id="flowPara1136">Smooth out the NICE hours / day by applying a median filter (with a 7 day window).</flowPara></flowRoot>    <g
+         id="flowPara1136">Smooth out the WARM hours / day by applying a median filter (with a 7 day window).</flowPara></flowRoot>    <g
        id="g1380"
-       transform="translate(-0.70722831,9.9678513)">
+       transform="translate(-0.70722831,20.551185)">
       <text
          id="text5598-3-6"
          y="164.76389"
@@ -1105,12 +1104,12 @@ AAAAAECEBWgAAAAAACJ+A7ECtNlyZlzFAAAAAElFTkSuQmCC
          xml:space="preserve"><tspan
            style="font-size:2.64583325px;text-align:center;text-anchor:middle;stroke-width:0.26458332"
            y="164.76389"
-           x="12.883782"
+           x="12.883781"
            id="tspan5477-5-2-6"
-           sodipodi:role="line">NICE HOURS COUNT</tspan></text>
+           sodipodi:role="line">WARM HOURS COUNT</tspan></text>
     </g>
     <g
-       transform="translate(-0.70722831,-12.995839)"
+       transform="translate(-0.70722831,-2.4125056)"
        id="g1394">
       <text
          xml:space="preserve"
@@ -1141,41 +1140,41 @@ AAAAAECEBWgAAAAAACJ+A7ECtNlyZlzFAAAAAElFTkSuQmCC
          y="164.76389"
          id="text1392"><tspan
            sodipodi:role="line"
-           x="12.883782"
+           x="12.883781"
            y="164.76389"
            style="font-size:2.64583325px;text-align:center;text-anchor:middle;stroke-width:0.26458332"
-           id="tspan1407">NICE HOURS COUNT</tspan></text>
+           id="tspan1407">WARM HOURS COUNT</tspan></text>
     </g>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="-36.677361"
-       y="156.41949"
+       y="167.00284"
        id="text1437"><tspan
          sodipodi:role="line"
          id="tspan1435"
          x="-36.677361"
-         y="156.41949"
+         y="167.00284"
          style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332">12</tspan></text>
     <text
        id="text1441"
-       y="160.76833"
+       y="171.35167"
        x="-36.704491"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332"
-         y="160.76833"
+         y="171.35167"
          x="-36.704491"
          id="tspan1439"
          sodipodi:role="line">0</tspan></text>
     <text
        id="text1445"
-       y="179.26427"
+       y="189.84761"
        x="-36.677361"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        xml:space="preserve"><tspan
          style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332"
-         y="179.26427"
+         y="189.84761"
          x="-36.677361"
          id="tspan1443"
          sodipodi:role="line">12</tspan></text>
@@ -1183,12 +1182,12 @@ AAAAAECEBWgAAAAAACJ+A7ECtNlyZlzFAAAAAElFTkSuQmCC
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:4.23333311px;line-height:1.25;font-family:sans-serif;text-align:end;letter-spacing:0px;word-spacing:0px;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
        x="-36.704491"
-       y="183.6131"
+       y="194.19644"
        id="text1449"><tspan
          sodipodi:role="line"
          id="tspan1447"
          x="-36.704491"
-         y="183.6131"
+         y="194.19644"
          style="font-size:2.64583325px;text-align:end;text-anchor:end;stroke-width:0.26458332">0</tspan></text>
     <image
        width="95.25"
@@ -1264,5 +1263,17 @@ AAAAAECEBWgAAAAAACJ+A7ECtNlyZlzFAAAAAElFTkSuQmCC
          x="63.012455"
          y="82.135353"
          style="font-size:4.23333311px;stroke-width:0.26458332">× 3</tspan></text>
-  </g>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot1144"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:0.01%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,56.272509,-55.503551)"><flowRegion
+         id="flowRegion1140"><rect
+           id="rect1138"
+           width="218.69804"
+           height="40.911133"
+           x="-617.20319"
+           y="559.86469" /></flowRegion><flowPara
+         style="font-size:10px;line-height:1.25"
+         id="flowPara1142">For each factor (humid, dry, hot, cold, cool, warm, rainy), we do the following steps. Example given for warm.</flowPara></flowRoot>  </g>
 </svg>
