@@ -13,13 +13,13 @@ Now live as https://bestweather.in/
 ## Running
 
 - clone
-- create a `profiles.clj` to set the appropriate env variables:
+- create a `config.edn` to set the appropriate env variables:
   ```
-  {:me {:env {:darksky-api-key "DARKSKY_KEY"
-              :google-api-key "GOOGLE_KEY"
-              :http-port 1262
-              :cache-path "data"}}}
+  {:omni/http-port 1262
+   :darksky-api-key "DARKSKY_KEY"
+   :google-api-key "GOOGLE_KEY"
+   :cache-path "data"}
   ```
 - create the data folder `mkdir data`
-- run the repl: `lein with-profiles +me repl`
-- run either the analysis server `(start! :analysis)` or client dev server `(start! :dev)`
+- run the repl: `lein repl`
+- run either the analysis server `(start! :analysis)` or site server `(start! :site)`

@@ -3,20 +3,15 @@
                  [org.clojure/clojurescript "1.9.946"]
                  [clj-time "0.14.2"]
                  [re-frame "0.10.5"]
-                 [reagent "0.8.0-alpha2"]
-                 [mount "0.1.12"]
-                 [environ "1.1.0"]
-                 [ring-middleware-format "0.7.2"]
-                 [ring/ring-defaults "0.3.1"]
-                 [io.bloomventures/omni "0.9.3"]]
+                 [reagent "0.8.1"]
+                 [io.bloomventures/omni "0.14.8"]]
 
-  :plugins [[lein-environ "1.1.0"]
-            [lein-exec "0.3.7"]]
+  :plugins [[io.bloomventures/omni "0.14.8"]]
 
   :main perfect-weather.core
 
-  :aliases {"compile-assets" ["exec" "-ep" "(use 'perfect-weather.compile) (compile!)"]}
+  :omni-config perfect-weather.core/site-config
 
   :profiles {:uberjar {:aot :all
-                       :prep-tasks ["compile-assets"
+                       :prep-tasks [["omni" "compile"]
                                     "compile"]}})

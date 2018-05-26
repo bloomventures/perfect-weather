@@ -1,9 +1,9 @@
 (ns perfect-weather.client.state.events
   (:require
     [clojure.string :as string]
-    [bloom.omni.ajax :as ajax]
-    [bloom.omni.dispatch-debounce :as dispatch-debounce]
-    [bloom.omni.router :as router]
+    [bloom.omni.fx.ajax :as ajax]
+    [bloom.omni.fx.dispatch-debounce :as dispatch-debounce]
+    [bloom.omni.fx.router :as router]
     [bloom.omni.fx.title :as title]
     [re-frame.core :refer [dispatch reg-fx reg-event-fx]]
     [perfect-weather.client.state.routes :as routes]))

@@ -1,7 +1,7 @@
 (ns perfect-weather.client.state.routes
   (:require
     [clojure.string :as string]
-    [bloom.omni.router :as router]
+    [bloom.omni.fx.router :as router]
     [re-frame.core :refer [dispatch]]))
 
 (router/defroute index-path "/" []

@@ -1,6 +1,6 @@
 (ns perfect-weather.analysis.state.events
   (:require
-    [bloom.omni.ajax :as ajax]
+    [bloom.omni.fx.ajax :as ajax]
     [re-frame.core :refer [dispatch reg-fx reg-event-fx]]))
 
 (reg-fx :ajax ajax/fx)

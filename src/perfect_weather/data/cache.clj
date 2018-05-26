@@ -1,8 +1,8 @@
 (ns perfect-weather.data.cache
   (:require
+    [bloom.omni.env :as env]
     [clojure.java.io :as io]
-    [clojure.string :as string]
-    [environ.core :refer [env]]))
+    [clojure.string :as string]))
 
 (defn log [& args]
   #_(apply println args))
@@ -14,7 +14,7 @@
 
 (defn- cache-base-path
   [cache-id]
-  (str (env :cache-path) "/" (name cache-id)))
+  (str (env/get :cache-path) "/" (name cache-id)))
 
 (defn- cache-path 
   [cache-id query-id]

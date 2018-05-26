@@ -1,6 +1,6 @@
 (ns perfect-weather.data.core
   (:require
-    [environ.core :refer [env]]
+    [bloom.omni.env :as env]
     [clj-time.core :as t]
     [clj-time.periodic :as p]
     [clj-time.format :as f]
@@ -18,9 +18,9 @@
   (let [[f api-key] 
         (case provider
           :darksky 
-          [darksky/fetch-day-history (env :darksky-api-key)]
+          [darksky/fetch-day-history (env/get :darksky-api-key)]
           :wunderground 
-          [wunderground/fetch-day-history (env :wunderground-api-key)])]
+          [wunderground/fetch-day-history (env/get :wunderground-api-key)])]
     (f {:lat lat
         :lon lon
         :ymd ymd

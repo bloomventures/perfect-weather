@@ -1,9 +1,9 @@
 (ns perfect-weather.data.google-maps 
   (:require
+    [bloom.omni.env :as env]
     [clojure.string :as string]
     [clojure.set :refer [rename-keys]]
     [cheshire.core :as json]
-    [environ.core :refer [env]]
     [org.httpkit.client :as http]
     [perfect-weather.data.cache :refer [with-cache in-cache?]]))
 
@@ -21,7 +21,7 @@
                     {:method :get
                      :url (str base-url "/details/json")
                      :query-params
-                     {:key (env :google-api-key)
+                     {:key (env/get :google-api-key)
                       :placeid place-id}})
         parse (fn [r]
                 {:place-id place-id
@@ -57,7 +57,7 @@
                     {:method :get
                      :url (str base-url "/autocomplete/json")
                      :query-params
-                     {:key (env :google-api-key)
+                     {:key (env/get :google-api-key)
                       :input query
                       :type "(cities)"}})]
     (future (if (= 200 (:status response))
