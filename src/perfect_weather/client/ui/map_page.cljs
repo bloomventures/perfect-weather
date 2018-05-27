@@ -1,4 +1,4 @@
-(ns perfect-weather.client.ui.map
+(ns perfect-weather.client.ui.map-page
   (:require
     [clojure.string :as string]
     [reagent.core :as r]
