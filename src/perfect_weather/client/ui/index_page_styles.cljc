@@ -5,8 +5,6 @@
     [perfect-weather.client.ui.mixins :as mixins]
     [perfect-weather.client.ui.footer-styles :refer [>footer]]))
 
-(def mobile {:max-width "760px"})
-
 (defn months []
   (let [height "2rem"]
     [:&
@@ -44,7 +42,7 @@
     {:flex-grow 2
      :min-width "30rem"}
 
-    (at-media mobile
+    (at-media mixins/mobile
       [:&
        {:min-width "100%"}])
 
@@ -53,21 +51,8 @@
       :width "100%"}
 
      [:>.column
-      {:width (str (float (/ 100 12)) "%")
-       :border-left [["1px" "solid" colors/grid-border]]}
-
-      ["&:nth-child(even)"
-       {:background colors/grid-background}]
-
-      [:&:last-child
-       {:border-right [["1px" "solid" colors/grid-border]]}]
-      
-      (at-media mobile
-        [:&:first-child
-         {:border-left "none"}]
-
-        [:&:last-child
-         {:border-right "none"}])]]]])
+      {:width (str (float (/ 100 12)) "%")}
+      (mixins/alternating-colors)]]]])
 
 (defn >index-page []
   [:>.index-page
@@ -140,7 +125,7 @@
     [:>.labels
      row
 
-     (at-media mobile
+     (at-media mixins/mobile
        [:&
         {:display "none !important"}])
 
@@ -159,7 +144,7 @@
       [:>.result
        row
 
-       (at-media mobile
+       (at-media mixins/mobile
          [:&
           {:margin-bottom "3rem"}])
 
@@ -189,7 +174,7 @@
          [:>.country
           (mixins/tiny-text)]
 
-         (at-media mobile
+         (at-media mixins/mobile
            [:&
             {:height "2rem"
              :line-height "2rem"
@@ -329,7 +314,7 @@
         [:>.columns.months
          {:display "none"}
 
-         (at-media mobile
+         (at-media mixins/mobile
            [:&
             {:display "flex"}])
 

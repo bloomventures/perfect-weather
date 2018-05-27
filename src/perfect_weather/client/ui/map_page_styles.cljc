@@ -1,7 +1,8 @@
 (ns perfect-weather.client.ui.map-page-styles
   (:require
-    [perfect-weather.client.ui.footer-styles :refer [>footer]]))
-
+    [perfect-weather.client.ui.footer-styles :refer [>footer]]
+    [perfect-weather.client.ui.colors :as colors]
+    [perfect-weather.client.ui.mixins :as mixins]))
 
 (defn >map-page []
   [:>.page.map
@@ -24,14 +25,12 @@
       :-moz-user-select "none"
       :-ms-user-select "none"
       :user-select "none"}
+     (mixins/tiny-text)
 
      [:>.month
-      {:border-left "1px solid #ccc"
-       :text-align "center"
+      {:text-align "center"
        :width (str (float (/ 100 12)) "%")}
-
-      [:&:last-child
-       {:border-right "1px solid #ccc"}]]]]
+      (mixins/alternating-colors)]]]
 
    [:>.map
     {:margin "0 auto"}]
