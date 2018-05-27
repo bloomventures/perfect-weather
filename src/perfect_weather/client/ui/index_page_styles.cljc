@@ -1,7 +1,8 @@
 (ns perfect-weather.client.ui.index-page-styles
   (:require
+    [garden.stylesheet :refer [at-media]]
     [perfect-weather.client.ui.colors :as colors]
-    [garden.stylesheet :refer [at-media]]))
+    [perfect-weather.client.ui.footer-styles :refer [>footer]]))
 
 (def mobile {:max-width "760px"})
 
@@ -347,19 +348,4 @@
    [:>.gap
     {:flex-grow 1}]
 
-   [:>.footer
-    {:display "flex"
-     :justify-content "center"
-     :flex-wrap "wrap"
-     :box-sizing "border-box"
-     :width "100%"
-     :padding "0.25rem"}
-
-    [:>div
-     {:color colors/text-light
-      :margin "0.25rem 0.5rem"
-      :white-space "nowrap"}
-
-     [:>a
-      {:color colors/accent
-       :text-decoration "none"}]]]])
+   (>footer)])
