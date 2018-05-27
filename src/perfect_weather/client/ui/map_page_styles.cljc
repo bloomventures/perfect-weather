@@ -5,6 +5,7 @@
 
 (defn >map-page []
   [:>.page.map
+   {:width "100%"}
 
    [:>.controls
 
@@ -24,5 +25,8 @@
 
       [:&:last-child
        {:border-right "1px solid #ccc"}]]]]
+
+   [:>.map
+    {:margin "0 auto"}]
 
    (>footer)])
