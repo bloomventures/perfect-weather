@@ -10,12 +10,12 @@
      "Search"]]
 
    [:div
-    [:a {:href (routes/faq-path)}
-     "FAQ"]]
-
-   [:div
     [:a {:href (routes/map-path)}
      "Map"]]
+
+   [:div
+    [:a {:href (routes/faq-path)}
+     "FAQ"]]
 
    [:div
     "Built by " 
