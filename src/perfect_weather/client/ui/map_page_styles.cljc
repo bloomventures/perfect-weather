@@ -11,7 +11,11 @@
     [:>.months
      {:display "flex"
       :justify-content "space-between"
-      :width "100%"}
+      :width "100%"
+      :-webkit-user-select "none"
+      :-moz-user-select "none"
+      :-ms-user-select "none"
+      :user-select "none"}
 
      [:>.month
       {:border-left "1px solid #ccc"
