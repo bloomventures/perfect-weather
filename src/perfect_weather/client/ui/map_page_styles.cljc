@@ -5,9 +5,16 @@
 
 (defn >map-page []
   [:>.page.map
-   {:width "100%"}
+   {:display "flex"
+    :min-height "100vh"
+    :flex-direction "column"
+    :justify-content "center"
+    :align-items "center"
+    :width "100%"}
 
    [:>.controls
+    {:width "100%"
+     :max-width "800px"}
 
     [:>.months
      {:display "flex"
@@ -28,5 +35,8 @@
 
    [:>.map
     {:margin "0 auto"}]
+
+   [:>.gap
+    {:flex-grow 1}]
 
    (>footer)])

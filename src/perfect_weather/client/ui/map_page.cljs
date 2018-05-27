@@ -196,8 +196,10 @@
                                                        (or (= factor :warm) 
                                                            (= factor :cool)))))})))]
         [:div.page.map
+         [:div.gap]
          [controls-view (@vars :start) (@vars :end) (fn [start end]
                                                       (reset! vars {:start start
                                                                     :end end}))]
          [map-view results]
+         [:div.gap]
          [footer-view]]))))
