@@ -3,7 +3,10 @@
     [garden.stylesheet :refer [at-media]]
     [perfect-weather.client.ui.colors :as colors]))
 
-(def mobile {:max-width "760px"})
+(defn at-mobile [rules]
+  (at-media {:max-width "760px"}
+    [:&
+     rules]))
 
 (defn tiny-text []
   {:text-transform "uppercase"
@@ -26,9 +29,10 @@
    [:&:last-child
     {:border-right [["1px" "solid" colors/grid-border]]}]
 
-   (at-media mobile
-     [:&:first-child
-      {:border-left "none"}]
+   (at-mobile 
+     [:&
+      [:&:first-child
+       {:border-left "none"}]
 
-     [:&:last-child
-      {:border-right "none"}])])
+      [:&:last-child
+       {:border-right "none"}]])])

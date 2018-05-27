@@ -42,9 +42,8 @@
     {:flex-grow 2
      :min-width "30rem"}
 
-    (at-media mixins/mobile
-      [:&
-       {:min-width "100%"}])
+    (mixins/at-mobile 
+      {:min-width "100%"})
 
     [:>.columns
      {:display "flex"
@@ -125,9 +124,8 @@
     [:>.labels
      row
 
-     (at-media mixins/mobile
-       [:&
-        {:display "none !important"}])
+     (mixins/at-mobile
+       {:display "none !important"})
 
      [:>.calendar
       [:>.months
@@ -144,9 +142,8 @@
       [:>.result
        row
 
-       (at-media mixins/mobile
-         [:&
-          {:margin-bottom "3rem"}])
+       (mixins/at-mobile
+         {:margin-bottom "3rem"})
 
        [:>.legend
         {:background "white"
@@ -174,12 +171,11 @@
          [:>.country
           (mixins/tiny-text)]
 
-         (at-media mixins/mobile
-           [:&
-            {:height "2rem"
-             :line-height "2rem"
-             :margin-left "0.5rem"
-             :text-align "left"}])]]
+         (mixins/at-mobile
+           {:height "2rem"
+            :line-height "2rem"
+            :margin-left "0.5rem"
+            :text-align "left"})]]
 
        [:>.calendar
 
@@ -314,9 +310,8 @@
         [:>.columns.months
          {:display "none"}
 
-         (at-media mixins/mobile
-           [:&
-            {:display "flex"}])
+         (mixins/at-mobile
+           {:display "flex"})
 
          (months)]]])]
 
