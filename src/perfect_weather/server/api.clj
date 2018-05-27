@@ -17,8 +17,12 @@
   [[[:get "/api/random/:n"]
     (fn [req]
       {:status 200
-       :body (->> (places/n-random (Integer/parseInt (get-in req [:params :n])))
-                  (map compute/by-lat-lon))})]
+       :body (compute/n-random (Integer/parseInt (get-in req [:params :n])))})]
+
+   [[:get "/api/all"]
+    (fn [req]
+      {:status 200
+       :body (compute/all)})]
 
    [[:get "/api/autocomplete"]
     (fn [req]

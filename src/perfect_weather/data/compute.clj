@@ -1,12 +1,11 @@
 (ns perfect-weather.data.compute
   (:require
-    [perfect-weather.data.cache :refer [with-cache]]
+    [perfect-weather.data.cache :as cache :refer [with-cache]]
     [perfect-weather.data.core :as data]
     [perfect-weather.data.summary :as summary]
     [perfect-weather.data.google-maps :as google-maps]
     [perfect-weather.data.places :as places]
     [perfect-weather.data.rate :as rate]))
-
 
 (defn calc-ranges 
   [data]
@@ -56,8 +55,8 @@
     (when data
       {:city city
        :country country
-       :lat lat 
-       :lon lon 
+       :lat lat
+       :lon lon
        :place-id place-id
        :ranges (calc-ranges data)})))
 
@@ -70,6 +69,12 @@
         (future (apply by-lat-lon-raw args)))
       args)
     deref))
+
+(defn n-random [n]
+  (cache/n-random :results n))
+
+(defn all []
+  (cache/all :results))
 
 (defn by-place-id [place-id]
   (let [place @(google-maps/place place-id)]

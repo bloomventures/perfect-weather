@@ -3,9 +3,9 @@
     [clojure.string :as string]
     [re-frame.core :refer [dispatch dispatch-sync subscribe]]
     [reagent.core :as r]
-    [perfect-weather.client.state.routes :as routes]
     [perfect-weather.data.months :refer [months months-abbr]]
-    [perfect-weather.client.ui.autocomplete :refer [autocomplete-view]]))
+    [perfect-weather.client.ui.autocomplete :refer [autocomplete-view]]
+    [perfect-weather.client.ui.footer :refer [footer-view]]))
 
 (def loading-messages
   ["Reticulating splines..."
@@ -135,29 +135,6 @@
                        (when (result :known?) 
                          [:div.known "⚡"])])}] 
    "?"])
-
-(defn footer-view []
-  [:div.footer
-
-   [:div
-    [:a {:href (routes/faq-path)}
-     "FAQ"]]
-
-   [:div
-    "Built by " 
-    [:a {:href "https://bloomventures.io/"
-         :rel "noopener"
-         :target "_blank"}
-     "Bloom"]]
-
-   [:div
-    "Powered by "
-    [:a {:href "https://darksky.net/poweredby/"
-         :rel "noopener"
-         :target "_blank"}
-     "DarkSky"] " & "
-    [:a {:href "https://developers.google.com/places/"}
-     "Google"]]])
 
 (defn index-page-view []
   [:div.index-page

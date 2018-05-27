@@ -5,8 +5,7 @@
     [perfect-weather.data.google-maps :as google-maps]))
 
 (defn all []
-  (->> (cache/cache-list :places)
-       (map (comp read-string slurp))))
+  (cache/all :places))
 
 (defn by-city [city]
   (->> (all) 
@@ -14,10 +13,7 @@
                  (= (p :city) city)))))
 
 (defn n-random [n]
-  (->> (cache/cache-list :places)
-       shuffle
-       (take n)
-       (map (comp read-string slurp))))
+  (cache/n-random :places n))
 
 (defn distance
   [{lon1 :lon lat1 :lat} {lon2 :lon lat2 :lat}]

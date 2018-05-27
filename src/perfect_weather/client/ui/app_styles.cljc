@@ -2,7 +2,8 @@
   (:require
     [garden.stylesheet :refer [at-import at-keyframes]]
     [perfect-weather.client.ui.faq-page-styles :refer [>faq-page]]
-    [perfect-weather.client.ui.index-page-styles :refer [>index-page]]))
+    [perfect-weather.client.ui.index-page-styles :refer [>index-page]]
+    [perfect-weather.client.ui.map-page-styles :refer [>map-page]]))
 
 (defn styles []
   [(at-import "https://fonts.googleapis.com/css?family=Montserrat:400,600")
@@ -31,4 +32,5 @@
       :align-items "center"}
 
      (>index-page)
-     (>faq-page)]]])
+     (>faq-page)
+     (>map-page)]]])

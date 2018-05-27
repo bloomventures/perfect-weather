@@ -7,6 +7,8 @@
 (defn log [& args]
   #_(apply println args))
 
+(def remote? true)
+
 (defn- sanitize 
   "Sanitize a file name"
   [file-name]
@@ -32,7 +34,7 @@
   (->> (io/file (cache-base-path cache-id))
        (.listFiles)))
 
-(defn cache-list 
+(defn- cache-list 
   [cache-id]
   (->> (io/file (cache-base-path cache-id))
        file-seq 
@@ -50,12 +52,25 @@
       (do
         (log "Returning cached result.")
         (read-string (slurp (cache-path cache-id query-id))))
-      (do
-        (log "Fetching from API...")
-        (if-let [result @(fetch-fn args)]
+      (do 
+        (if remote?
           (do
-            (log "Successful.")
-            (make-parent-dirs (cache-path cache-id query-id))
-            (spit (cache-path cache-id query-id) result)
-            result)
-          (log "Fetch failed."))))))
+            (log "Fetching from API...")
+            (if-let [result @(fetch-fn args)]
+              (do
+                (log "Successful.")
+                (make-parent-dirs (cache-path cache-id query-id))
+                (spit (cache-path cache-id query-id) result)
+                result)
+              (log "Fetch failed.")))
+          (println "Skipping fetch from API:" cache-id query-id args))))))
+
+(defn n-random [cache-id n]
+  (->> (cache-list cache-id)
+       shuffle
+       (take n)
+       (map (comp read-string slurp))))
+
+(defn all [cache-id]
+  (->> (cache-list :results)
+       (map (comp read-string slurp))))

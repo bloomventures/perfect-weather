@@ -1,20 +1,9 @@
 (ns perfect-weather.client.ui.index-page-styles
   (:require
+    [garden.stylesheet :refer [at-media]]
     [perfect-weather.client.ui.colors :as colors]
-    [garden.stylesheet :refer [at-media]]))
-
-(def mobile {:max-width "760px"})
-
-(defn tiny-text []
-  {:text-transform "uppercase"
-   :font-size "0.65rem"
-   :line-height "1rem"
-   :letter-spacing "0.03rem"})
-
-(defn small-text []
-  {:font-size "0.85rem"
-   :text-transform "uppercase"
-   :letter-spacing "0.1em"})
+    [perfect-weather.client.ui.mixins :as mixins]
+    [perfect-weather.client.ui.footer-styles :refer [>footer]]))
 
 (defn months []
   (let [height "2rem"]
@@ -26,7 +15,7 @@
        {:height height
         :line-height [[height "!important"]] 
         :text-align "center"}
-       (tiny-text)
+       (mixins/tiny-text)
 
        (at-media {:max-width "400px"}
          [:&
@@ -53,30 +42,16 @@
     {:flex-grow 2
      :min-width "30rem"}
 
-    (at-media mobile
-      [:&
-       {:min-width "100%"}])
+    (mixins/at-mobile 
+      {:min-width "100%"})
 
     [:>.columns
      {:display "flex"
       :width "100%"}
 
      [:>.column
-      {:width (str (float (/ 100 12)) "%")
-       :border-left [["1px" "solid" colors/grid-border]]}
-
-      ["&:nth-child(even)"
-       {:background colors/grid-background}]
-
-      [:&:last-child
-       {:border-right [["1px" "solid" colors/grid-border]]}]
-      
-      (at-media mobile
-        [:&:first-child
-         {:border-left "none"}]
-
-        [:&:last-child
-         {:border-right "none"}])]]]])
+      {:width (str (float (/ 100 12)) "%")}
+      (mixins/alternating-colors)]]]])
 
 (defn >index-page []
   [:>.index-page
@@ -149,9 +124,8 @@
     [:>.labels
      row
 
-     (at-media mobile
-       [:&
-        {:display "none !important"}])
+     (mixins/at-mobile
+       {:display "none !important"})
 
      [:>.calendar
       [:>.months
@@ -168,9 +142,8 @@
       [:>.result
        row
 
-       (at-media mobile
-         [:&
-          {:margin-bottom "3rem"}])
+       (mixins/at-mobile
+         {:margin-bottom "3rem"})
 
        [:>.legend
         {:background "white"
@@ -188,7 +161,7 @@
           :color colors/accent}
 
          [:>.city
-          (small-text)
+          (mixins/small-text)
           {:height bar-height
            :line-height bar-height}
 
@@ -196,14 +169,13 @@
            {:font-size "1.15em"}]]
 
          [:>.country
-          (tiny-text)]
+          (mixins/tiny-text)]
 
-         (at-media mobile
-           [:&
-            {:height "2rem"
-             :line-height "2rem"
-             :margin-left "0.5rem"
-             :text-align "left"}])]]
+         (mixins/at-mobile
+           {:height "2rem"
+            :line-height "2rem"
+            :margin-left "0.5rem"
+            :text-align "left"})]]
 
        [:>.calendar
 
@@ -258,7 +230,7 @@
              :width "100%"
              :overflow "hidden"
              :text-overflow "clip"}
-            (tiny-text)]
+            (mixins/tiny-text)]
 
            ["&:nth-child(odd)"
 
@@ -338,28 +310,12 @@
         [:>.columns.months
          {:display "none"}
 
-         (at-media mobile
-           [:&
-            {:display "flex"}])
+         (mixins/at-mobile
+           {:display "flex"})
 
          (months)]]])]
 
    [:>.gap
     {:flex-grow 1}]
 
-   [:>.footer
-    {:display "flex"
-     :justify-content "center"
-     :flex-wrap "wrap"
-     :box-sizing "border-box"
-     :width "100%"
-     :padding "0.25rem"}
-
-    [:>div
-     {:color colors/text-light
-      :margin "0.25rem 0.5rem"
-      :white-space "nowrap"}
-
-     [:>a
-      {:color colors/accent
-       :text-decoration "none"}]]]])
+   (>footer)])

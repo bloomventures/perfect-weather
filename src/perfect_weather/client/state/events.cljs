@@ -19,7 +19,8 @@
     {:db {:query ""
           :autocomplete-results []
           :page nil
-          :results []}
+          :results []
+          :map-data []}
      :router [:init!]}))
 
 (reg-event-fx
@@ -32,9 +33,10 @@
   (fn [{db :db} _]
     (let [title (case (db :page)
                   :faq "Best weather in... (FAQ)"
-                  :index (if-not (string/blank? (db :query))
-                           (str "Best weather in " (db :query))
-                           "Best weather in..."))]
+                  ; default
+                  (if-not (string/blank? (db :query))
+                    (str "Best weather in " (db :query))
+                    "Best weather in..."))]
       {:title title})))
 
 (reg-event-fx
@@ -93,6 +95,20 @@
               :on-success (fn [results]
                             (doseq [result results]
                               (dispatch [:-store-result! result])))}})))
+
+(reg-event-fx 
+  :fetch-map-data!
+  (fn [{db :db} _]
+    (when (empty? (db :map-data))
+      {:ajax {:method :get
+              :uri "/api/all"
+              :on-success (fn [response]
+                            (dispatch [:-store-map-data! response]))}})))
+
+(reg-event-fx
+  :-store-map-data!
+  (fn [{db :db} [_ data]]
+    {:db (assoc db :map-data data)}))
 
 (reg-event-fx
   :-fetch-result!
