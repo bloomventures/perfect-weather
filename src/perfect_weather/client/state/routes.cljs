@@ -13,7 +13,7 @@
 
 (router/defroute map-path "/map" []
   (dispatch [:route-page! :map])
-  (dispatch [:fetch-random!]))
+  (dispatch [:fetch-map-data!]))
 
 (defn place->slug [{:keys [city country]}]
   (-> (str city "--" country)

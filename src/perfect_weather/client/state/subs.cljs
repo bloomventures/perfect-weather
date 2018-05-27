@@ -13,6 +13,11 @@
     (reverse (db :results))))
 
 (reg-sub
+  :map-data
+  (fn [db _]
+    (db :map-data)))
+
+(reg-sub
   :autocomplete-results
   (fn [db _]
     (db :autocomplete-results)))

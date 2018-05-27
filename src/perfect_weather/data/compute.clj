@@ -7,7 +7,6 @@
     [perfect-weather.data.places :as places]
     [perfect-weather.data.rate :as rate]))
 
-
 (defn calc-ranges 
   [data]
   (->> rate/factors 
@@ -75,6 +74,10 @@
   (->> (cache/cache-list :results)
        shuffle
        (take n)
+       (map (comp read-string slurp))))
+
+(defn all []
+  (->> (cache/cache-list :results)
        (map (comp read-string slurp))))
 
 (defn by-place-id [place-id]

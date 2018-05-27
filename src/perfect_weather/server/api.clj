@@ -19,6 +19,11 @@
       {:status 200
        :body (compute/n-random (Integer/parseInt (get-in req [:params :n])))})]
 
+   [[:get "/api/all"]
+    (fn [req]
+      {:status 200
+       :body (compute/all)})]
+
    [[:get "/api/autocomplete"]
     (fn [req]
       {:status 200

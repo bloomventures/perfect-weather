@@ -174,7 +174,7 @@
     (fn []
       (let [start (@vars :start)
             end (@vars :end)
-            results (->> @(subscribe [:results])
+            results (->> @(subscribe [:map-data])
                          (map (fn [result]
                                 {:lat (result :lat)
                                  :lon (result :lon)
