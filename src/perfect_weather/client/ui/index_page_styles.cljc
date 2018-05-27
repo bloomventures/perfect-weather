@@ -2,20 +2,10 @@
   (:require
     [garden.stylesheet :refer [at-media]]
     [perfect-weather.client.ui.colors :as colors]
+    [perfect-weather.client.ui.mixins :as mixins]
     [perfect-weather.client.ui.footer-styles :refer [>footer]]))
 
 (def mobile {:max-width "760px"})
-
-(defn tiny-text []
-  {:text-transform "uppercase"
-   :font-size "0.65rem"
-   :line-height "1rem"
-   :letter-spacing "0.03rem"})
-
-(defn small-text []
-  {:font-size "0.85rem"
-   :text-transform "uppercase"
-   :letter-spacing "0.1em"})
 
 (defn months []
   (let [height "2rem"]
@@ -27,7 +17,7 @@
        {:height height
         :line-height [[height "!important"]] 
         :text-align "center"}
-       (tiny-text)
+       (mixins/tiny-text)
 
        (at-media {:max-width "400px"}
          [:&
@@ -189,7 +179,7 @@
           :color colors/accent}
 
          [:>.city
-          (small-text)
+          (mixins/small-text)
           {:height bar-height
            :line-height bar-height}
 
@@ -197,7 +187,7 @@
            {:font-size "1.15em"}]]
 
          [:>.country
-          (tiny-text)]
+          (mixins/tiny-text)]
 
          (at-media mobile
            [:&
@@ -259,7 +249,7 @@
              :width "100%"
              :overflow "hidden"
              :text-overflow "clip"}
-            (tiny-text)]
+            (mixins/tiny-text)]
 
            ["&:nth-child(odd)"
 
