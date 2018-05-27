@@ -57,7 +57,6 @@
         drag (r/atom nil)
         val-min 0
         val-max 365
-
         wrap (fn [x]
                (cond
                  (< x val-min)
@@ -94,6 +93,7 @@
             [:div.month 
              month])]
          [:svg {:width "100%"
+                :height height
                 :ref (fn [el]
                        (when el
                          (reset! svg el)))
