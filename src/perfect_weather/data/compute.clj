@@ -71,14 +71,10 @@
     deref))
 
 (defn n-random [n]
-  (->> (cache/cache-list :results)
-       shuffle
-       (take n)
-       (map (comp read-string slurp))))
+  (cache/n-random :results n))
 
 (defn all []
-  (->> (cache/cache-list :results)
-       (map (comp read-string slurp))))
+  (cache/all :results))
 
 (defn by-place-id [place-id]
   (let [place @(google-maps/place place-id)]

@@ -32,7 +32,7 @@
   (->> (io/file (cache-base-path cache-id))
        (.listFiles)))
 
-(defn cache-list 
+(defn- cache-list 
   [cache-id]
   (->> (io/file (cache-base-path cache-id))
        file-seq 
@@ -59,3 +59,13 @@
             (spit (cache-path cache-id query-id) result)
             result)
           (log "Fetch failed."))))))
+
+(defn n-random [cache-id n]
+  (->> (cache-list cache-id)
+       shuffle
+       (take n)
+       (map (comp read-string slurp))))
+
+(defn all [cache-id]
+  (->> (cache-list :results)
+       (map (comp read-string slurp))))
