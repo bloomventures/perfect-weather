@@ -1,9 +1,10 @@
 (ns perfect-weather.client.ui.map-page
   (:require
     [clojure.string :as string]
+    [garden.core :as garden]
     [reagent.core :as r]
     [re-frame.core :refer [subscribe]]
-    [garden.core :as garden]
+    [perfect-weather.client.ui.colors :as colors]
     [perfect-weather.data.months :refer [months months-abbr]]
     [perfect-weather.client.ui.footer :refer [footer-view]]))
 
@@ -42,7 +43,7 @@
                       :margin-top "-2px"
                       :border-radius "50%"
                       :background (if (city :nice?) 
-                                    "#4cafef"
+                                    colors/accent
                                     "#ddd")
                       :z-index (when (city :nice?)
                                  100)
@@ -52,128 +53,160 @@
 (defn styles [rules]
   [:style {:dangerously-set-inner-HTML {:__html (garden/css rules)}}])
 
-(defn controls-view [_ _ _]
-  (let [svg (r/atom nil)
+(defn controls-view [date-range]
+  (let [slider-el (r/atom nil)
         drag (r/atom nil)
         val-min 0
         val-max 365
-        wrap (fn [x]
+        wrap (fn wrap [x]
                (cond
                  (< x val-min)
-                 (+ val-max x)
+                 (wrap (+ val-max x))
                  (< val-max x)
-                 (- x val-max)
+                 (wrap (- x val-max))
                  :else 
                  x))
-        mouse-x (fn [x]
-                  (let [ctm (.getScreenCTM @svg)]
-                    (/ (- x (.-e ctm)) (.-a ctm))))
         mouse->val (fn [e]
-                     (let [x (mouse-x (.-clientX e))
-                           svg-dims (.getBoundingClientRect @svg)]
+                     (let [slider-dims (.getBoundingClientRect @slider-el)
+                           x (- (.-clientX e) (.-x slider-dims))]
                        (* val-max
-                          (/ x (.-width svg-dims)))))
+                          (/ x (.-width slider-dims)))))
         height 20
         thumb-height height
-        thumb-width 7
-        track-height 5]
-    (fn [start end on-change]
-      (let [on-change* (fn [start end]
-                         (on-change (js/Math.round start)
-                                    (js/Math.round end)))
-            start-percent (/ start val-max)
-            end-percent (/ end val-max)
-            midpoint (if (< start end)
-                       (/ (+ start end) 2)
-                       (wrap (/ (+ start (+ end val-max)) 2)))]
-        [:div.controls
-         [:div.months 
-          (for [month months-abbr]
-            ^{:key month}
-            [:div.month 
-             month])]
-         [:svg {:width "100%"
-                :height height
-                :ref (fn [el]
-                       (when el
-                         (reset! svg el)))
-                :on-mouse-move (fn [e]
-                                 (case @drag
-                                   :start
-                                   (on-change* (mouse->val e) end)
-                                   :end 
-                                   (on-change* start (mouse->val e))
-                                   :both
-                                   (let [v (mouse->val e)
-                                         delta (- midpoint v)]
-                                     (on-change* (wrap (- start delta))
-                                                 (wrap (- end delta))))
-                                   nil
-                                   (do)))
-                :on-mouse-up (fn [e]
-                               (reset! drag nil))}
-          [:rect.track 
-           {:width "100%"
-            :height track-height
-            :y (/ (- height track-height) 2)
-            :fill "#ccc"}]
+        thumb-width 18
+        track-height 8
+        midpoint (fn [start end]
+                   (if (< start end)
+                     (/ (+ start end) 2)
+                     (wrap (/ (+ start (+ end val-max)) 2))))
+        on-change (fn [start end]
+                    (reset! date-range [(js/Math.round start)
+                                        (js/Math.round end)]))
+        on-mouse-move (fn [e]
+                        (let [[start end] @date-range]
+                          (when @drag
+                            ; to prevent user from selecting elements on page
+                            (.preventDefault e))
+                          (case @drag
+                            :start
+                            (on-change (wrap (mouse->val e)) end)
+                            :end 
+                            (on-change start (wrap (mouse->val e)))
+                            :both
+                            (let [v (mouse->val e)
+                                  delta (- (midpoint start end) v)]
+                              (on-change (wrap (- start delta))
+                                         (wrap (- end delta))))
+                            nil
+                            (do))))
+        on-mouse-up (fn [e]
+                      (reset! drag nil))]
+    (r/create-class
+      {:component-did-mount
+       (fn [_]
+         (.addEventListener js/document "mousemove" on-mouse-move false)
+         (.addEventListener js/document "mouseup" on-mouse-up false))
+       :component-will-unmount
+       (fn [_]
+         (.removeEventListener js/document "mousemove" on-mouse-move false)
+         (.removeEventListener js/document "mouseup" on-mouse-up false))
+       :reagent-render
+       (fn [date-range]
+         (let [[start end] @date-range
+               start-percent (/ start val-max)
+               end-percent (/ end val-max)]
+           [:div.controls
+            [:div.months 
+             (for [month months-abbr]
+               ^{:key month}
+               [:div.month 
+                month])]
+            [:div.slider
+             {:style {:position "relative" 
+                      :width "100%"
+                      :height height}
+              :ref (fn [el]
+                     (when el
+                       (reset! slider-el el)))}
+             [:div.track 
+              {:style {:position "absolute"
+                       :width "100%"
+                       :height track-height
+                       :top (/ (- height track-height) 2)
+                       :background "#ddd"}}]
 
-          (when (< start-percent end-percent)
-            [:rect.mid
-             {:width (str (* 100 (- end-percent start-percent)) "%")
-              :height track-height
-              :x (str (* 100 start-percent) "%")
-              :y (/ (- height track-height) 2)
-              :fill "#4cafef"
-              :style {:cursor "pointer"}
-              :on-mouse-down (fn [e]
-                               (reset! drag :both))}])
+             (when (< start-percent end-percent)
+               [:div.mid
+                {:on-mouse-down (fn [e]
+                                  (.preventDefault e)
+                                  (reset! drag :both))
+                 :style {:position "absolute"
+                         :width (str (* 100 (- end-percent start-percent)) "%")
+                         :height track-height
+                         :left (str (* 100 start-percent) "%")
+                         :top (/ (- height track-height) 2)
+                         :background colors/accent
+                         :cursor "pointer"}}])
 
-          (when (< end-percent start-percent)
-            [:rect.mid
-             {:width (str (* 100 end-percent) "%")
-              :height track-height
-              :x 0
-              :y (/ (- height track-height) 2)
-              :fill "#4cafef"
-              :style {:cursor "pointer"}
-              :on-mouse-down (fn [e]
-                               (reset! drag :both))}])
+             (when (< end-percent start-percent)
+               [:div.mid
+                {:on-mouse-down (fn [e]
+                                  (.preventDefault e)
+                                  (reset! drag :both))
+                 :style {:position "absolute"
+                         :width (str (* 100 end-percent) "%")
+                         :height track-height
+                         :left 0
+                         :top (/ (- height track-height) 2)
+                         :background colors/accent
+                         :cursor "pointer"}}])
 
-          (when (< end-percent start-percent)
-            [:rect.mid
-             {:width (str (* 100 (- 1 start-percent)) "%")
-              :height track-height
-              :x (str (* 100 start-percent) "%")
-              :y (/ (- height track-height) 2)
-              :fill "#4cafef"
-              :style {:cursor "pointer"}
-              :on-mouse-down (fn [e]
-                               (reset! drag :both))}])
+             (when (< end-percent start-percent)
+               [:div.mid
+                {:on-mouse-down (fn [e]
+                                  (.preventDefault e)
+                                  (reset! drag :both))
+                 :style {:position "absolute"
+                         :width (str (* 100 (- 1 start-percent)) "%")
+                         :height track-height
+                         :left (str (* 100 start-percent) "%")
+                         :top (/ (- height track-height) 2)
+                         :background colors/accent
+                         :cursor "pointer"}}])
 
-          [:circle.start.thumb 
-           {:r thumb-width
-            :cx (str (* 100 start-percent) "%")
-            :cy (/ height 2)
-            :fill "#4cafef"
-            :style {:cursor "pointer"}
-            :on-mouse-down (fn [e]
-                             (reset! drag :start))}]
-          [:circle.end.thumb
-           {:r thumb-width
-            :cx (str (* 100 end-percent) "%")
-            :cy (/ height 2)
-            :fill "#4cafef"
-            :style {:cursor "pointer"}
-            :on-mouse-down (fn [e]
-                             (reset! drag :end))}]]]))))
+             [:div.start.thumb 
+              {:on-mouse-down (fn [e]
+                                (.preventDefault e)
+                                (reset! drag :start))
+               :style {:position "absolute"
+                       :width thumb-width
+                       :height thumb-width
+                       :border-radius "50%"
+                       :left (str (* 100 start-percent) "%")
+                       :top (/ height 2)
+                       :margin-left (- (/ thumb-width 2))
+                       :margin-top (- (/ thumb-width 2))
+                       :background colors/accent
+                       :cursor "pointer"}}]
+             [:div.end.thumb
+              {:on-mouse-down (fn [e]
+                                (.preventDefault e)
+                                (reset! drag :end))
+               :style {:position "absolute"
+                       :width thumb-width
+                       :height thumb-width
+                       :border-radius "50%"
+                       :left (str (* 100 end-percent) "%")
+                       :top (/ height 2)
+                       :margin-left (- (/ thumb-width 2))
+                       :margin-top (- (/ thumb-width 2))
+                       :background colors/accent
+                       :cursor "pointer"}}]]]))})))
 
 (defn map-page-view []
-  (let [vars (r/atom {:start 31
-                      :end 58})]
+  (let [date-range (r/atom [31 58])]
     (fn []
-      (let [start (@vars :start)
-            end (@vars :end)
+      (let [[start end] @date-range
             results (->> @(subscribe [:map-data])
                          (map (fn [result]
                                 {:lat (result :lat)
@@ -197,9 +230,7 @@
                                                            (= factor :cool)))))})))]
         [:div.page.map
          [:div.gap]
-         [controls-view (@vars :start) (@vars :end) (fn [start end]
-                                                      (reset! vars {:start start
-                                                                    :end end}))]
+         [controls-view date-range]
          [map-view results]
          [:div.gap]
          [footer-view]]))))
