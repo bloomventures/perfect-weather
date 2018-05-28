@@ -286,6 +286,7 @@
             :&.humid
             :&.cold
             :&.dry
+            :&.rainy
 
             [:>.bar
              {:height "0.2em" ; bar-height * 0.2
