@@ -262,6 +262,9 @@
               :color [[colors/text-normal "!important"]]
               :overflow "visible"}]]
 
+           ["&.short:hover+.range>.label"
+            {:visibility "hidden"}]
+
            [:&.warm
 
             [:>.bar
