@@ -13,6 +13,28 @@
     [:h1 "FAQ"]]
 
    [:div.items
+    [:div.item
+     [:h2 "What is 'cool', what is 'warm'?"]
+     [:p "The ranges for each location can fall under one of the following categories:"]
+     [:ul
+      [:li "cold"]
+      [:li "cool"]
+      [:li "warm"]
+      [:li "hot"]
+      [:li "humid"]
+      [:li "dry"]
+      [:li "rainy"]]
+     [:p "'Warm' and 'cool' are 'comfortable' ranges with light clothing. In other conditions, it is uncomfortable to be outside for more than an hour."]
+     [:p "Apart from 'rainy', the above categories are determined by the temperature and humidity:"]
+     [:img {:src "/images/psychometric-graph.png"}]
+     [:p "The above model is based on a combination of human thermal-comfort research and personal experience."]] 
+
+    [:div.item
+     [:h2 "You can't predict the weather!"]
+     [:p
+      "You're right, but what this site is doing is closer to 'summarizing the climate' than 'predicting the weather'."]
+     [:p "The specifics of how the data is manipulated to get to the results you see is best explained with a diagram:"]
+     [:img {:src "/images/how-it-works.png"}]]
 
     [:div.item
      [:h2 "This is all cool and all, but... why?"]
@@ -32,20 +54,6 @@
       "So, since I plan to do this kind of evaluation a lot (every 3 months for the foreeseable future), and I'm a developer, I figured I could probably just scrape together some data and do the analysis for myself. Which I did, and it worked pretty well. Since it's potentially useful to others, I slapped on a pretty interface and made it public."]
      [:p "If you have any feedback or suggestions, hit me up at: " 
       [:a {:href (str "mailto:" email)} email]]]
-
-    [:div.item
-     [:h2 "What weather is considered 'nice'?"]
-     [:p "The weather is 'nice' if:"]
-     [:ul
-      [:li "the temperature and humidity are within a comfortable range (in a t-shirt or sweater)"]
-      [:li "it's not raining"]]
-     [:p 
-      "The acceptable temperature/humidity range is a synthesis of various human thermal-comfort research sources:"]
-     [:img {:src "/images/psychometric-graph.png"}]
-     [:p
-      "A day is considered 'nice' if at least " rate/hour-threshold " hours between " rate/hour-start "am and " (- rate/hour-end 12) "pm were 'nice', based on data from the last 3 years." ]
-     [:p "The specifics are best explained with a diagram:"]
-     [:img {:src "/images/how-it-works.png"}]] 
 
     [:div.item
      [:h2 "Is there a public API?"]
