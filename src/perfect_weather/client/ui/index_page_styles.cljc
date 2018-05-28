@@ -229,9 +229,11 @@
              :width "100%"
              :overflow "hidden"
              :text-overflow "clip"}
-            (mixins/tiny-text)
+            (mixins/tiny-text)]
 
-            [:&.short
+           [:&.short
+
+            [:>.label
              {:visibility "hidden"}]]
 
            ["&:nth-child(odd)"

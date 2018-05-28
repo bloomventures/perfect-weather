@@ -76,11 +76,12 @@
                            (or (= prev-k :warm)
                                (= prev-k :cool)))
                      "join-prev")
-                   (when k (name k))]
+                   (when k (name k))
+                   (when (< (- end start) 21)
+                                "short")]
            :style {:width (str (* 100 (/ (- end start) 365)) "%")}}
           [:div.bar]
-          [:div.label {:class (when (< (- end start) 21)
-                                "short")}
+          [:div.label 
            (when k (name k))]])))
    [month-labels-view]])
 
