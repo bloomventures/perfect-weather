@@ -223,14 +223,16 @@
 
            [:>.label
             {:margin-left "0.2em"
-             :color colors/text-light
              :display "inline-block"
              :pointer-events "none"
              :white-space "nowrap"
              :width "100%"
              :overflow "hidden"
              :text-overflow "clip"}
-            (mixins/tiny-text)]
+            (mixins/tiny-text)
+
+            [:&.short
+             {:visibility "hidden"}]]
 
            ["&:nth-child(odd)"
 
@@ -254,7 +256,8 @@
              {:background [[colors/text-normal "!important"]]}]
 
             [:>.label
-             {:color [[colors/text-normal "!important"]]
+             {:visibility "visible"
+              :color [[colors/text-normal "!important"]]
               :overflow "visible"}]]
 
            [:&.warm

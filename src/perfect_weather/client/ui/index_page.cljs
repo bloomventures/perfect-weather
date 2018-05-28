@@ -79,7 +79,8 @@
                    (when k (name k))]
            :style {:width (str (* 100 (/ (- end start) 365)) "%")}}
           [:div.bar]
-          [:div.label 
+          [:div.label {:class (when (< (- end start) 21)
+                                "short")}
            (when k (name k))]])))
    [month-labels-view]])
 
