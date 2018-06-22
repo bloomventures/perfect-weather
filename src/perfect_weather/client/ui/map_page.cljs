@@ -8,7 +8,7 @@
     [perfect-weather.data.months :refer [months months-abbr]]
     [perfect-weather.client.ui.footer :refer [footer-view]]))
 
-(defn merc-lat 
+(defn merc-lat
   "From https://wiki.openstreetmap.org/wiki/Mercator"
   [lat]
   (* 180 (/ js/Math.PI) (js/Math.log (js/Math.tan (* (/ js/Math.PI 4) (+ 1 (/ lat 90)))))))
@@ -42,7 +42,7 @@
                       :margin-left "-2px"
                       :margin-top "-2px"
                       :border-radius "50%"
-                      :background (if (city :nice?) 
+                      :background (if (city :nice?)
                                     colors/accent
                                     "#ddd")
                       :z-index (when (city :nice?)
@@ -64,7 +64,7 @@
                  (wrap (+ val-max x))
                  (< val-max x)
                  (wrap (- x val-max))
-                 :else 
+                 :else
                  x))
         pointer->val (fn [e]
                        (let [slider-dims (.getBoundingClientRect @slider-el)
@@ -215,18 +215,18 @@
                                  :title (result :city)
                                  :nice? (->> (result :ranges)
                                              (filter (fn [[_ start* end* _]]
-                                                       (or (and 
+                                                       (or (and
                                                              (< start end)
                                                              (< start end*)
                                                              (< start* end))
-                                                           (and 
+                                                           (and
                                                              (< end start)
                                                              (not
                                                                (and
                                                                  (< end start*)
                                                                  (< end* start)))))))
                                              (every? (fn [[factor _ _ _]]
-                                                       (or (= factor :warm) 
+                                                       (or (= factor :warm)
                                                            (= factor :cool)))))})))]
         [:div.page.map
          [:div.gap]
