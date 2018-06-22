@@ -3,7 +3,13 @@
                  [org.clojure/clojurescript "1.9.946"]
                  [clj-time "0.14.2"]
                  [re-frame "0.10.5"]
-                 [reagent "0.8.1"]
+                 ; need react 16.4.0 for pointer event support
+                 ; once reagent 0.8.2 is released
+                 ; won't need the react exclusions and explicit deps
+                 [reagent "0.8.1" :exclusions [cljsjs/react
+                                               cljsjs/react-dom]]
+                 [cljsjs/react "16.4.0-0"]
+                 [cljsjs/react-dom "16.4.0-0"]
                  [io.bloomventures/omni "0.14.8"]]
 
   :plugins [[io.bloomventures/omni "0.14.8"]]

@@ -66,11 +66,11 @@
                  (wrap (- x val-max))
                  :else 
                  x))
-        mouse->val (fn [e]
-                     (let [slider-dims (.getBoundingClientRect @slider-el)
-                           x (- (.-clientX e) (.-x slider-dims))]
-                       (* val-max
-                          (/ x (.-width slider-dims)))))
+        pointer->val (fn [e]
+                       (let [slider-dims (.getBoundingClientRect @slider-el)
+                             x (- (.-clientX e) (.-x slider-dims))]
+                         (* val-max
+                            (/ x (.-width slider-dims)))))
         height 20
         thumb-height height
         thumb-width 18
@@ -82,126 +82,126 @@
         on-change (fn [start end]
                     (reset! date-range [(js/Math.round start)
                                         (js/Math.round end)]))
-        on-mouse-move (fn [e]
-                        (let [[start end] @date-range]
-                          (when @drag
-                            ; to prevent user from selecting elements on page
-                            (.preventDefault e))
-                          (case @drag
-                            :start
-                            (on-change (wrap (mouse->val e)) end)
-                            :end 
-                            (on-change start (wrap (mouse->val e)))
-                            :both
-                            (let [v (mouse->val e)
-                                  delta (- (midpoint start end) v)]
-                              (on-change (wrap (- start delta))
-                                         (wrap (- end delta))))
-                            nil
-                            (do))))
-        on-mouse-up (fn [e]
-                      (reset! drag nil))]
-    (r/create-class
-      {:component-did-mount
-       (fn [_]
-         (.addEventListener js/document "mousemove" on-mouse-move false)
-         (.addEventListener js/document "mouseup" on-mouse-up false))
-       :component-will-unmount
-       (fn [_]
-         (.removeEventListener js/document "mousemove" on-mouse-move false)
-         (.removeEventListener js/document "mouseup" on-mouse-up false))
-       :reagent-render
-       (fn [date-range]
-         (let [[start end] @date-range
-               start-percent (/ start val-max)
-               end-percent (/ end val-max)]
-           [:div.controls
-            [:div.months 
-             (for [month months-abbr]
-               ^{:key month}
-               [:div.month 
-                month])]
-            [:div.slider
-             {:style {:position "relative" 
-                      :width "100%"
-                      :height height}
-              :ref (fn [el]
-                     (when el
-                       (reset! slider-el el)))}
-             [:div.track 
-              {:style {:position "absolute"
-                       :width "100%"
-                       :height track-height
-                       :top (/ (- height track-height) 2)
-                       :background "#ddd"}}]
+        on-pointer-down (fn [k]
+                          (fn [e]
+                            ; delegate pointer events to slider element
+                            ; to avoid glitches when the mid bar elements get removed from DOM mid-drag
+                            ; (the bar elements get changed when bar goes "around the edge")
+                            (.setPointerCapture @slider-el (.-pointerId e))
+                            (reset! drag k)))]
+    (fn [date-range]
+      (let [[start end] @date-range
+            start-percent (/ start val-max)
+            end-percent (/ end val-max)]
+        [:div.controls
+         [:div.months
+          (for [month months-abbr]
+            ^{:key month}
+            [:div.month
+             month])]
+         [:div.slider
+          {:style {:position "relative"
+                   :width "100%"
+                   :height height}
+           :ref (fn [el]
+                  (when el
+                    (reset! slider-el el)))
+           ; delegated pointer events
+           :on-pointer-move (fn [e]
+                              (case @drag
+                                nil
+                                (do)
+                                :start
+                                (let [[start end] @date-range]
+                                  (on-change (wrap (pointer->val e)) end))
+                                :end
+                                (let [[start end] @date-range]
+                                  (on-change start (wrap (pointer->val e))))
+                                :both
+                                (let [[start end] @date-range
+                                      v (pointer->val e)
+                                      delta (- (midpoint start end) v)]
+                                  (on-change (wrap (- start delta))
+                                             (wrap (- end delta))))))
+           :on-pointer-up (fn [e]
+                            (reset! drag nil))
+           :on-pointer-cancel (fn [e]
+                                (reset! drag nil))}
+          [:div.track
+           {:style {:position "absolute"
+                    :width "100%"
+                    :height track-height
+                    :top (/ (- height track-height) 2)
+                    :background "#ddd"}}]
 
-             (when (< start-percent end-percent)
-               [:div.mid
-                {:on-mouse-down (fn [e]
-                                  (.preventDefault e)
-                                  (reset! drag :both))
-                 :style {:position "absolute"
-                         :width (str (* 100 (- end-percent start-percent)) "%")
-                         :height track-height
-                         :left (str (* 100 start-percent) "%")
-                         :top (/ (- height track-height) 2)
-                         :background colors/accent
-                         :cursor "pointer"}}])
+          (when (< start-percent end-percent)
+            [:div.mid
+             {:on-pointer-down (on-pointer-down :both)
+              :style {:touch-action "none" ; necessary
+                      :user-select "none" ; necessary
+                      :position "absolute"
+                      :width (str (* 100 (- end-percent start-percent)) "%")
+                      :height track-height
+                      :left (str (* 100 start-percent) "%")
+                      :top (/ (- height track-height) 2)
+                      :background colors/accent
+                      :cursor "pointer"}}])
 
-             (when (< end-percent start-percent)
-               [:div.mid
-                {:on-mouse-down (fn [e]
-                                  (.preventDefault e)
-                                  (reset! drag :both))
-                 :style {:position "absolute"
-                         :width (str (* 100 end-percent) "%")
-                         :height track-height
-                         :left 0
-                         :top (/ (- height track-height) 2)
-                         :background colors/accent
-                         :cursor "pointer"}}])
+          (when (< end-percent start-percent)
+            [:div.mid
+             {:on-pointer-down (on-pointer-down :both)
+              :style {:touch-action "none" ; necessary
+                      :user-select "none" ; necessary
+                      :position "absolute"
+                      :width (str (* 100 end-percent) "%")
+                      :height track-height
+                      :left 0
+                      :top (/ (- height track-height) 2)
+                      :background colors/accent
+                      :cursor "pointer"}}])
 
-             (when (< end-percent start-percent)
-               [:div.mid
-                {:on-mouse-down (fn [e]
-                                  (.preventDefault e)
-                                  (reset! drag :both))
-                 :style {:position "absolute"
-                         :width (str (* 100 (- 1 start-percent)) "%")
-                         :height track-height
-                         :left (str (* 100 start-percent) "%")
-                         :top (/ (- height track-height) 2)
-                         :background colors/accent
-                         :cursor "pointer"}}])
+          (when (< end-percent start-percent)
+            [:div.mid
+             {:on-pointer-down (on-pointer-down :both)
+              :style {:touch-action "none" ; necessary
+                      :user-select "none" ; necessary
+                      :position "absolute"
+                      :width (str (* 100 (- 1 start-percent)) "%")
+                      :height track-height
+                      :left (str (* 100 start-percent) "%")
+                      :top (/ (- height track-height) 2)
+                      :background colors/accent
+                      :cursor "pointer"}}])
 
-             [:div.start.thumb 
-              {:on-mouse-down (fn [e]
-                                (.preventDefault e)
-                                (reset! drag :start))
-               :style {:position "absolute"
-                       :width thumb-width
-                       :height thumb-width
-                       :border-radius "50%"
-                       :left (str (* 100 start-percent) "%")
-                       :top (/ height 2)
-                       :margin-left (- (/ thumb-width 2))
-                       :margin-top (- (/ thumb-width 2))
-                       :background colors/accent
-                       :cursor "pointer"}}]
-             [:div.end.thumb
-              {:on-mouse-down (fn [e]
-                                (.preventDefault e)
-                                (reset! drag :end))
-               :style {:position "absolute"
-                       :width thumb-width
-                       :height thumb-width
-                       :border-radius "50%"
-                       :left (str (* 100 end-percent) "%")
-                       :top (/ height 2)
-                       :margin-left (- (/ thumb-width 2))
-                       :margin-top (- (/ thumb-width 2))
-                       :background colors/accent
-                       :cursor "pointer"}}]]]))})))
+          [:div.start.thumb
+           {:on-pointer-down (on-pointer-down :start)
+            :style {:touch-action "none" ; necessary
+                    :user-select "none" ; necessary
+                    :position "absolute"
+                    :width thumb-width
+                    :height thumb-width
+                    :border-radius "50%"
+                    :left (str (* 100 start-percent) "%")
+                    :top (/ height 2)
+                    :margin-left (- (/ thumb-width 2))
+                    :margin-top (- (/ thumb-width 2))
+                    :background colors/accent
+                    :cursor "pointer"}}]
+
+          [:div.end.thumb
+           {:on-pointer-down (on-pointer-down :end)
+            :style {:touch-action "none" ; necessary
+                    :user-select "none" ; necessary
+                    :position "absolute"
+                    :width thumb-width
+                    :height thumb-width
+                    :border-radius "50%"
+                    :left (str (* 100 end-percent) "%")
+                    :top (/ height 2)
+                    :margin-left (- (/ thumb-width 2))
+                    :margin-top (- (/ thumb-width 2))
+                    :background colors/accent
+                    :cursor "pointer"}}]]]))))
 
 (defn map-page-view []
   (let [date-range (r/atom [31 58])]
