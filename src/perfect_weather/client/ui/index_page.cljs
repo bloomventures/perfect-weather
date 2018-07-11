@@ -14,7 +14,7 @@
    "Reading the clouds..."
    "Searching for a hygrometer..."
    "Predicting the weather..."
-   "Pulling head out clouds..."
+   "Pulling head out of clouds..."
    "Moving satellites into position..."
    "Dividing by zero..."
    "Checking the weather channel..."
