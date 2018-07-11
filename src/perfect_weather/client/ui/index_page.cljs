@@ -28,26 +28,26 @@
 (defn loading-message-view []
   (let [message (r/atom (rand-nth loading-messages))]
     [:div.message {:ref (fn []
-                          (js/setTimeout 
+                          (js/setTimeout
                             (fn [] (reset! message (rand-nth loading-messages)))
                             5000))}
      [:div.img [:img {:src "/images/sun.svg"}]]
      @message]))
 
 (defn month-labels-view []
-  (into 
+  (into
      [:div.columns.months]
      (for [month months-abbr]
-       [:div.column 
+       [:div.column
         [:div.label month]])))
 
 (defn calendar-view
   [{:keys [ranges error?]}]
-  [:div.calendar.main 
+  [:div.calendar.main
    (into
      [:div.columns.background]
      (repeat 12 [:div.column]))
-   (into 
+   (into
      [:div.ranges]
      (cond
        error?
@@ -57,21 +57,21 @@
        [[:div.range.loading [loading-message-view]]]
 
        (seq ranges)
-       (for [[[prev-k _ _ _] 
-              [k start end text] 
+       (for [[[prev-k _ _ _]
+              [k start end text]
               [next-k _ _ _]] (->> (concat [(first ranges)] ranges [(last ranges)])
                                                  (partition 3 1))]
          [:div.range.result
           {:class [(when (= start 0) "start")
                    (when (= end 365) "end")
-                   (when (and 
-                           (or (= k :warm) 
+                   (when (and
+                           (or (= k :warm)
                                (= k :cool))
                            (or (= next-k :warm)
                                (= next-k :cool)))
                      "join-next")
-                   (when (and 
-                           (or (= k :warm) 
+                   (when (and
+                           (or (= k :warm)
                                (= k :cool))
                            (or (= prev-k :warm)
                                (= prev-k :cool)))
@@ -81,7 +81,7 @@
                                 "short")]
            :style {:width (str (* 100 (/ (- end start) 365)) "%")}}
           [:div.bar]
-          [:div.label 
+          [:div.label
            (when k (name k))]])))
    [month-labels-view]])
 
@@ -90,8 +90,8 @@
    [:div.legend
     [:div.label
      [:div.city
-     (result :city)] 
-     [:div.country 
+     (result :city)]
+     [:div.country
       (result :country)]]]
    [calendar-view result]])
 
@@ -99,17 +99,17 @@
   [:div.row.labels
    [:div.legend]
    [:div.calendar.main
-    (into 
+    (into
       [:div.columns.months]
       (for [month months-abbr]
-        [:div.column 
+        [:div.column
          [:div.label month]]))]])
 
 (defn results-view []
   (let [results @(subscribe [:results])]
     (when (seq results)
       [:div.results {:class (when (<= 5 (count results)) "many")}
-       [extra-month-labels-row]  
+       [extra-month-labels-row]
        (doall
          (for [result results]
            ^{:key (result :place-id)}
@@ -120,7 +120,7 @@
   [:form {:on-submit (fn [e]
                        (.preventDefault e))}
    "When's the best weather in "
-   [autocomplete-view 
+   [autocomplete-view
     {:auto-focus? true
      :value (subscribe [:query])
      :on-change (fn [value]
@@ -134,8 +134,8 @@
                       [:div.place
                        [:div.name
                         (str (result :city) ", " (result :country))]
-                       (when (result :known?) 
-                         [:div.known "⚡"])])}] 
+                       (when (result :known?)
+                         [:div.known "⚡"])])}]
    "?"])
 
 (defn index-page-view []
