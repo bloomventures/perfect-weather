@@ -32,12 +32,12 @@
    [[:get "/api/search"]
     (fn [req]
       {:status 200
-       :body (cond 
-               (get-in req [:params :place-id]) 
+       :body (cond
+               (get-in req [:params :place-id])
                (compute/by-place-id (get-in req [:params :place-id]))
 
-               (and 
-                 (get-in req [:params :city]) 
+               (and
+                 (get-in req [:params :city])
                  (get-in req [:params :country]))
                (compute/by-autocomplete (str (get-in req [:params :city]) ", " (get-in req [:params :country]))))})]
 
