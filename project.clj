@@ -10,9 +10,9 @@
                                                cljsjs/react-dom]]
                  [cljsjs/react "16.4.0-0"]
                  [cljsjs/react-dom "16.4.0-0"]
-                 [io.bloomventures/omni "0.17.10"]]
+                 [io.bloomventures/omni "0.18.1"]]
 
-  :plugins [[io.bloomventures/omni "0.17.10"]]
+  :plugins [[io.bloomventures/omni "0.18.1"]]
 
   :main perfect-weather.core
 
